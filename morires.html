@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🍣森の小さなレストラン🍣</title>
+  <style>
+    body {
+      background-color: #0b0015;
+      color: #fef0f5;
+      font-family: "MS Gothic", monospace;
+      margin: 0;
+      text-align: center;
+      overflow-x: hidden;
+      overflow-y: auto;
+      min-height: 100vh;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* ====== 🌌 背景宇宙：マウストラッキング ====== */
+    #background-wrap {
+      position: fixed;
+      /* ↓ 110%→100%、-5%→0 に修正。横スクロール誘発を防ぐ */
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1;
+      pointer-events: none;
+      transition: transform 0.1s ease-out;
+    }
+    #mycelium {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at center, rgba(255,192,203,0.15) 0%, transparent 70%);
+      animation: breathe 5s infinite ease-in-out alternate;
+    }
+    @keyframes breathe { from { opacity: 0.3; } to { opacity: 0.8; } }
+    #spores-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+    /* ====== 💖 メインコンテナ ====== */
+    .outer-container {
+      position: relative;
+      z-index: 10;
+      max-width: 600px;
+      margin: 40px auto 80px; /* ↓ 下余白を追加 */
+      width: calc(100% - 32px);
+      box-sizing: border-box;
+      background: rgba(15, 0, 25, 0.9);
+      border-radius: 40px;
+      padding: 40px 20px;
+      border: 6px solid #ffd1dc;
+      box-shadow: 0 0 50px rgba(255, 182, 193, 0.6);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 0.5em;
+      color: #fff;
+      text-shadow: 0 0 15px rgba(255, 182, 193, 0.8);
+    }
+
+    /* ====== 🌈 注文ログ ====== */
+    #log {
+      width: 90%;
+      max-width: 480px;
+      height: 200px;
+      overflow-y: auto;
+      margin: 20px auto;
+      background: linear-gradient(135deg, #fff5ff 0%, #eaffff 50%, #fff9e6 100%);
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: inset 0 0 15px rgba(0,0,0,0.1);
+      color: #2a0033;
+      font-size: 0.9rem;
+      text-align: left;
+      border: 2px solid #fff;
+      box-sizing: border-box;
+    }
+
+    /* ====== 🍬 ボタン類 ====== */
+    .btn-wrap { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+    .summon-btn, .home-btn {
+      padding: 1rem 2rem;
+      font-size: 1.1em;
+      font-weight: 900;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-family: "MS Gothic", monospace;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(255, 192, 203, 0.5);
+    }
+    .summon-btn { background: linear-gradient(45deg, #ffe1ff, #fff7d1, #ffe1ff); color: #2a0033; }
+    .home-btn { background: rgba(255, 255, 255, 0.1); color: #fff; border: 2px solid #ffd1dc; text-decoration: none; line-height: 1.5; }
+    .summon-btn:hover, .home-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 255, 255, 0.8); }
+
+    /* ====== 🍣 演出演出演出 ====== */
+    .floating-food { position: fixed; pointer-events: none; z-index: 100; text-shadow: 0 0 15px #fff; }
+    .summon-anim { font-size: 6rem; animation: floatUp 1.6s ease-out forwards; }
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-150px) rotate(20deg); opacity: 0; }
+    }
+    .bomb-anim { animation: floatBomb 1.4s ease-in forwards; }
+    @keyframes floatBomb {
+      0% { transform: translateY(-20vh); opacity: 1; }
+      100% { transform: translateY(120vh); opacity: 0; }
+    }
+    .sushi-particle { position: fixed; font-size: 2rem; opacity: 0.25; pointer-events: none; z-index: 1; }
+    .shard { position: fixed; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 20px solid #ffe1ff; pointer-events: none; z-index: 9999; }
+    #darkOverlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); opacity: 0; transition: opacity 0.5s; pointer-events: none; z-index: 1000; }
+    #darkOverlay.active { opacity: 1; }
+    .star { position: absolute; background: white; border-radius: 50%; animation: twinkle 3s infinite; }
+    @keyframes twinkle { 0%,100% {opacity: 0.3;} 50% {opacity: 1;} }
+  </style>
+</head>
+<body>
+
+<div id="background-wrap">
+  <canvas id="spores-canvas"></canvas>
+  <div id="mycelium"></div>
+</div>
+
+<div class="outer-container">
+  <h1>🍣 ぶぶ漬け食べなはれ 🍝</h1>
+  <p>めじぃ‼️めじぃ‼️めじぃ‼️めじぃ‼️(　Д　 )</p>
+  <div id="log"></div>
+  <div class="btn-wrap">
+    <button class="summon-btn" onclick="summon(event)">注文すんの（　´_ゝ`）？</button>
+    <a href="index.html" class="home-btn">おあいそ</a>
+  </div>
+</div>
+
+<div id="darkOverlay"></div>
+
+<script>
+const foods = ["🍣", "🐟", "🦑", "🐡", "🦪", "🐚", "🐠", "🐣", "🦠", "🍝", "🍔", "🍜", "🐙", "🍕", "🍤", "🍙"];
+const funnyLines = ["カラスミって…なんなんすかね（　´_ゝ`）", "うめえ（；´_ゝ`）", "大抵の食いもんは飲めるんすよね（　´_ゝ`）", "ふーん、よく食うじゃん（　´_ゝ`）", "ぶぶ漬けを、啜っても、あーきません🎵", "ゆ○り、飲んでなくない？"];
+
+function summon(e) {
+  e.stopPropagation();
+
+  const log = document.getElementById("log");
+  if (Math.random() < 0.1) {
+    const div = document.createElement("div");
+    div.textContent = "❌ なんか出ない事もあるんすよね（　´_ゝ`）";
+    log.prepend(div); return;
+  }
+  const chosen = foods[Math.floor(Math.random() * foods.length)];
+  const line = funnyLines[Math.floor(Math.random() * funnyLines.length)];
+  const div = document.createElement("div");
+  div.textContent = `🌀 ${chosen} めじぃ❗️：${line}`;
+  log.prepend(div);
+  
+  const el = document.createElement("div");
+  el.className = "floating-food summon-anim";
+  el.textContent = chosen;
+  el.style.left = Math.random() * 80 + 10 + "%";
+  el.style.top = "40%";
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1600);
+
+  if (chosen === "🍝" || chosen === "🦠") {
+    const overlay = document.getElementById("darkOverlay");
+    overlay.classList.add("active");
+    setTimeout(() => overlay.classList.remove("active"), 800);
+  }
+}
+
+/* ====== 背景処理 ====== */
+const canvas = document.getElementById("spores-canvas");
+const ctx = canvas.getContext("2d");
+const bgWrap = document.getElementById("background-wrap");
+let w, h, spores = [];
+
+function resize() {
+  /* ↓ 1.1倍をやめてぴったりに */
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+  spores = Array.from({length: 120}, () => ({
+    x: Math.random() * w, y: Math.random() * h,
+    r: Math.random() * 2, o: Math.random(), z: Math.random() * 2
+  }));
+}
+function draw() {
+  ctx.clearRect(0, 0, w, h);
+  spores.forEach(s => {
+    s.x += Math.sin(Date.now() * 0.0001 + s.y) * 0.1 * s.z;
+    s.y += Math.cos(Date.now() * 0.00005 + s.x) * 0.1 * s.z;
+    const colors = ['#ffe1ff', '#c1a3e4', '#fbe88b', '#a6d0e4'];
+    ctx.beginPath();
+    ctx.fillStyle = colors[Math.floor((s.x/w)*4)] + "44";
+    ctx.arc(s.x, s.y, s.r * s.z, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+window.addEventListener("resize", resize);
+resize(); draw();
+
+document.addEventListener("mousemove", (e) => {
+  const moveX = (e.clientX / window.innerWidth - 0.5) * 30;
+  const moveY = (e.clientY / window.innerHeight - 0.5) * 30;
+  bgWrap.style.transform = `translate(${-moveX}px, ${-moveY}px)`;
+});
+
+/* ====== クリック演出：背景のみ爆撃抽選 ====== */
+function triggerEffects(clientX, clientY, target) {
+  if (target.closest('button') || target.closest('a')) return;
+
+  const colors = ['#ffe1ff', '#c1a3e4', '#fbe88b', '#a6d0e4'];
+  
+  for (let i = 0; i < 10; i++) {
+    const shard = document.createElement('div');
+    shard.className = 'shard';
+    shard.style.borderBottomColor = colors[Math.floor(Math.random() * colors.length)];
+    shard.style.left = clientX + 'px'; shard.style.top = clientY + 'px';
+    const angle = Math.random() * Math.PI * 2;
+    const velocity = Math.random() * 100 + 50;
+    const tx = Math.cos(angle) * velocity; const ty = Math.sin(angle) * velocity;
+    document.body.appendChild(shard);
+    shard.animate([
+      { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
+      { transform: `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(0)`, opacity: 0 }
+    ], { duration: 600 }).onfinish = () => shard.remove();
+  }
+
+  if (Math.random() < 0.30) {
+    const isMobile = window.innerWidth < 600;
+    const isSuperBomb = Math.random() < 0.15;
+    const bombCount = isMobile ? (isSuperBomb ? 40 : 15) : (isSuperBomb ? 80 : 35);
+
+    for (let i = 0; i < bombCount; i++) {
+      const bomb = document.createElement("div");
+      bomb.className = "floating-food bomb-anim";
+      bomb.textContent = foods[Math.floor(Math.random() * foods.length)];
+      bomb.style.left = Math.random() * 100 + "%";
+      bomb.style.top = "-10vh"; 
+      bomb.style.fontSize = isMobile ? (Math.random() * 4 + 3) + "vw" : (Math.random() * 3 + 3) + "rem";
+      bomb.style.animationDelay = (Math.random() * 0.8) + "s";
+      document.body.appendChild(bomb);
+      setTimeout(() => bomb.remove(), 2500);
+    }
+  }
+}
+
+document.addEventListener('mousedown', (e) => triggerEffects(e.clientX, e.clientY, e.target));
+document.addEventListener('touchstart', (e) => {
+  const touch = e.touches[0];
+  triggerEffects(touch.clientX, touch.clientY, e.target);
+}, { passive: true });
+
+/* ====== 背景パーティクル ====== */
+const particleCount = 100;
+for (let i = 0; i < particleCount; i++) {
+  const p = document.createElement("div");
+  p.className = "sushi-particle";
+  p.textContent = foods[Math.floor(Math.random() * foods.length)];
+  p.style.left = Math.random() * 100 + "vw";
+  p.style.top = Math.random() * 100 + "vh";
+  p.style.fontSize = (Math.random() * 1.5 + 1.5) + "rem";
+  p.animate([
+    { transform: 'translateY(0) rotate(0deg)' },
+    { transform: `translateY(-20px) rotate(${Math.random() * 20}deg)` }
+  ], { duration: 3000 + Math.random() * 3000, iterations: Infinity, direction: 'alternate', easing: 'ease-in-out' });
+  document.body.appendChild(p);
+}
+
+for (let i = 0; i < 40; i++) {
+  const star = document.createElement("div");
+  star.className = "star";
+  star.style.width = star.style.height = "2px";
+  star.style.left = Math.random() * 100 + "%"; star.style.top = Math.random() * 100 + "%";
+  bgWrap.appendChild(star);
+}
+</script>
+</body>
+</html>

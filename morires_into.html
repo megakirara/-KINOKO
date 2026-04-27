@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🧠 魂の準備ページ ⚡️</title>
+  <style>
+    body {
+      background-color: #0b0015;
+      color: #fef0f5;
+      font-family: "MS Gothic", monospace;
+      margin: 0;
+      text-align: center;
+      overflow-x: hidden;
+      overflow-y: auto;
+      min-height: 100vh;
+      -webkit-overflow-scrolling: touch; /* iOS スムーズスクロール */
+    }
+
+    /* ====== 🌌 背景宇宙：マウストラッキング ====== */
+    #background-wrap {
+      position: fixed;
+      /* ↓ 110%をやめて100%に。横はみ出し横スクロール問題を解消 */
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1;
+      pointer-events: none;
+      transition: transform 0.1s ease-out;
+    }
+    #mycelium {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at center, rgba(255,192,203,0.15) 0%, transparent 70%);
+      animation: breathe 5s infinite ease-in-out alternate;
+    }
+    @keyframes breathe { from { opacity: 0.3; } to { opacity: 0.8; } }
+    #spores { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+    /* ====== 💖 外枠：ピンクグラデーション発光コンテナ ====== */
+    .outer-container {
+      position: relative;
+      z-index: 2;
+      max-width: 650px;
+      margin: 60px auto 80px; /* 下余白を追加 */
+      background: rgba(15, 0, 25, 0.85);
+      border-radius: 40px;
+      padding: 40px 20px;
+      border: 6px solid #ffd1dc;
+      box-shadow: 0 0 50px rgba(255, 182, 193, 0.6);
+      backdrop-filter: blur(10px);
+      /* ↓ スマホではみ出さないように */
+      box-sizing: border-box;
+      width: calc(100% - 32px);
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 0.3em;
+      color: #fff;
+      text-shadow: 0 0 15px rgba(255, 182, 193, 0.8);
+    }
+
+    .tagline {
+      font-size: 0.85em;
+      margin-bottom: 35px;
+      color: #ffe1ff;
+      letter-spacing: 0.1em;
+    }
+
+    /* ====== 🌈 質問ボックス ====== */
+    .question {
+      margin-bottom: 25px;
+      padding: 25px;
+      background: linear-gradient(135deg, #fff5ff 0%, #eaffff 50%, #fff9e6 100%);
+      border-radius: 20px;
+      border-left: 8px solid #c1a3e4;
+      text-align: left;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .question p {
+      margin-top: 0;
+      font-weight: bold;
+      color: #2a0033;
+      font-size: 1.1em;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 8px;
+      color: #4a2e5e;
+      transition: all 0.2s;
+    }
+    label:hover {
+      background: rgba(255, 255, 255, 0.5);
+      transform: translateX(5px);
+    }
+
+    input[type="radio"] {
+      margin-right: 10px;
+      accent-color: #c1a3e4;
+    }
+
+    /* ====== 🍬 送信ボタン ====== */
+    .submit-btn {
+      display: block;
+      margin: 2rem auto 0;
+      padding: 1rem 3rem;
+      background: linear-gradient(45deg, #ffe1ff, #e0ffff, #fff7d1, #ffe1ff);
+      color: #2a0033;
+      font-size: 1.2rem;
+      font-weight: 900;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 25px rgba(255, 192, 203, 0.6);
+      transition: all 0.3s ease;
+      font-family: "MS Gothic", monospace;
+    }
+    .submit-btn:hover {
+      transform: scale(1.05) rotate(-1deg);
+      box-shadow: 0 0 35px rgba(255, 255, 255, 0.8);
+    }
+
+    /* ====== ✨ 爆発する三角形 ====== */
+    .shard {
+      position: fixed;
+      width: 0; height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 20px solid #ffe1ff;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .star { position: absolute; background: white; border-radius: 50%; animation: twinkle 3s infinite ease-in-out; }
+    @keyframes twinkle { 0%,100% {opacity: 0.3;} 50% {opacity: 1;} }
+  </style>
+</head>
+<body>
+
+<div id="background-wrap">
+  <canvas id="spores"></canvas>
+  <div id="mycelium"></div>
+</div>
+
+<div class="outer-container">
+  <h1>🧠 魂の準備ページ⚡️</h1>
+  <div class="tagline">〜 果たして君は、「めじぃ（飯）❗️」に辿り着けるか 〜</div>
+
+  <form id="soulForm">
+    <div class="question">
+      <p>Q1. 世界がもし1秒で終わるなら、何をする？</p>
+      <label><input type="radio" name="q1" value="a">叫ぶ 🔊</label>
+      <label><input type="radio" name="q1" value="b">踊る 💃</label>
+      <label><input type="radio" name="q1" value="c">見届ける 👁️</label>
+    </div>
+
+    <div class="question">
+      <p>Q2. 朝目覚めたら別の惑星にいた。どうする？</p>
+      <label><input type="radio" name="q2" value="a">探索する 🚀</label>
+      <label><input type="radio" name="q2" value="b">瞑想する 🧘</label>
+      <label><input type="radio" name="q2" value="c">寝直す 💤</label>
+    </div>
+
+    <button type="button" class="submit-btn" onclick="checkAnswers()">✨魂チェック完了✨</button>
+  </form>
+</div>
+
+<script>
+const canvas = document.getElementById("spores");
+const ctx = canvas.getContext("2d");
+const bgWrap = document.getElementById("background-wrap");
+let w, h, spores = [];
+
+function resize() {
+  // ↓ 1.1倍をやめてぴったりにする
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+  spores = Array.from({length: 150}, () => ({
+    x: Math.random() * w, y: Math.random() * h,
+    r: Math.random() * 2, o: Math.random(),
+    s: Math.random() * 0.5 + 0.2, z: Math.random() * 2
+  }));
+}
+function draw() {
+  ctx.clearRect(0, 0, w, h);
+  spores.forEach(s => {
+    s.x += Math.sin(Date.now() * 0.0001 + s.y) * 0.1 * s.z;
+    s.y += Math.cos(Date.now() * 0.00005 + s.x) * 0.1 * s.z;
+    if (s.x < 0) s.x = w; if (s.x > w) s.x = 0;
+    if (s.y < 0) s.y = h; if (s.y > h) s.y = 0;
+    s.o += (Math.random() - 0.5) * 0.05;
+    s.o = Math.max(0.1, Math.min(1, s.o));
+    const colors = ['#ffe1ff', '#c1a3e4', '#fbe88b', '#a6d0e4', '#ffeaff'];
+    ctx.beginPath();
+    ctx.fillStyle = `${colors[Math.floor((s.x/w)*5)]}${Math.floor(s.o * 255).toString(16).padStart(2, '0')}`;
+    ctx.arc(s.x, s.y, s.r * s.z, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+window.addEventListener("resize", resize);
+resize(); draw();
+
+document.addEventListener("mousemove", (e) => {
+  const moveX = (e.clientX / window.innerWidth - 0.5) * 30;
+  const moveY = (e.clientY / window.innerHeight - 0.5) * 30;
+  bgWrap.style.transform = `translate(${-moveX}px, ${-moveY}px)`;
+});
+
+document.addEventListener('click', (e) => {
+  const shardCount = 12;
+  const colors = ['#ffe1ff', '#c1a3e4', '#fbe88b', '#a6d0e4', '#ffeaff'];
+  for (let i = 0; i < shardCount; i++) {
+    const shard = document.createElement('div');
+    shard.className = 'shard';
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const size = Math.random() * 12 + 4;
+    shard.style.borderBottom = `${size * 2}px solid ${color}`;
+    shard.style.borderLeftWidth = `${size}px`;
+    shard.style.borderRightWidth = `${size}px`;
+    shard.style.left = e.clientX + 'px'; shard.style.top = e.clientY + 'px';
+    const angle = Math.random() * Math.PI * 2;
+    const velocity = Math.random() * 120 + 40;
+    const tx = Math.cos(angle) * velocity; const ty = Math.sin(angle) * velocity;
+    const rot = Math.random() * 360;
+    document.body.appendChild(shard);
+    const anim = shard.animate([
+      { transform: 'translate(-50%, -50%) rotate(0deg) scale(1)', opacity: 1 },
+      { transform: `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) rotate(${rot}deg) scale(0)`, opacity: 0 }
+    ], { duration: 600, easing: 'ease-out' });
+    anim.onfinish = () => shard.remove();
+  }
+});
+
+const correctAnswers = { q1: 'c', q2: 'b' };
+function checkAnswers() {
+  let score = 0;
+  for (let key in correctAnswers) {
+    const selected = document.querySelector(`input[name="${key}"]:checked`);
+    if (selected && selected.value === correctAnswers[key]) score++;
+  }
+  if (score === Object.keys(correctAnswers).length) {
+    alert("おめでとう！魂キラキラ（　👁️_ゝ👁️）✨");
+    window.location.href = "morires.html"; 
+  } else {
+    alert("ぶぶ漬け食べなはれや( 　´_ゝ`)🍵");
+    window.location.href = "index.html"; 
+  }
+}
+
+for (let i = 0; i < 40; i++) {
+  const star = document.createElement("div");
+  star.classList.add("star");
+  star.style.width = star.style.height = Math.random() * 2 + "px";
+  star.style.left = Math.random() * 100 + "%"; star.style.top = Math.random() * 100 + "%";
+  bgWrap.appendChild(star);
+}
+</script>
+</body>
+</html>

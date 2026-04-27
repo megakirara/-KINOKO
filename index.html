@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🍄合同会社菌糸🍄</title>
+<style>
+body {
+  background-color: #0b0015;
+  color: #fff;
+  font-family: "MS Gothic", monospace;
+  text-align: center;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#mycelium {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: -2;
+  background: radial-gradient(circle at center, rgba(255,192,255,0.25) 0%, transparent 70%);
+  animation: spores 5s infinite ease-in-out alternate;
+  filter: blur(2px);
+}
+@keyframes spores {
+  from { transform: scale(1); opacity: 0.4; }
+  to { transform: scale(1.25); opacity: 0.8; }
+}
+
+#spores {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  /* ★修正: マウス追従のズレを抑えるためtransitionを追加 */
+  transition: transform 0.1s ease-out;
+}
+
+.main-container {
+  position: relative;
+  z-index: 2;
+  max-width: 850px;
+  margin: 60px auto;
+  background: rgba(10, 0, 20, 0.7);
+  border-radius: 30px;
+  padding: 40px 20px;
+  box-shadow: 0 0 40px rgba(255, 182, 193, 0.35); 
+  border: 2px solid rgba(255, 192, 203, 0.25);
+  backdrop-filter: blur(10px);
+}
+
+h1 {
+  margin-top: 20px;
+  font-size: 2.4em;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 10px #ffc0ff, 0 0 20px #ffe0ff;
+}
+
+.tagline {
+  font-size: 1em;
+  margin-bottom: 15px;
+  color: #ffeaff;
+}
+
+.marquee {
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-bottom: 30px;
+}
+.marquee p {
+  display: inline-block;
+  animation: scrollText 25s linear infinite;
+  color: #ffccff;
+}
+@keyframes scrollText {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+}
+
+.buttons {
+  margin: 30px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+.buttons a { text-decoration: none; }
+
+button {
+  background: linear-gradient(45deg, #ffd6ff, #eaffff, #fff2e0, #ffe1ff);
+  color: #2a0033;
+  border: none;
+  padding: 15px 40px;
+  font-size: 1.1em;
+  font-family: "MS Gothic", monospace;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(255,200,255,0.4);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  font-weight: bold;
+}
+button:hover {
+  transform: scale(1.07);
+  box-shadow: 0 0 30px rgba(255,255,255,0.7);
+}
+
+/* ★修正: よむ・みるボタンは未実装なのでdisabled風スタイルを追加（任意） */
+button.wip {
+  opacity: 0.6;
+  cursor: default;
+}
+button.wip:hover {
+  transform: none;
+  box-shadow: 0 0 20px rgba(255,200,255,0.4);
+}
+
+.litlink-mini-button {
+  display: inline-block;
+  background: linear-gradient(45deg, #ffe1ff, #e0ffff, #fff7d1, #e0ffe1, #ffe1ff);
+  background-size: 200% 200%;
+  color: #2a0033;
+  text-decoration: none;
+  padding: 8px 25px; 
+  font-size: 0.9em; 
+  border-radius: 30px;
+  box-shadow: 0 0 15px rgba(255, 192, 203, 0.4);
+  transition: all 0.3s ease;
+  animation: rainbow-button 5s linear infinite;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-weight: bold;
+}
+.litlink-mini-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+}
+@keyframes rainbow-button {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.sub-links { margin: 30px auto; }
+.sub-links a {
+  display: inline-block;
+  color: #ffccff;
+  text-decoration: none;
+  margin: 10px 20px;
+  font-size: 1em;
+  transition: 0.3s;
+}
+.sub-links a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 8px #ffe6ff;
+  transform: translateY(-2px);
+}
+
+#note-box {
+  width: 85%;
+  max-width: 600px;
+  margin: 40px auto;
+  background: rgba(255, 255, 255, 0.9);
+  border: 3px double #ff99cc;
+  color: #000;
+  font-family: "MS PGothic", monospace;
+  text-align: left;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(255,150,255,0.4);
+}
+#note-box h2 {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 15px;
+  text-align: center;
+  background-color: #ffe6f9;
+  border: 1px solid #ff99cc;
+  padding: 5px;
+  border-radius: 10px;
+}
+.note-item {
+  border-bottom: 1px dashed #ffbbee;
+  padding: 10px 0;
+}
+.note-item:last-child { border-bottom: none; }
+.note-item a {
+  display: inline;
+  color: #c000a0;
+  text-decoration: underline;
+  margin: 0; font-size: 1em;
+}
+.note-item a:hover { color: #ff0088; }
+.note-date { font-size: 11px; color: #666; display: block; margin-top: 4px; }
+
+#growMsg {
+  position: fixed;
+  bottom: 10px; width: 100%;
+  text-align: center; opacity: 0;
+  transition: opacity 1s ease;
+  font-size: 0.9em; color: #ffccff;
+}
+
+.shard {
+  position: fixed;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid #c1a3e4;
+  pointer-events: none;
+  z-index: 9999;
+  filter: drop-shadow(0 0 5px rgba(255,255,255,0.8));
+}
+
+@keyframes twinkle { 0%,100% {opacity: 0.4;} 50% {opacity: 1;} }
+.star {
+  position: absolute; background: white; border-radius: 50%;
+  animation: twinkle 3s infinite ease-in-out;
+}
+</style>
+</head>
+<body>
+<canvas id="spores"></canvas>
+<div id="mycelium"></div>
+
+<div class="main-container">
+  <h1>🍄 合同会社 菌糸™ 🍄</h1>
+  <p class="tagline">💫 内気な人々の、ちっさい遊び場 💫</p>
+
+  <div class="marquee">
+    <p>🍄 ゆ、ゆっくりしていってね( 👁️ _ 👁️ ；) 🍄</p>
+  </div>
+
+  <div class="buttons">
+    <!-- ★修正: morires_into.html はそのまま（意図的と判断） -->
+    <a href="morires_into.html"><button>🍄どんぐりを辿っても着きません🎵</button></a>
+
+    <!-- ★修正: リンク先が未定のボタンはhref="#"＋wipクラスで無効化。準備できたらhref先を差し替えてね -->
+    <a href="#"><button class="wip">🍄 よむ（準備中）</button></a>
+    <a href="#"><button class="wip">🍄 みる（準備中）</button></a>
+  </div>
+
+  <div style="margin: 25px auto;">
+    <a href="https://lit.link/MEGAKIRARA" target="_blank" class="litlink-mini-button">
+      🧠 にーとの中枢 ⚡️
+    </a>
+  </div>
+
+  <div class="sub-links">
+    <a href="hello.html">🧠ごあいさつ⚡️</a>
+    <a href="profile.html">✋( 👁️ _ 👁️ )🤚</a>
+  </div>
+
+  <div id="note-box">
+    <h2>🍄 いろいろごあんない（調整中）🍄</h2>
+
+    <!-- ★修正: 空だったのでサンプル項目を追加。内容は自由に差し替えてね -->
+    <div class="note-item">
+      <a href="#">🌱 サイトをちょっとずつ整えています</a>
+      <span class="note-date">2025-07-01</span>
+    </div>
+    <div class="note-item">
+      <a href="#">🍄 よむ・みるページ、準備中です</a>
+      <span class="note-date">2025-06-20</span>
+    </div>
+    <div class="note-item">
+      <a href="hello.html">🌙 ごあいさつページできました</a>
+      <span class="note-date">2025-06-10</span>
+    </div>
+  </div>
+</div>
+
+<div id="growMsg">……胞子舞にける（；´_ゝ`）</div>
+
+<script>
+/* 胞子＆星屑アニメーション */
+const canvas = document.getElementById("spores");
+const ctx = canvas.getContext("2d");
+let w, h, spores = [];
+
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+  spores = Array.from({length: 250}, () => ({
+    x: Math.random() * w, y: Math.random() * h,
+    r: Math.random() * 2 + 1, o: Math.random(),
+    s: Math.random() * 0.5 + 0.2, z: Math.random() * 2
+  }));
+}
+function draw() {
+  ctx.clearRect(0, 0, w, h);
+  spores.forEach(s => {
+    s.x += Math.sin(Date.now() * 0.0001 + s.y) * 0.2 * s.z;
+    s.y += Math.cos(Date.now() * 0.00005 + s.x) * 0.2 * s.z;
+    if (s.x < 0) s.x = w; if (s.x > w) s.x = 0;
+    if (s.y < 0) s.y = h; if (s.y > h) s.y = 0;
+    s.o += (Math.random() - 0.5) * 0.05;
+    s.o = Math.max(0.1, Math.min(1, s.o));
+    const hue = (s.x / w) * 360;
+    ctx.beginPath();
+    ctx.fillStyle = `hsla(${hue}, 80%, 80%, ${s.o})`;
+    ctx.arc(s.x, s.y, s.r * s.z, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+window.addEventListener("resize", resize);
+resize(); draw();
+
+/* マウス追従（★修正: transitionはCSS側で設定済み） */
+document.addEventListener("mousemove", (e) => {
+  const x = (e.clientX / window.innerWidth - 0.5) * 2;
+  const y = (e.clientY / window.innerHeight - 0.5) * 2;
+  canvas.style.transform = `translate(${x * 10}px, ${y * 10}px)`;
+});
+
+/* アイドル時メッセージ */
+let idleTimer;
+const growMsg = document.getElementById("growMsg");
+function showGrowMsg() { growMsg.style.opacity = 1; }
+function resetIdleTimer() {
+  growMsg.style.opacity = 0;
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(showGrowMsg, 30000);
+}
+window.onload = resetIdleTimer;
+document.onmousemove = resetIdleTimer;
+document.onkeydown = resetIdleTimer;
+
+/* 星屑生成 */
+for (let i = 0; i < 50; i++) {
+  const star = document.createElement("div");
+  star.classList.add("star");
+  star.style.width = star.style.height = Math.random() * 3 + "px";
+  star.style.left = Math.random() * 100 + "%";
+  star.style.top = Math.random() * 100 + "%";
+  star.style.animationDuration = 2 + Math.random() * 3 + "s";
+  document.body.appendChild(star);
+}
+
+/* 三角形爆発エフェクト */
+document.addEventListener('click', (e) => {
+  const shardCount = 12;
+  const colors = ['#f9c5d1', '#a6d0e4', '#c1a3e4', '#fbe88b', '#a8f0c6'];
+
+  for (let i = 0; i < shardCount; i++) {
+    const shard = document.createElement('div');
+    shard.className = 'shard';
+    
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const size = Math.random() * 15 + 5;
+    shard.style.borderBottom = `${size * 2}px solid ${color}`;
+    shard.style.borderLeftWidth = `${size}px`;
+    shard.style.borderRightWidth = `${size}px`;
+    shard.style.left = e.clientX + 'px';
+    shard.style.top = e.clientY + 'px';
+
+    const angle = Math.random() * Math.PI * 2;
+    const velocity = Math.random() * 150 + 50;
+    const tx = Math.cos(angle) * velocity;
+    const ty = Math.sin(angle) * velocity;
+    const rot = Math.random() * 360;
+
+    document.body.appendChild(shard);
+
+    const anim = shard.animate([
+      { transform: 'translate(-50%, -50%) rotate(0deg) scale(1)', opacity: 1 },
+      { transform: `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) rotate(${rot}deg) scale(0)`, opacity: 0 }
+    ], {
+      duration: Math.random() * 500 + 500,
+      easing: 'cubic-bezier(0, .9, .57, 1)'
+    });
+
+    anim.onfinish = () => shard.remove();
+  }
+});
+</script>
+</body>
+</html>

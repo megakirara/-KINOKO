@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>✋( 👁️ _ 👁️ )🤚</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;900&display=swap');
+
+    :root {
+      --bg-dark: #0b0015;
+      --neon-pink: #ffb6c1;
+      --neon-purple: #c1a3e4;
+      --neon-blue: #a6d0e4;
+      --text-main: #fef0f5;
+      --card-bg: rgba(15, 0, 30, 0.85);
+      --unicorn-gradient: linear-gradient(135deg, #f9c5d1, #a6d0e4, #c1a3e4, #fbe88b, #a8f0c6);
+    }
+
+    html, body {
+      margin: 0;
+      font-family: 'Baloo 2', cursive, sans-serif;
+      background-color: var(--bg-dark);
+      user-select: none;
+      color: var(--text-main);
+      position: relative;
+      overflow-x: hidden;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      min-height: 100vh;
+    }
+
+    #mycelium {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -4;
+      background: radial-gradient(circle at center, rgba(255,192,255,0.15) 0%, transparent 70%);
+    }
+
+    #parallax-bg {
+      position: fixed;
+      top: -10%; left: -10%; width: 120%; height: 120%;
+      z-index: -2;
+      pointer-events: none;
+      will-change: transform;
+    }
+
+    /* ====== ✨ タップスポットライト ====== */
+    #touch-spotlight {
+      position: fixed;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(255,192,255,0.35) 0%, rgba(193,163,228,0.15) 40%, transparent 70%);
+      transition: opacity 0.15s ease-out;
+    }
+    #touch-spotlight.active {
+      opacity: 1;
+    }
+
+    .brain-particle {
+      position: absolute;
+      font-size: calc(2rem + 2vw);
+      opacity: 0.15;
+      animation: floatParticle var(--dur, 8s) ease-in-out infinite alternate;
+      animation-delay: var(--delay, 0s);
+      will-change: transform, opacity;
+    }
+    @keyframes floatParticle {
+      0%   { transform: translateY(0) rotate(0deg);   opacity: 0.08; }
+      100% { transform: translateY(-30px) rotate(15deg); opacity: 0.28; }
+    }
+
+    .star {
+      position: absolute; background: white; border-radius: 50%;
+      animation: twinkle var(--dur, 3s) infinite ease-in-out;
+      z-index: -3;
+    }
+    @keyframes twinkle { 0%,100% {opacity: 0.2;} 50% {opacity: 0.9;} }
+
+    .mystery-text {
+      position: fixed; top: 10vh; left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.2rem; letter-spacing: 0.3em;
+      opacity: 0.2; font-weight: 700;
+      white-space: nowrap;
+      animation: flicker 3s infinite alternate;
+      z-index: 1;
+      color: var(--neon-pink);
+    }
+    @keyframes flicker { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.5; } }
+
+    .profile-card {
+      max-width: 420px;
+      width: calc(100% - 32px);
+      box-sizing: border-box;
+      margin: 5vh auto 20px;
+      background: var(--card-bg);
+      border-radius: 30px; padding: 20px 35px 30px;
+      box-shadow: 0 0 40px rgba(255, 182, 193, 0.2);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      text-align: center; z-index: 10;
+      position: relative;
+      border: 2px solid rgba(255, 182, 193, 0.3);
+    }
+
+    .profile-card h1 {
+      font-size: 2.8rem; margin-bottom: 0.2em;
+      text-shadow: 0 0 15px var(--neon-purple);
+      color: #fff;
+    }
+    .home-link { text-decoration: none; color: inherit; transition: transform 0.2s; display: inline-block; }
+    .home-link:hover { transform: scale(1.1); }
+
+    .profile-card p { margin: 10px 0; font-weight: 600; font-size: 1.15rem; color: #fff; }
+    .profile-label { font-weight: 900; color: var(--neon-pink); margin-right: 8px; text-shadow: 0 0 5px var(--neon-pink); }
+
+    #days-until-birthday {
+      font-weight: 700; font-size: 1rem;
+      background: linear-gradient(90deg, #ffc0cb, #a6d0e4, #c1a3e4, #fbe88b, #a8f0c6);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbowShift 5s linear infinite;
+    }
+    @keyframes rainbowShift { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+
+    .cloud {
+      display: block;
+      width: 200px; height: 75px;
+      background: var(--unicorn-gradient);
+      background-size: 200% 200%;
+      border-radius: 50% / 100%;
+      filter: drop-shadow(0 0 15px rgba(255,255,255,0.5));
+      animation: floatCloud 5s ease-in-out infinite, rainbowShift 10s linear infinite;
+      cursor: pointer; z-index: 20;
+      box-shadow: 20px 10px 15px rgba(255,255,255,0.2);
+      margin: 0 auto 16px;
+    }
+    @keyframes floatCloud {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    #summon-log {
+      position: fixed;
+      top: 15vh; right: 20px;
+      width: 360px; max-height: 65vh;
+      overflow-y: auto;
+      background: rgba(10, 0, 20, 0.7);
+      border-radius: 16px; padding: 15px 20px;
+      box-shadow: 0 0 20px rgba(193, 163, 228, 0.3);
+      font-family: "MS Gothic", monospace; font-size: 0.9rem; z-index: 15;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ffeaff;
+    }
+    #summon-log div { margin-bottom: 8px; border-bottom: 1px dashed rgba(255, 255, 255, 0.2); padding-bottom: 4px; }
+
+    .floating-emoji { position: fixed; font-size: 8rem; pointer-events: none; animation: floatUp 1s forwards ease-out; z-index: 100; }
+    .glow { text-shadow: 0 0 10px #fff, 0 0 20px var(--neon-pink); }
+    @keyframes floatUp {
+      0% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-120px) scale(2.5); }
+    }
+
+    body.ritual-glow { animation: ritualGlow 0.4s ease forwards; }
+    @keyframes ritualGlow { 0% { filter: brightness(1); } 50% { filter: brightness(1.5) saturate(1.2); } 100% { filter: brightness(1); } }
+
+    @media (max-width: 700px) {
+      .profile-card {
+        margin: 16px auto 16px;
+        padding: 20px 20px 24px;
+        border-radius: 24px;
+      }
+      .profile-card h1 { font-size: 2rem; }
+      .profile-card p { font-size: 0.95rem; margin: 6px 0; }
+      .cloud { width: 160px; height: 60px; }
+      #summon-log {
+        position: relative;
+        top: auto; right: auto;
+        width: calc(100% - 32px);
+        max-width: 420px;
+        max-height: 200px;
+        margin: 0 auto 60px;
+        box-sizing: border-box;
+      }
+      /* スポットライトをスマホでは少し大きく */
+      #touch-spotlight {
+        width: 420px;
+        height: 420px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="mycelium"></div>
+  <div id="parallax-bg"></div>
+  <!-- タップスポットライト -->
+  <div id="touch-spotlight"></div>
+
+  <div class="profile-card">
+    <div class="cloud"></div>
+    <a href="index.html" class="home-link"><h1>✋( 👁️ _ 👁️ )🤚</h1></a>
+    <p><span class="profile-label">名前：</span>⚡️にーとの輝星⚡️</p>
+    <p><span class="profile-label">出自：</span>🇯🇵✖️🇨🇭</p>
+    <p><span class="profile-label">分類：</span>無職</p>
+    <p><span class="profile-label">属性：</span>お絵描きオタク</p>
+    <p><span class="profile-label">性別：</span>生まれた時から♀</p>
+    <p><span class="profile-label">誕生日：</span>6月15日</p>
+    <p><span class="profile-label">年齢：</span><span id="age-value">計算中...</span></p>
+    <p><span class="profile-label">生年：</span>紀元前249997975年</p>
+    <p><span class="profile-label">座右の銘：</span>生きてりゃなんとかなる</p>
+    <p><span class="profile-label">誕生日まで：</span><br><span id="days-until-birthday">計算中...</span></p>
+  </div>
+  <div id="summon-log"><strong>めじ❗️ログ</strong><br></div>
+
+  <script>
+    (() => {
+      const summons = [
+        { emoji: '🍺', poems: ["とりあえず飲めよ（　´_ゝ`）。","ほら、冷えてんだからさァ（　´_ゝ`）","冷凍庫に缶入れてんの忘れたら爆発したんだけど（ ；_ゝ； ）。"]},
+        { emoji: '🥟', poems: ["しいたけ入れたらうまいよ。","あ、自分ニラ入れないんすよね（　´_ゝ`）。","一食で何個食える（　´_ゝ`）？"]},
+        { emoji: '🍔', poems: ["挟まってる肉がなんの肉かなんて…どうでもいいよ（　´_ゝ`）","ビッ○○ックなら3個は食うよ（　´_ゝ`）"]},
+        { emoji: '🍟', poems: ["たまにやったら長い芋入ってんの何（　´_ゝ`）","自分で芋揚げたら同じ値段で何倍も量食えますからね。"]}
+      ];
+
+      const parallaxBg = document.getElementById('parallax-bg');
+      const spotlight = document.getElementById('touch-spotlight');
+      const fragment = document.createDocumentFragment();
+
+      for (let i = 0; i < 40; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        const size = Math.random() * 2 + 'px';
+        star.style.cssText = `width:${size};height:${size};left:${Math.random()*100}%;top:${Math.random()*100}%;--dur:${2+Math.random()*3}s`;
+        fragment.appendChild(star);
+      }
+
+      const PARTICLE_COUNT = 60;
+      const MIN_DIST = 8;
+      const placed = [];
+      function isFarEnough(x, y) {
+        return placed.every(p => Math.hypot(p.x - x, p.y - y) >= MIN_DIST);
+      }
+      let attempts = 0, count = 0;
+      while (count < PARTICLE_COUNT && attempts < PARTICLE_COUNT * 10) {
+        attempts++;
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+        if (!isFarEnough(x, y)) continue;
+        placed.push({ x, y });
+        const p = document.createElement('div');
+        p.className = 'brain-particle';
+        p.textContent = (count % 2 === 0) ? '🧠' : '⚡️';
+        p.style.cssText = `left:${x}%;top:${y}%;--dur:${7+Math.random()*8}s;--delay:${Math.random()*5}s`;
+        fragment.appendChild(p);
+        count++;
+      }
+      parallaxBg.appendChild(fragment);
+
+      // ====== パラックス：マウス & タッチ両対応 ======
+      let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+      let rafId = null;
+
+      function setParallaxTarget(clientX, clientY) {
+        targetX = (window.innerWidth  / 2 - clientX) / 30;
+        targetY = (window.innerHeight / 2 - clientY) / 30;
+        if (!rafId) rafId = requestAnimationFrame(animateParallax);
+      }
+
+      function animateParallax() {
+        currentX += (targetX - currentX) * 0.1;
+        currentY += (targetY - currentY) * 0.1;
+        parallaxBg.style.transform = `translate(${currentX}px,${currentY}px)`;
+        if (Math.abs(targetX - currentX) > 0.05 || Math.abs(targetY - currentY) > 0.05) {
+          rafId = requestAnimationFrame(animateParallax);
+        } else {
+          rafId = null;
+        }
+      }
+
+      // PCはマウスムーブで常時追従
+      document.addEventListener('mousemove', (e) => {
+        setParallaxTarget(e.clientX, e.clientY);
+      });
+
+      // ====== スマホ：タッチでパラックス＋スポットライト ======
+      let spotlightTimer = null;
+
+      document.addEventListener('touchmove', (e) => {
+        const t = e.touches[0];
+        setParallaxTarget(t.clientX, t.clientY);
+        showSpotlight(t.clientX, t.clientY);
+      }, { passive: true });
+
+      document.addEventListener('touchstart', (e) => {
+        const t = e.touches[0];
+        setParallaxTarget(t.clientX, t.clientY);
+        showSpotlight(t.clientX, t.clientY);
+      }, { passive: true });
+
+      document.addEventListener('touchend', () => {
+        // 指を離したら少し遅れてフェードアウト
+        spotlightTimer = setTimeout(() => {
+          spotlight.classList.remove('active');
+        }, 400);
+      });
+
+      function showSpotlight(x, y) {
+        clearTimeout(spotlightTimer);
+        spotlight.style.left = x + 'px';
+        spotlight.style.top  = y + 'px';
+        spotlight.classList.add('active');
+      }
+
+      // ====== 召喚システム ======
+      const cloud = document.querySelector('.cloud');
+      const summonLog = document.getElementById('summon-log');
+
+      function addSummonLog(text) {
+        const line = document.createElement('div');
+        line.textContent = text;
+        summonLog.appendChild(line);
+        summonLog.scrollTop = summonLog.scrollHeight;
+      }
+
+      cloud.addEventListener('click', () => {
+        document.body.classList.add('ritual-glow');
+        setTimeout(() => document.body.classList.remove('ritual-glow'), 400);
+
+        if (Math.random() < 0.1) {
+          addSummonLog('❌ 出ないこともあるんすよね（　´_ゝ`）。');
+          return;
+        }
+        const item = summons[Math.floor(Math.random() * summons.length)];
+        const poem = item.poems[Math.floor(Math.random() * item.poems.length)];
+
+        const float = document.createElement('div');
+        float.textContent = item.emoji;
+        float.className = 'floating-emoji glow';
+        float.style.left = `${Math.random() * 70 + 15}%`;
+        float.style.top  = `${Math.random() * 50 + 25}%`;
+        document.body.appendChild(float);
+        setTimeout(() => float.remove(), 1000);
+
+        addSummonLog(`${item.emoji} ${poem}`);
+      });
+    })();
+
+    function updateAge() {
+      const now = new Date();
+      document.getElementById('age-value').textContent =
+        (now.getFullYear() + 249997975).toLocaleString() + '歳';
+
+      const nextBday = new Date(now.getFullYear(), 5, 15);
+      if (now > nextBday) nextBday.setFullYear(now.getFullYear() + 1);
+      const diff = nextBday - now;
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      document.getElementById('days-until-birthday').textContent =
+        `${d}日 ${h}時間 ${m}分 ${s}秒`;
+    }
+    setInterval(updateAge, 1000);
+    updateAge();
+  </script>
+</body>
+</html>
