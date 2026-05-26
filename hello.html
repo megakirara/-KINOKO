@@ -41,7 +41,7 @@ body {
   position: relative;
   z-index: 2;
   max-width: 800px;
-  margin: 60px auto 80px; /* 上下余白を調整 */
+  margin: 60px auto 80px; 
   background: rgba(15, 0, 25, 0.75);
   border-radius: 20px;
   padding: 40px;
@@ -169,17 +169,17 @@ hr {
   <hr>
 
   <p>
-    …では、またどこかでお会いしましょ。<br>
+    …では、またどこかでお会いしまひょ。<br>
     あなたの思考が、<br>
     少しでも柔らかくなるように。<br>
-    🍄 より、菌をこめて 🍄
+    🍄 より、菌をこめて…。
   </p>
 
-  <a href="index.html" class="button">🍄 もどる❓</a><br>
+  <a href="index.html" class="button">🍄 帰る</a><br>
   <a href="profile.html" class="button">🧠 にーとの輝星について ⚡️</a>
 </div>
 
-<div id="growMsg">🍄こころやすくお過ごしください( 　´_ゝ`)</div>
+<div id="growMsg">🍄こころやすくお過ごしください</div>
 
 <script>
 const canvas = document.getElementById("spores");
@@ -238,7 +238,6 @@ window.onload = resetIdleTimer;
 document.onmousemove = resetIdleTimer;
 document.onkeydown = resetIdleTimer;
 
-/* ====== 💥 三角形爆発エフェクト ====== */
 document.addEventListener('click', (e) => {
   const shardCount = 12;
   const colors = ['#ffe1ff', '#c1a3e4', '#fbe88b', '#a6d0e4', '#ffeaff'];

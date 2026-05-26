@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🍄 培養室｜合同会社菌糸 🍄</title>
+<title>🍄 ホダ場｜合同会社菌糸 🍄</title>
 <style>
 body {
   background-color: #0b0015;
@@ -78,7 +78,6 @@ h1 {
   to { transform: translateX(-100%); }
 }
 
-/* ★単品サイトを並べるグリッドレイアウト */
 .site-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -86,7 +85,6 @@ h1 {
   margin: 0 auto 40px;
 }
 
-/* ★個別のサイトカード */
 .site-card {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 192, 203, 0.2);
@@ -138,7 +136,6 @@ button:hover {
   box-shadow: 0 0 25px rgba(255,255,255,0.6);
 }
 
-/* 戻るボタン用スタイル */
 .back-link {
   display: inline-block;
   color: #ffccff;
@@ -154,7 +151,6 @@ button:hover {
   border-bottom: 1px dashed #ffffff;
 }
 
-/* その他の既存スタイル */
 .shard {
   position: fixed; width: 0; height: 0;
   border-left: 10px solid transparent; border-right: 10px solid transparent;
@@ -224,12 +220,11 @@ button:hover {
 
   </div>
   <div>
-    <a href="index.html" class="back-link">🔙 トップページへ逃げる</a>
+    <a href="index.html" class="back-link">🍄 帰る</a>
   </div>
 </div>
 
 <script>
-/* 胞子＆星屑アニメーション（既存のまま） */
 const canvas = document.getElementById("spores");
 const ctx = canvas.getContext("2d");
 let w, h, spores = [];
@@ -263,14 +258,12 @@ function draw() {
 window.addEventListener("resize", resize);
 resize(); draw();
 
-/* マウス追従 */
 document.addEventListener("mousemove", (e) => {
   const x = (e.clientX / window.innerWidth - 0.5) * 2;
   const y = (e.clientY / window.innerHeight - 0.5) * 2;
   canvas.style.transform = `translate(${x * 10}px, ${y * 10}px)`;
 });
 
-/* 星屑生成 */
 for (let i = 0; i < 50; i++) {
   const star = document.createElement("div");
   star.classList.add("star");
@@ -281,7 +274,6 @@ for (let i = 0; i < 50; i++) {
   document.body.appendChild(star);
 }
 
-/* 三角形爆発エフェクト */
 document.addEventListener('click', (e) => {
   const shardCount = 12;
   const colors = ['#f9c5d1', '#a6d0e4', '#c1a3e4', '#fbe88b', '#a8f0c6'];

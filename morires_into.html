@@ -14,13 +14,11 @@
       overflow-x: hidden;
       overflow-y: auto;
       min-height: 100vh;
-      -webkit-overflow-scrolling: touch; /* iOS スムーズスクロール */
+      -webkit-overflow-scrolling: touch;
     }
 
-    /* ====== 🌌 背景宇宙：マウストラッキング ====== */
     #background-wrap {
       position: fixed;
-      /* ↓ 110%をやめて100%に。横はみ出し横スクロール問題を解消 */
       top: 0; left: 0; width: 100%; height: 100%;
       z-index: -1;
       pointer-events: none;
@@ -35,19 +33,17 @@
     @keyframes breathe { from { opacity: 0.3; } to { opacity: 0.8; } }
     #spores { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-    /* ====== 💖 外枠：ピンクグラデーション発光コンテナ ====== */
     .outer-container {
       position: relative;
       z-index: 2;
       max-width: 650px;
-      margin: 60px auto 80px; /* 下余白を追加 */
+      margin: 60px auto 80px;
       background: rgba(15, 0, 25, 0.85);
       border-radius: 40px;
       padding: 40px 20px;
       border: 6px solid #ffd1dc;
       box-shadow: 0 0 50px rgba(255, 182, 193, 0.6);
       backdrop-filter: blur(10px);
-      /* ↓ スマホではみ出さないように */
       box-sizing: border-box;
       width: calc(100% - 32px);
     }
@@ -66,7 +62,6 @@
       letter-spacing: 0.1em;
     }
 
-    /* ====== 🌈 質問ボックス ====== */
     .question {
       margin-bottom: 25px;
       padding: 25px;
@@ -103,7 +98,6 @@
       accent-color: #c1a3e4;
     }
 
-    /* ====== 🍬 送信ボタン ====== */
     .submit-btn {
       display: block;
       margin: 2rem auto 0;
@@ -124,7 +118,6 @@
       box-shadow: 0 0 35px rgba(255, 255, 255, 0.8);
     }
 
-    /* ====== ✨ 爆発する三角形 ====== */
     .shard {
       position: fixed;
       width: 0; height: 0;
@@ -161,7 +154,7 @@
     <div class="question">
       <p>Q2. 朝目覚めたら別の惑星にいた。どうする？</p>
       <label><input type="radio" name="q2" value="a">探索する 🚀</label>
-      <label><input type="radio" name="q2" value="b">瞑想する 🧘</label>
+      <label><input type="radio" name="q2" value="b">ワロス 🧘</label>
       <label><input type="radio" name="q2" value="c">寝直す 💤</label>
     </div>
 
@@ -176,7 +169,6 @@ const bgWrap = document.getElementById("background-wrap");
 let w, h, spores = [];
 
 function resize() {
-  // ↓ 1.1倍をやめてぴったりにする
   w = canvas.width = window.innerWidth;
   h = canvas.height = window.innerHeight;
   spores = Array.from({length: 150}, () => ({
@@ -244,7 +236,7 @@ function checkAnswers() {
     if (selected && selected.value === correctAnswers[key]) score++;
   }
   if (score === Object.keys(correctAnswers).length) {
-    alert("おめでとう！魂キラキラ（　👁️_ゝ👁️）✨");
+    alert("おめでとう（　👁️_ゝ👁️）✨");
     window.location.href = "morires.html"; 
   } else {
     alert("ぶぶ漬け食べなはれや( 　´_ゝ`)🍵");

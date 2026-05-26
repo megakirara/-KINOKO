@@ -45,7 +45,6 @@
       will-change: transform;
     }
 
-    /* ====== ✨ タップスポットライト ====== */
     #touch-spotlight {
       position: fixed;
       width: 300px; height: 300px;
@@ -190,7 +189,6 @@
         margin: 0 auto 60px;
         box-sizing: border-box;
       }
-      /* スポットライトをスマホでは少し大きく */
       #touch-spotlight {
         width: 420px;
         height: 420px;
@@ -201,7 +199,6 @@
 <body>
   <div id="mycelium"></div>
   <div id="parallax-bg"></div>
-  <!-- タップスポットライト -->
   <div id="touch-spotlight"></div>
 
   <div class="profile-card">
@@ -263,7 +260,6 @@
       }
       parallaxBg.appendChild(fragment);
 
-      // ====== パラックス：マウス & タッチ両対応 ======
       let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
       let rafId = null;
 
@@ -284,12 +280,10 @@
         }
       }
 
-      // PCはマウスムーブで常時追従
       document.addEventListener('mousemove', (e) => {
         setParallaxTarget(e.clientX, e.clientY);
       });
 
-      // ====== スマホ：タッチでパラックス＋スポットライト ======
       let spotlightTimer = null;
 
       document.addEventListener('touchmove', (e) => {
@@ -305,7 +299,6 @@
       }, { passive: true });
 
       document.addEventListener('touchend', () => {
-        // 指を離したら少し遅れてフェードアウト
         spotlightTimer = setTimeout(() => {
           spotlight.classList.remove('active');
         }, 400);
@@ -318,7 +311,6 @@
         spotlight.classList.add('active');
       }
 
-      // ====== 召喚システム ======
       const cloud = document.querySelector('.cloud');
       const summonLog = document.getElementById('summon-log');
 

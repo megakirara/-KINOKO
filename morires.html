@@ -17,10 +17,8 @@
       -webkit-overflow-scrolling: touch;
     }
 
-    /* ====== 🌌 背景宇宙：マウストラッキング ====== */
     #background-wrap {
       position: fixed;
-      /* ↓ 110%→100%、-5%→0 に修正。横スクロール誘発を防ぐ */
       top: 0; left: 0; width: 100%; height: 100%;
       z-index: -1;
       pointer-events: none;
@@ -35,12 +33,11 @@
     @keyframes breathe { from { opacity: 0.3; } to { opacity: 0.8; } }
     #spores-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-    /* ====== 💖 メインコンテナ ====== */
     .outer-container {
       position: relative;
       z-index: 10;
       max-width: 600px;
-      margin: 40px auto 80px; /* ↓ 下余白を追加 */
+      margin: 40px auto 80px;
       width: calc(100% - 32px);
       box-sizing: border-box;
       background: rgba(15, 0, 25, 0.9);
@@ -59,7 +56,6 @@
       text-shadow: 0 0 15px rgba(255, 182, 193, 0.8);
     }
 
-    /* ====== 🌈 注文ログ ====== */
     #log {
       width: 90%;
       max-width: 480px;
@@ -77,7 +73,6 @@
       box-sizing: border-box;
     }
 
-    /* ====== 🍬 ボタン類 ====== */
     .btn-wrap { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
     .summon-btn, .home-btn {
       padding: 1rem 2rem;
@@ -94,7 +89,6 @@
     .home-btn { background: rgba(255, 255, 255, 0.1); color: #fff; border: 2px solid #ffd1dc; text-decoration: none; line-height: 1.5; }
     .summon-btn:hover, .home-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 255, 255, 0.8); }
 
-    /* ====== 🍣 演出演出演出 ====== */
     .floating-food { position: fixed; pointer-events: none; z-index: 100; text-shadow: 0 0 15px #fff; }
     .summon-anim { font-size: 6rem; animation: floatUp 1.6s ease-out forwards; }
     @keyframes floatUp {
@@ -167,14 +161,12 @@ function summon(e) {
   }
 }
 
-/* ====== 背景処理 ====== */
 const canvas = document.getElementById("spores-canvas");
 const ctx = canvas.getContext("2d");
 const bgWrap = document.getElementById("background-wrap");
 let w, h, spores = [];
 
 function resize() {
-  /* ↓ 1.1倍をやめてぴったりに */
   w = canvas.width = window.innerWidth;
   h = canvas.height = window.innerHeight;
   spores = Array.from({length: 120}, () => ({
@@ -204,7 +196,6 @@ document.addEventListener("mousemove", (e) => {
   bgWrap.style.transform = `translate(${-moveX}px, ${-moveY}px)`;
 });
 
-/* ====== クリック演出：背景のみ爆撃抽選 ====== */
 function triggerEffects(clientX, clientY, target) {
   if (target.closest('button') || target.closest('a')) return;
 
@@ -250,7 +241,6 @@ document.addEventListener('touchstart', (e) => {
   triggerEffects(touch.clientX, touch.clientY, e.target);
 }, { passive: true });
 
-/* ====== 背景パーティクル ====== */
 const particleCount = 100;
 for (let i = 0; i < particleCount; i++) {
   const p = document.createElement("div");
