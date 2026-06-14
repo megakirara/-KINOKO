@@ -348,14 +348,12 @@
       const now = new Date();
       const thisBday = new Date(now.getFullYear(), 5, 15);
 
-      // 誕生日（6/15）を迎えていなければ年齢から1引く
       let age = now.getFullYear() + 249997976;
       if (now < thisBday) age -= 1;
 
       document.getElementById('age-value').textContent =
         age.toLocaleString() + '歳';
 
-      // カウントダウン用：誕生日を過ぎていたら来年の誕生日にする
       if (now > thisBday) thisBday.setFullYear(now.getFullYear() + 1);
       const diff = thisBday - now;
       const d = Math.floor(diff / 86400000);
