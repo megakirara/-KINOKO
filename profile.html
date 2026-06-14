@@ -346,12 +346,18 @@
 
     function updateAge() {
       const now = new Date();
-      document.getElementById('age-value').textContent =
-        (now.getFullYear() + 249997975).toLocaleString() + '歳';
+      const thisBday = new Date(now.getFullYear(), 5, 15);
 
-      const nextBday = new Date(now.getFullYear(), 5, 15);
-      if (now > nextBday) nextBday.setFullYear(now.getFullYear() + 1);
-      const diff = nextBday - now;
+      // 誕生日（6/15）を迎えていなければ年齢から1引く
+      let age = now.getFullYear() + 249997976;
+      if (now < thisBday) age -= 1;
+
+      document.getElementById('age-value').textContent =
+        age.toLocaleString() + '歳';
+
+      // カウントダウン用：誕生日を過ぎていたら来年の誕生日にする
+      if (now > thisBday) thisBday.setFullYear(now.getFullYear() + 1);
+      const diff = thisBday - now;
       const d = Math.floor(diff / 86400000);
       const h = Math.floor((diff % 86400000) / 3600000);
       const m = Math.floor((diff % 3600000) / 60000);
