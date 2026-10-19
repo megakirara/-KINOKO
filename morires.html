@@ -5,9 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🍣森の小さなレストラン🍣</title>
   <style>
+    :root {
+      --bg: #070720;
+      --neon-pink: #ff7ad9;
+      --neon-cyan: #4de1ff; 
+      --neon-yellow: #ffe84a;
+      --neon-purple: #b68cff; 
+      --panel: rgba(8, 6, 32, 0.9); 
+    }
+
     body {
-      background-color: #0b0015;
-      color: #fef0f5;
+      background-color: var(--bg);
+      color: #fff;
       font-family: "MS Gothic", monospace;
       margin: 0;
       text-align: center;
@@ -27,7 +36,9 @@
     #mycelium {
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: radial-gradient(circle at center, rgba(255,192,203,0.15) 0%, transparent 70%);
+      background:
+        radial-gradient(circle at 30% 40%, rgba(255,122,217,0.28) 0%, transparent 55%),
+        radial-gradient(circle at 70% 60%, rgba(77,225,255,0.25) 0%, transparent 55%);
       animation: breathe 5s infinite ease-in-out alternate;
     }
     @keyframes breathe { from { opacity: 0.3; } to { opacity: 0.8; } }
@@ -40,11 +51,14 @@
       margin: 40px auto 80px;
       width: calc(100% - 32px);
       box-sizing: border-box;
-      background: rgba(15, 0, 25, 0.9);
+      background: var(--panel);
       border-radius: 40px;
       padding: 40px 20px;
-      border: 6px solid #ffd1dc;
-      box-shadow: 0 0 50px rgba(255, 182, 193, 0.6);
+      border: 4px solid var(--neon-cyan);
+      box-shadow:
+        0 0 14px rgba(77,225,255,0.8),
+        0 0 50px rgba(255,122,217,0.5),
+        inset 0 0 30px rgba(182,140,255,0.2);
       -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
     }
@@ -53,7 +67,16 @@
       font-size: 2em;
       margin-bottom: 0.5em;
       color: #fff;
-      text-shadow: 0 0 15px rgba(255, 182, 193, 0.8);
+      text-shadow:
+        0 0 6px #fff,
+        0 0 14px var(--neon-pink),
+        0 0 30px var(--neon-pink),
+        0 0 50px var(--neon-cyan);
+    }
+
+    .outer-container > p {
+      color: var(--neon-yellow);
+      text-shadow: 0 0 8px var(--neon-yellow);
     }
 
     #log {
@@ -62,14 +85,16 @@
       height: 200px;
       overflow-y: auto;
       margin: 20px auto;
-      background: linear-gradient(135deg, #fff5ff 0%, #eaffff 50%, #fff9e6 100%);
+      background: rgba(255, 255, 255, 0.04);
       padding: 15px;
       border-radius: 20px;
-      box-shadow: inset 0 0 15px rgba(0,0,0,0.1);
-      color: #2a0033;
+      box-shadow:
+        0 0 12px rgba(77,225,255,0.3),
+        inset 0 0 15px rgba(182,140,255,0.15);
+      color: #e8e0ff;
       font-size: 0.9rem;
       text-align: left;
-      border: 2px solid #fff;
+      border: 2px solid var(--neon-cyan);
       box-sizing: border-box;
     }
 
@@ -83,13 +108,39 @@
       cursor: pointer;
       font-family: "MS Gothic", monospace;
       transition: all 0.3s ease;
-      box-shadow: 0 0 20px rgba(255, 192, 203, 0.5);
     }
-    .summon-btn { background: linear-gradient(45deg, #ffe1ff, #fff7d1, #ffe1ff); color: #2a0033; }
-    .home-btn { background: rgba(255, 255, 255, 0.1); color: #fff; border: 2px solid #ffd1dc; text-decoration: none; line-height: 1.5; }
-    .summon-btn:hover, .home-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 255, 255, 0.8); }
+    .summon-btn {
+      background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple), var(--neon-cyan));
+      color: #1a0033;
+      border: 2px solid #fff;
+      box-shadow:
+        0 0 12px rgba(255,122,217,0.9),
+        0 0 28px rgba(77,225,255,0.6);
+    }
+    .home-btn {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--neon-cyan);
+      text-shadow: 0 0 8px rgba(77,225,255,0.8);
+      border: 2px solid var(--neon-cyan);
+      text-decoration: none;
+      line-height: 1.5;
+      box-shadow: 0 0 12px rgba(77,225,255,0.5);
+    }
+    .summon-btn:hover {
+      transform: scale(1.05);
+      box-shadow:
+        0 0 18px rgba(255,122,217,1),
+        0 0 44px rgba(77,225,255,0.95);
+    }
+    .home-btn:hover {
+      transform: scale(1.05);
+      color: #fff;
+      text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
+      border-color: var(--neon-pink);
+      box-shadow: 0 0 18px rgba(255,122,217,0.9);
+    }
 
-    .floating-food { position: fixed; pointer-events: none; z-index: 100; text-shadow: 0 0 15px #fff; }
+    .floating-food { position: fixed; pointer-events: none; z-index: 100; text-shadow: 0 0 15px var(--neon-pink); }
     .summon-anim { font-size: 6rem; animation: floatUp 1.6s ease-out forwards; }
     @keyframes floatUp {
       0% { transform: translateY(0) rotate(0deg); opacity: 1; }
@@ -101,10 +152,16 @@
       100% { transform: translateY(120vh); opacity: 0; }
     }
     .sushi-particle { position: fixed; font-size: 2rem; opacity: 0.25; pointer-events: none; z-index: 1; }
-    .shard { position: fixed; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 20px solid #ffe1ff; pointer-events: none; z-index: 9999; }
+    .shard {
+      position: fixed; width: 0; height: 0;
+      border-left: 10px solid transparent; border-right: 10px solid transparent;
+      border-bottom: 20px solid var(--neon-purple);
+      pointer-events: none; z-index: 9999;
+      filter: drop-shadow(0 0 6px rgba(255,255,255,0.9));
+    }
     #darkOverlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); opacity: 0; transition: opacity 0.5s; pointer-events: none; z-index: 1000; }
     #darkOverlay.active { opacity: 1; }
-    .star { position: absolute; background: white; border-radius: 50%; animation: twinkle 3s infinite; }
+    .star { position: absolute; border-radius: 50%; animation: twinkle 3s infinite; }
     @keyframes twinkle { 0%,100% {opacity: 0.3;} 50% {opacity: 1;} }
   </style>
 </head>
@@ -128,6 +185,8 @@
 <div id="darkOverlay"></div>
 
 <script>
+const NEON_COLORS = ['#ff7ad9', '#4de1ff', '#ffe84a', '#b68cff'];
+
 const foods = ["🍣", "🐟", "🦑", "🐡", "🦪", "🐚", "🐠", "🐣", "🦠", "🍝", "🍔", "🍜", "🐙", "🍕", "🍤", "🍙"];
 const funnyLines = ["カラスミって…なんなんすかね（　´_ゝ`）", "うめえ（；´_ゝ`）", "大抵の食いもんは飲めるんすよね（　´_ゝ`）", "ふーん、よく食うじゃん（　´_ゝ`）", "ぶぶ漬けを、啜っても、あーきません🎵", "ゆ○り、飲んでなくない？"];
 
@@ -179,9 +238,10 @@ function draw() {
   spores.forEach(s => {
     s.x += Math.sin(Date.now() * 0.0001 + s.y) * 0.1 * s.z;
     s.y += Math.cos(Date.now() * 0.00005 + s.x) * 0.1 * s.z;
-    const colors = ['#ffe1ff', '#c1a3e4', '#fbe88b', '#a6d0e4'];
+
+    const idx = Math.max(0, Math.min(NEON_COLORS.length - 1, Math.floor((s.x / w) * NEON_COLORS.length)));
     ctx.beginPath();
-    ctx.fillStyle = colors[Math.floor((s.x/w)*4)] + "44";
+    ctx.fillStyle = NEON_COLORS[idx] + "88";
     ctx.arc(s.x, s.y, s.r * s.z, 0, Math.PI * 2);
     ctx.fill();
   });
@@ -199,12 +259,10 @@ document.addEventListener("mousemove", (e) => {
 function triggerEffects(clientX, clientY, target) {
   if (target.closest('button') || target.closest('a')) return;
 
-  const colors = ['#ffe1ff', '#c1a3e4', '#fbe88b', '#a6d0e4'];
-  
   for (let i = 0; i < 10; i++) {
     const shard = document.createElement('div');
     shard.className = 'shard';
-    shard.style.borderBottomColor = colors[Math.floor(Math.random() * colors.length)];
+    shard.style.borderBottomColor = NEON_COLORS[Math.floor(Math.random() * NEON_COLORS.length)];
     shard.style.left = clientX + 'px'; shard.style.top = clientY + 'px';
     const angle = Math.random() * Math.PI * 2;
     const velocity = Math.random() * 100 + 50;
@@ -259,6 +317,9 @@ for (let i = 0; i < particleCount; i++) {
 for (let i = 0; i < 40; i++) {
   const star = document.createElement("div");
   star.className = "star";
+  const color = NEON_COLORS[Math.floor(Math.random() * NEON_COLORS.length)];
+  star.style.background = color;
+  star.style.boxShadow = `0 0 6px ${color}`;
   star.style.width = star.style.height = "2px";
   star.style.left = Math.random() * 100 + "%"; star.style.top = Math.random() * 100 + "%";
   bgWrap.appendChild(star);

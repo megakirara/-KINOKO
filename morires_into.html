@@ -3,11 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🧠 魂の準備ページ ⚡️</title>
+  <title> ⭐️ ヽ(　´ᯅ`　)ノ 💫 </title>
   <style>
+    :root {
+      --bg: #070720; 
+      --neon-pink: #ff7ad9; 
+      --neon-cyan: #4de1ff; 
+      --neon-yellow: #ffe84a;
+      --neon-purple: #b68cff; 
+      --panel: rgba(8, 6, 32, 0.85); 
+    }
+
     body {
-      background-color: #0b0015;
-      color: #fef0f5;
+      background-color: var(--bg);
+      color: #fff;
       font-family: "MS Gothic", monospace;
       margin: 0;
       text-align: center;
@@ -27,7 +36,9 @@
     #mycelium {
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: radial-gradient(circle at center, rgba(255,192,203,0.15) 0%, transparent 70%);
+      background:
+        radial-gradient(circle at 30% 40%, rgba(255,122,217,0.28) 0%, transparent 55%),
+        radial-gradient(circle at 70% 60%, rgba(77,225,255,0.25) 0%, transparent 55%);
       animation: breathe 5s infinite ease-in-out alternate;
     }
     @keyframes breathe { from { opacity: 0.3; } to { opacity: 0.8; } }
@@ -38,11 +49,14 @@
       z-index: 2;
       max-width: 650px;
       margin: 60px auto 80px;
-      background: rgba(15, 0, 25, 0.85);
+      background: var(--panel);
       border-radius: 40px;
       padding: 40px 20px;
-      border: 6px solid #ffd1dc;
-      box-shadow: 0 0 50px rgba(255, 182, 193, 0.6);
+      border: 4px solid var(--neon-cyan);
+      box-shadow:
+        0 0 14px rgba(77,225,255,0.8),
+        0 0 50px rgba(255,122,217,0.5),
+        inset 0 0 30px rgba(182,140,255,0.2);
       backdrop-filter: blur(10px);
       box-sizing: border-box;
       width: calc(100% - 32px);
@@ -52,30 +66,37 @@
       font-size: 2em;
       margin-bottom: 0.3em;
       color: #fff;
-      text-shadow: 0 0 15px rgba(255, 182, 193, 0.8);
+      text-shadow:
+        0 0 6px #fff,
+        0 0 14px var(--neon-pink),
+        0 0 30px var(--neon-pink),
+        0 0 50px var(--neon-cyan);
     }
 
     .tagline {
       font-size: 0.85em;
       margin-bottom: 35px;
-      color: #ffe1ff;
+      color: var(--neon-yellow);
+      text-shadow: 0 0 8px var(--neon-yellow);
       letter-spacing: 0.1em;
     }
 
     .question {
       margin-bottom: 25px;
       padding: 25px;
-      background: linear-gradient(135deg, #fff5ff 0%, #eaffff 50%, #fff9e6 100%);
+      background: rgba(255, 255, 255, 0.04);
       border-radius: 20px;
-      border-left: 8px solid #c1a3e4;
+      border: 1px solid rgba(77, 225, 255, 0.45);
+      border-left: 8px solid var(--neon-pink);
       text-align: left;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 12px rgba(77, 225, 255, 0.25);
     }
 
     .question p {
       margin-top: 0;
       font-weight: bold;
-      color: #2a0033;
+      color: #fff;
+      text-shadow: 0 0 6px var(--neon-pink);
       font-size: 1.1em;
     }
 
@@ -85,37 +106,43 @@
       cursor: pointer;
       padding: 8px;
       border-radius: 8px;
-      color: #4a2e5e;
+      color: #d8c8ff;
       transition: all 0.2s;
     }
     label:hover {
-      background: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 122, 217, 0.18);
+      color: #fff;
+      text-shadow: 0 0 8px var(--neon-pink);
       transform: translateX(5px);
     }
 
     input[type="radio"] {
       margin-right: 10px;
-      accent-color: #c1a3e4;
+      accent-color: var(--neon-pink);
     }
 
     .submit-btn {
       display: block;
       margin: 2rem auto 0;
       padding: 1rem 3rem;
-      background: linear-gradient(45deg, #ffe1ff, #e0ffff, #fff7d1, #ffe1ff);
-      color: #2a0033;
+      background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple), var(--neon-cyan));
+      color: #1a0033;
       font-size: 1.2rem;
       font-weight: 900;
-      border: none;
+      border: 2px solid #fff;
       border-radius: 50px;
       cursor: pointer;
-      box-shadow: 0 0 25px rgba(255, 192, 203, 0.6);
+      box-shadow:
+        0 0 12px rgba(255,122,217,0.9),
+        0 0 28px rgba(77,225,255,0.6);
       transition: all 0.3s ease;
       font-family: "MS Gothic", monospace;
     }
     .submit-btn:hover {
       transform: scale(1.05) rotate(-1deg);
-      box-shadow: 0 0 35px rgba(255, 255, 255, 0.8);
+      box-shadow:
+        0 0 18px rgba(255,122,217,1),
+        0 0 44px rgba(77,225,255,0.95);
     }
 
     .shard {
@@ -123,12 +150,13 @@
       width: 0; height: 0;
       border-left: 10px solid transparent;
       border-right: 10px solid transparent;
-      border-bottom: 20px solid #ffe1ff;
+      border-bottom: 20px solid var(--neon-purple);
       pointer-events: none;
       z-index: 9999;
+      filter: drop-shadow(0 0 6px rgba(255,255,255,0.9));
     }
 
-    .star { position: absolute; background: white; border-radius: 50%; animation: twinkle 3s infinite ease-in-out; }
+    .star { position: absolute; border-radius: 50%; animation: twinkle 3s infinite ease-in-out; }
     @keyframes twinkle { 0%,100% {opacity: 0.3;} 50% {opacity: 1;} }
   </style>
 </head>
@@ -140,29 +168,31 @@
 </div>
 
 <div class="outer-container">
-  <h1>🧠 魂の準備ページ⚡️</h1>
-  <div class="tagline">〜 果たして君は、「めじぃ（飯）❗️」に辿り着けるか 〜</div>
+  <h1>🪐 御霊を整えましょう🪐</h1>
+  <div class="tagline">〜 果たして貴殿は「めじぃ（飯）❗️」に辿り着けるか 〜</div>
 
   <form id="soulForm">
     <div class="question">
       <p>Q1. 世界がもし1秒で終わるなら、何をする？</p>
       <label><input type="radio" name="q1" value="a">叫ぶ 🔊</label>
       <label><input type="radio" name="q1" value="b">踊る 💃</label>
-      <label><input type="radio" name="q1" value="c">見届ける 👁️</label>
+      <label><input type="radio" name="q1" value="c">ｼｬｲﾆﾝｸﾞ（　👁️　👄　👁️　）</label>
     </div>
 
     <div class="question">
       <p>Q2. 朝目覚めたら別の惑星にいた。どうする？</p>
-      <label><input type="radio" name="q2" value="a">探索する 🚀</label>
+      <label><input type="radio" name="q2" value="a">逃走 🚀</label>
       <label><input type="radio" name="q2" value="b">ワロス 🧘</label>
-      <label><input type="radio" name="q2" value="c">寝直す 💤</label>
+      <label><input type="radio" name="q2" value="c">寝ます 💤</label>
     </div>
 
-    <button type="button" class="submit-btn" onclick="checkAnswers()">✨魂チェック完了✨</button>
+    <button type="button" class="submit-btn" onclick="checkAnswers()">✨御霊を拝見致しました(　´ᯅ`　)✨</button>
   </form>
 </div>
 
 <script>
+const NEON_COLORS = ['#ff7ad9', '#4de1ff', '#ffe84a', '#b68cff'];
+
 const canvas = document.getElementById("spores");
 const ctx = canvas.getContext("2d");
 const bgWrap = document.getElementById("background-wrap");
@@ -186,9 +216,11 @@ function draw() {
     if (s.y < 0) s.y = h; if (s.y > h) s.y = 0;
     s.o += (Math.random() - 0.5) * 0.05;
     s.o = Math.max(0.1, Math.min(1, s.o));
-    const colors = ['#ffe1ff', '#c1a3e4', '#fbe88b', '#a6d0e4', '#ffeaff'];
+
+    const idx = Math.min(NEON_COLORS.length - 1, Math.floor((s.x / w) * NEON_COLORS.length));
+    const alpha = Math.floor(s.o * 255).toString(16).padStart(2, '0');
     ctx.beginPath();
-    ctx.fillStyle = `${colors[Math.floor((s.x/w)*5)]}${Math.floor(s.o * 255).toString(16).padStart(2, '0')}`;
+    ctx.fillStyle = `${NEON_COLORS[idx]}${alpha}`;
     ctx.arc(s.x, s.y, s.r * s.z, 0, Math.PI * 2);
     ctx.fill();
   });
@@ -205,11 +237,10 @@ document.addEventListener("mousemove", (e) => {
 
 document.addEventListener('click', (e) => {
   const shardCount = 12;
-  const colors = ['#ffe1ff', '#c1a3e4', '#fbe88b', '#a6d0e4', '#ffeaff'];
   for (let i = 0; i < shardCount; i++) {
     const shard = document.createElement('div');
     shard.className = 'shard';
-    const color = colors[Math.floor(Math.random() * colors.length)];
+    const color = NEON_COLORS[Math.floor(Math.random() * NEON_COLORS.length)];
     const size = Math.random() * 12 + 4;
     shard.style.borderBottom = `${size * 2}px solid ${color}`;
     shard.style.borderLeftWidth = `${size}px`;
@@ -247,6 +278,9 @@ function checkAnswers() {
 for (let i = 0; i < 40; i++) {
   const star = document.createElement("div");
   star.classList.add("star");
+  const color = NEON_COLORS[Math.floor(Math.random() * NEON_COLORS.length)];
+  star.style.background = color;
+  star.style.boxShadow = `0 0 6px ${color}`;
   star.style.width = star.style.height = Math.random() * 2 + "px";
   star.style.left = Math.random() * 100 + "%"; star.style.top = Math.random() * 100 + "%";
   bgWrap.appendChild(star);
