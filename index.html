@@ -105,9 +105,11 @@ button:hover {
   box-shadow: 0 0 30px rgba(255,255,255,0.7);
 }
 
+/* 準備中のボタン（グレーアウト） */
 button.wip {
   opacity: 0.6;
-  cursor: default;
+  filter: grayscale(1);
+  cursor: not-allowed;
 }
 button.wip:hover {
   transform: none;
@@ -233,6 +235,8 @@ button.wip:hover {
   <div class="buttons">
     <a href="morires_into.html"><button> (　´ᯅ`　) </button></a>
     <a href="baiyo.html"><button>  🍄  </button></a>
+    <!-- 準備中：リンクができたら、class="wip" disabled を消して <a href="..."> で囲む -->
+    <button class="wip" disabled> (　´ᯅ`　)🎨 </button>
   </div>
 
   <div class="sub-links">
@@ -242,8 +246,12 @@ button.wip:hover {
 
   <div id="note-box">
     <h2>(　´ᯅ`　)</h2>
+  <div class="note-item">
+      <a href="baiyo.html"> 🆕‼️ 🍄に「眉モーメント」追加</a>
+      <span class="note-date">2026-10-19</span>
+    </div>
     <div class="note-item">
-      <a href="baiyo.html">「🍄」(　´ᯅ`　)</a>
+      <a href="baiyo.html">🍄(　´ᯅ`　)❓</a>
       <span class="note-date">2026-05-26</span>
     </div>
     <div class="note-item">
