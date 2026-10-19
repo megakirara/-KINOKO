@@ -1,20 +1,24 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>(　´ᯅ`　) </title>
+<title>(　´ᯅ`　)</title>
+
 <style>
 :root {
-  --bg: #070720;         
-  --neon-pink: #ff7ad9; 
-  --neon-cyan: #4de1ff;   
-  --neon-yellow: #ffe84a; 
-  --neon-purple: #b68cff; 
-  --panel: rgba(8, 6, 32, 0.75); 
+  --bg: #070720;
+  --neon-pink: #ff7ad9;
+  --neon-cyan: #4de1ff;
+  --neon-yellow: #ffe84a;
+  --neon-purple: #b68cff;
+  --panel: rgba(8, 6, 32, 0.42);
 }
 
 body {
+  position: relative;
+  isolation: isolate;
   background-color: var(--bg);
   color: #fff;
   font-family: "MS Gothic", monospace;
@@ -22,12 +26,26 @@ body {
   text-align: center;
   overflow-x: hidden;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch; 
+  -webkit-overflow-scrolling: touch;
+}
+
+#background-image {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  background-image: url("files/neon_back.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 #mycelium {
   position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: -2;
   pointer-events: none;
   background:
@@ -37,13 +55,24 @@ body {
 }
 
 @keyframes spores {
-  from { transform: scale(1); opacity: 0.3; filter: blur(2px); }
-  to { transform: scale(1.25); opacity: 0.8; filter: blur(4px); }
+  from {
+    transform: scale(1);
+    opacity: 0.3;
+    filter: blur(2px);
+  }
+  to {
+    transform: scale(1.25);
+    opacity: 0.8;
+    filter: blur(4px);
+  }
 }
 
 #spores {
   position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: -1;
   pointer-events: none;
 }
@@ -52,7 +81,7 @@ body {
   position: relative;
   z-index: 2;
   max-width: 800px;
-  margin: 60px auto 80px; 
+  margin: 60px auto 80px;
   background: var(--panel);
   border-radius: 20px;
   padding: 40px;
@@ -68,8 +97,14 @@ body {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 h1 {
@@ -104,7 +139,14 @@ hr {
   height: 2px;
   width: 80%;
   margin: 30px auto;
-  background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple), var(--neon-yellow), var(--neon-cyan), var(--neon-pink));
+  background: linear-gradient(
+    90deg,
+    var(--neon-pink),
+    var(--neon-purple),
+    var(--neon-yellow),
+    var(--neon-cyan),
+    var(--neon-pink)
+  );
   box-shadow: 0 0 8px rgba(255,122,217,0.8);
 }
 
@@ -116,7 +158,12 @@ hr {
   font-size: 1em;
   padding: 10px 25px;
   border-radius: 12px;
-  background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple), var(--neon-cyan));
+  background: linear-gradient(
+    45deg,
+    var(--neon-pink),
+    var(--neon-purple),
+    var(--neon-cyan)
+  );
   border: 2px solid #fff;
   box-shadow:
     0 0 10px rgba(255,122,217,0.8),
@@ -134,10 +181,12 @@ hr {
 
 #growMsg {
   position: fixed;
-  bottom: 10px; width: 100%;
-  text-align: center; opacity: 0;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  opacity: 0;
   transition: opacity 1s ease;
-  font-size: 0.9em; 
+  font-size: 0.9em;
   color: var(--neon-cyan);
   text-shadow: 0 0 8px var(--neon-cyan);
 }
@@ -155,30 +204,38 @@ hr {
 }
 </style>
 </head>
+
 <body>
+<div id="background-image"></div>
+
 <canvas id="spores"></canvas>
 <div id="mycelium"></div>
 
 <div class="container">
-  <h1>(　´ᯅ`　)</h1>
+  <h1>🍄(　´ᯅ`　)🍄‍🟫</h1>
 
-<p>
-  ようこそ、きのこの庭へ。<br>
-  役に立つものは、たぶんありません。<br>
-  思いついたものを、思いついた順に<br>
-  置いているだけの場所です。<br>
-  意味はないけど、悪気もありません。<br>
-  気に入ったページがあったら、<br>
-  こっそり楽しんでいってください。<br>
-  たまに新しいのが生えます🍄
-</p>
+  <p>
+    ようこそ、きのこの庭へ。<br>
+    役に立つものは、たぶんありません。<br>
+    思いついたものを、思いついた順に<br>
+    置いているだけの場所です。<br>
+    意味はないけど、悪気もありません。<br>
+    気に入ったページがあったら、<br>
+    こっそり楽しんでいってください。<br>
+    たまに新しいのが生えます🍄
+  </p>
 
   <a href="index.html" class="button">🍄 帰る</a><br>
   <a href="profile.html" class="button">(　´ᯅ`　)</a>
 </div>
 
 <script>
-const NEON_COLORS = ['#ff7ad9', '#4de1ff', '#ffe84a', '#b68cff'];
+const NEON_COLORS = [
+  '#ff7ad9',
+  '#4de1ff',
+  '#ffe84a',
+  '#b68cff'
+];
 
 const canvas = document.getElementById("spores");
 const ctx = canvas.getContext("2d");
@@ -187,53 +244,76 @@ let w, h, spores = [];
 function resize() {
   w = canvas.width = window.innerWidth;
   h = canvas.height = window.innerHeight;
+
   spores = Array.from({length: 150}, () => ({
-    x: Math.random() * w, y: Math.random() * h,
-    r: Math.random() * 2, o: Math.random(),
-    s: Math.random() * 0.5 + 0.2, z: Math.random() * 2
+    x: Math.random() * w,
+    y: Math.random() * h,
+    r: Math.random() * 2,
+    o: Math.random(),
+    s: Math.random() * 0.5 + 0.2,
+    z: Math.random() * 2
   }));
 }
 
 function draw() {
   ctx.clearRect(0, 0, w, h);
+
   spores.forEach(s => {
     s.x += Math.sin(Date.now() * 0.0001 + s.y) * 0.1 * s.z;
     s.y += Math.cos(Date.now() * 0.00005 + s.x) * 0.1 * s.z;
-    if (s.x < 0) s.x = w; if (s.x > w) s.x = 0;
-    if (s.y < 0) s.y = h; if (s.y > h) s.y = 0;
+
+    if (s.x < 0) s.x = w;
+    if (s.x > w) s.x = 0;
+    if (s.y < 0) s.y = h;
+    if (s.y > h) s.y = 0;
+
     s.o += (Math.random() - 0.5) * 0.05;
     s.o = Math.max(0.1, Math.min(1, s.o));
 
-    // 横位置でネオンの色を決める
-    const idx = Math.min(NEON_COLORS.length - 1, Math.floor((s.x / w) * NEON_COLORS.length));
-    const alpha = Math.floor(s.o * 255).toString(16).padStart(2, '0');
+    const idx = Math.min(
+      NEON_COLORS.length - 1,
+      Math.floor((s.x / w) * NEON_COLORS.length)
+    );
+
+    const alpha = Math.floor(s.o * 255)
+      .toString(16)
+      .padStart(2, '0');
 
     ctx.beginPath();
     ctx.fillStyle = `${NEON_COLORS[idx]}${alpha}`;
     ctx.arc(s.x, s.y, s.r * s.z, 0, Math.PI * 2);
     ctx.fill();
   });
+
   requestAnimationFrame(draw);
 }
 
 window.addEventListener("resize", resize);
-resize(); draw();
+resize();
+draw();
 
 document.addEventListener("mousemove", (e) => {
   const x = (e.clientX / window.innerWidth - 0.5) * 2;
   const y = (e.clientY / window.innerHeight - 0.5) * 2;
-  canvas.style.transform = `translate(${x * 10}px, ${y * 10}px)`;
-});
 
+  canvas.style.transform =
+    `translate(${x * 10}px, ${y * 10}px)`;
+});
 
 let idleTimer;
 const growMsg = document.getElementById("growMsg");
-function showGrowMsg() { if (growMsg) growMsg.style.opacity = 1; }
+
+function showGrowMsg() {
+  if (growMsg) growMsg.style.opacity = 1;
+}
+
 function resetIdleTimer() {
   if (growMsg) growMsg.style.opacity = 0;
+
   clearTimeout(idleTimer);
   idleTimer = setTimeout(showGrowMsg, 30000);
 }
+
 window.onload = resetIdleTimer;
 document.onmousemove = resetIdleTimer;
 document.onkeydown = resetIdleTimer;
@@ -244,9 +324,13 @@ document.addEventListener('click', (e) => {
   for (let i = 0; i < shardCount; i++) {
     const shard = document.createElement('div');
     shard.className = 'shard';
-    
-    const color = NEON_COLORS[Math.floor(Math.random() * NEON_COLORS.length)];
+
+    const color = NEON_COLORS[
+      Math.floor(Math.random() * NEON_COLORS.length)
+    ];
+
     const size = Math.random() * 15 + 5;
+
     shard.style.borderBottom = `${size * 2}px solid ${color}`;
     shard.style.borderLeftWidth = `${size}px`;
     shard.style.borderRightWidth = `${size}px`;
@@ -262,8 +346,15 @@ document.addEventListener('click', (e) => {
     document.body.appendChild(shard);
 
     const anim = shard.animate([
-      { transform: 'translate(-50%, -50%) rotate(0deg) scale(1)', opacity: 1 },
-      { transform: `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) rotate(${rot}deg) scale(0)`, opacity: 0 }
+      {
+        transform: 'translate(-50%, -50%) rotate(0deg) scale(1)',
+        opacity: 1
+      },
+      {
+        transform:
+          `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) rotate(${rot}deg) scale(0)`,
+        opacity: 0
+      }
     ], {
       duration: Math.random() * 500 + 500,
       easing: 'cubic-bezier(0, .9, .57, 1)'

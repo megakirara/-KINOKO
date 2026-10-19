@@ -14,7 +14,7 @@
       --neon-yellow: #ffe84a;
       --neon-purple: #b68cff; 
       --text-main: #ffffff;
-      --card-bg: rgba(8, 6, 32, 0.85);
+      --card-bg: rgba(8, 6, 32, 0.42);
       --unicorn-gradient: linear-gradient(135deg, #ff7ad9, #4de1ff, #b68cff, #ffe84a, #ff7ad9);
     }
 
@@ -30,6 +30,17 @@
       -webkit-overflow-scrolling: touch;
       min-height: 100vh;
     }
+
+ #background-image {
+   position: fixed;
+   inset: 0;
+   z-index: -5;
+   pointer-events: none;
+   background-image: url("files/neon_back.jpg");
+   background-position: center;
+   background-size: cover;
+   background-repeat: no-repeat;
+ }
 
     #mycelium {
       position: fixed;
