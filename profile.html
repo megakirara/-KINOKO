@@ -235,6 +235,8 @@
     (() => {
       const NEON_COLORS = ['#ff7ad9', '#4de1ff', '#ffe84a', '#b68cff'];
 
+      const BG_EMOJIS = ['🪐', '💫', '🌎'];
+
       const summons = [
         { emoji: '🍺', poems: ["とりあえず飲めよ（　´_ゝ`）。","ほら、冷えてんだからさァ（　´_ゝ`）","冷凍庫に缶入れてんの忘れたら爆発したんだけど（ ；_ゝ； ）。"]},
         { emoji: '🥟', poems: ["しいたけ入れたらうまいよ。","あ、自分ニラ入れないんすよね（　´_ゝ`）。","一食で何個食える（　´_ゝ`）？"]},
@@ -270,7 +272,7 @@
         placed.push({ x, y });
         const p = document.createElement('div');
         p.className = 'brain-particle';
-        p.textContent = (count % 2 === 0) ? '🪐' : '💫';'🌎';
+        p.textContent = BG_EMOJIS[count % BG_EMOJIS.length];
         p.style.cssText = `left:${x}%;top:${y}%;--dur:${7+Math.random()*8}s;--delay:${Math.random()*5}s`;
         fragment.appendChild(p);
         count++;
