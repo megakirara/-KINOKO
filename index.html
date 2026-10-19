@@ -1,20 +1,24 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🍄(　´ᯅ`　)🍄</title>
+
 <style>
 :root {
-  --bg: #070720;          
-  --neon-pink: #ff7ad9; 
-  --neon-cyan: #4de1ff; 
-  --neon-yellow: #ffe84a; 
-  --neon-purple: #b68cff; 
-  --panel: rgba(8, 6, 32, 0.72); 
+  --bg: #070720;
+  --neon-pink: #ff7ad9;
+  --neon-cyan: #4de1ff;
+  --neon-yellow: #ffe84a;
+  --neon-purple: #b68cff;
+  --panel: rgba(8, 6, 32, 0.62);
 }
 
 body {
+  position: relative;
+  isolation: isolate;
   background-color: var(--bg);
   color: #fff;
   font-family: "MS Gothic", monospace;
@@ -24,9 +28,25 @@ body {
   overflow-y: auto;
 }
 
+/* 背景画像レイヤー */
+#background-image {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  background-image: url("files/neon_back.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* ピンクと水色の光 */
 #mycelium {
   position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: -2;
   background:
     radial-gradient(circle at 30% 40%, rgba(255,122,217,0.28) 0%, transparent 55%),
@@ -34,14 +54,19 @@ body {
   animation: spores 5s infinite ease-in-out alternate;
   filter: blur(2px);
 }
+
 @keyframes spores {
   from { transform: scale(1); opacity: 0.4; }
   to { transform: scale(1.25); opacity: 0.8; }
 }
 
+/* 動くつぶつぶ */
 #spores {
   position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: -1;
   pointer-events: none;
   transition: transform 0.1s ease-out;
@@ -88,12 +113,14 @@ h1 {
   white-space: nowrap;
   margin-bottom: 30px;
 }
+
 .marquee p {
   display: inline-block;
   animation: scrollText 15s linear infinite;
   color: var(--neon-yellow);
   text-shadow: 0 0 8px var(--neon-yellow);
 }
+
 @keyframes scrollText {
   from { transform: translateX(100%); }
   to { transform: translateX(-100%); }
@@ -106,7 +133,10 @@ h1 {
   justify-content: center;
   gap: 25px;
 }
-.buttons a { text-decoration: none; }
+
+.buttons a {
+  text-decoration: none;
+}
 
 button {
   background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple), var(--neon-cyan));
@@ -123,6 +153,7 @@ button {
   transition: transform 0.2s ease, box-shadow 0.3s ease;
   font-weight: bold;
 }
+
 button:hover {
   transform: scale(1.07);
   box-shadow:
@@ -135,6 +166,7 @@ button.wip {
   filter: grayscale(1);
   cursor: not-allowed;
 }
+
 button.wip:hover {
   transform: none;
   box-shadow:
@@ -148,8 +180,8 @@ button.wip:hover {
   background-size: 200% 200%;
   color: #1a0033;
   text-decoration: none;
-  padding: 8px 25px; 
-  font-size: 0.9em; 
+  padding: 8px 25px;
+  font-size: 0.9em;
   border-radius: 30px;
   box-shadow: 0 0 15px rgba(255, 122, 217, 0.6);
   transition: all 0.3s ease;
@@ -157,17 +189,22 @@ button.wip:hover {
   border: 1px solid #fff;
   font-weight: bold;
 }
+
 .litlink-mini-button:hover {
   transform: scale(1.05);
   box-shadow: 0 0 25px rgba(77, 225, 255, 0.9);
 }
+
 @keyframes rainbow-button {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-.sub-links { margin: 30px auto; }
+.sub-links {
+  margin: 30px auto;
+}
+
 .sub-links a {
   display: inline-block;
   color: var(--neon-cyan);
@@ -177,6 +214,7 @@ button.wip:hover {
   font-size: 1em;
   transition: 0.3s;
 }
+
 .sub-links a:hover {
   color: #fff;
   text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
@@ -198,6 +236,7 @@ button.wip:hover {
     0 0 12px rgba(255,122,217,0.7),
     0 0 30px rgba(182,140,255,0.4);
 }
+
 #note-box h2 {
   font-size: 18px;
   margin-top: 0;
@@ -210,27 +249,42 @@ button.wip:hover {
   padding: 5px;
   border-radius: 10px;
 }
+
 .note-item {
   border-bottom: 1px dashed rgba(77,225,255,0.5);
   padding: 10px 0;
 }
-.note-item:last-child { border-bottom: none; }
+
+.note-item:last-child {
+  border-bottom: none;
+}
+
 .note-item a {
   display: inline;
   color: var(--neon-cyan);
   text-decoration: underline;
-  margin: 0; font-size: 1em;
+  margin: 0;
+  font-size: 1em;
 }
+
 .note-item a:hover {
   color: var(--neon-pink);
   text-shadow: 0 0 8px var(--neon-pink);
 }
-.note-date { font-size: 11px; color: var(--neon-purple); display: block; margin-top: 4px; }
+
+.note-date {
+  font-size: 11px;
+  color: var(--neon-purple);
+  display: block;
+  margin-top: 4px;
+}
 
 #growMsg {
   position: fixed;
-  bottom: 10px; width: 100%;
-  text-align: center; opacity: 0;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  opacity: 0;
   transition: opacity 1s ease;
   font-size: 0.9em;
   color: var(--neon-cyan);
@@ -249,16 +303,26 @@ button.wip:hover {
   filter: drop-shadow(0 0 6px rgba(255,255,255,0.9));
 }
 
-@keyframes twinkle { 0%,100% {opacity: 0.4;} 50% {opacity: 1;} }
+@keyframes twinkle {
+  0%,100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
 .star {
-  position: absolute; border-radius: 50%;
+  position: absolute;
+  border-radius: 50%;
   animation: twinkle 3s infinite ease-in-out;
 }
 </style>
 </head>
+
 <body>
-<canvas id="spores"></canvas>
+<!-- 背景画像をいちばん奥に配置 -->
+<div id="background-image"></div>
+
+<!-- 光の演出とつぶつぶ -->
 <div id="mycelium"></div>
+<canvas id="spores"></canvas>
 
 <div class="main-container">
   <h1> 🍄🍄‍🟫🍄 </h1>
@@ -270,7 +334,7 @@ button.wip:hover {
 
   <div class="buttons">
     <a href="morires_into.html"><button> 🍱 (　´ᯅ`　) </button></a>
-    <a href="baiyo.html"><button>  🍄  </button></a>
+    <a href="baiyo.html"><button> 🍄 </button></a>
     <button class="wip" disabled> (　´ᯅ`　) 🎨 </button>
   </div>
 
@@ -281,22 +345,27 @@ button.wip:hover {
 
   <div id="note-box">
     <h2>(　´ᯅ`　)</h2>
-  <div class="note-item">
+
+    <div class="note-item">
       <a href="baiyo.html"> 🆕‼️ 🍄に「眉モーメント」追加</a>
       <span class="note-date">2026-10-19</span>
     </div>
+
     <div class="note-item">
       <a href="baiyo.html">🍄(　´ᯅ`　)❓</a>
       <span class="note-date">2026-05-26</span>
     </div>
+
     <div class="note-item">
       <a href="#">🌱 (　´ᯅ`　)</a>
       <span class="note-date">2026-04-29</span>
     </div>
+
     <div class="note-item">
       <a href="#">🍄 (　´ᯅ`　)</a>
       <span class="note-date">2026-04-29</span>
     </div>
+
     <div class="note-item">
       <a href="hello.html">🌙 ごあいさつページできました</a>
       <span class="note-date">2026-04-29</span>
@@ -316,74 +385,106 @@ let w, h, spores = [];
 function resize() {
   w = canvas.width = window.innerWidth;
   h = canvas.height = window.innerHeight;
+
   spores = Array.from({length: 250}, () => ({
-    x: Math.random() * w, y: Math.random() * h,
-    r: Math.random() * 2 + 1, o: Math.random(),
-    s: Math.random() * 0.5 + 0.2, z: Math.random() * 2
+    x: Math.random() * w,
+    y: Math.random() * h,
+    r: Math.random() * 2 + 1,
+    o: Math.random(),
+    s: Math.random() * 0.5 + 0.2,
+    z: Math.random() * 2
   }));
 }
+
 function draw() {
   ctx.clearRect(0, 0, w, h);
+
   spores.forEach(s => {
     s.x += Math.sin(Date.now() * 0.0001 + s.y) * 0.2 * s.z;
     s.y += Math.cos(Date.now() * 0.00005 + s.x) * 0.2 * s.z;
-    if (s.x < 0) s.x = w; if (s.x > w) s.x = 0;
-    if (s.y < 0) s.y = h; if (s.y > h) s.y = 0;
+
+    if (s.x < 0) s.x = w;
+    if (s.x > w) s.x = 0;
+    if (s.y < 0) s.y = h;
+    if (s.y > h) s.y = 0;
+
     s.o += (Math.random() - 0.5) * 0.05;
     s.o = Math.max(0.1, Math.min(1, s.o));
 
-    const idx = Math.min(NEON_COLORS.length - 1, Math.floor((s.x / w) * NEON_COLORS.length));
+    const idx = Math.min(
+      NEON_COLORS.length - 1,
+      Math.floor((s.x / w) * NEON_COLORS.length)
+    );
+
     const alpha = Math.floor(s.o * 255).toString(16).padStart(2, '0');
+
     ctx.beginPath();
     ctx.fillStyle = `${NEON_COLORS[idx]}${alpha}`;
     ctx.arc(s.x, s.y, s.r * s.z, 0, Math.PI * 2);
     ctx.fill();
   });
+
   requestAnimationFrame(draw);
 }
-window.addEventListener("resize", resize);
-resize(); draw();
 
+window.addEventListener("resize", resize);
+resize();
+draw();
+
+/* マウスに反応するパララックス風の動き */
 document.addEventListener("mousemove", (e) => {
   const x = (e.clientX / window.innerWidth - 0.5) * 2;
   const y = (e.clientY / window.innerHeight - 0.5) * 2;
+
   canvas.style.transform = `translate(${x * 10}px, ${y * 10}px)`;
 });
 
+/* しばらく操作がないとメッセージを表示 */
 let idleTimer;
 const growMsg = document.getElementById("growMsg");
-function showGrowMsg() { growMsg.style.opacity = 1; }
+
+function showGrowMsg() {
+  growMsg.style.opacity = 1;
+}
+
 function resetIdleTimer() {
   growMsg.style.opacity = 0;
   clearTimeout(idleTimer);
   idleTimer = setTimeout(showGrowMsg, 30000);
 }
+
 window.onload = resetIdleTimer;
 document.onmousemove = resetIdleTimer;
 document.onkeydown = resetIdleTimer;
 
+/* きらめく星を50個追加 */
 for (let i = 0; i < 50; i++) {
   const star = document.createElement("div");
   star.classList.add("star");
+
   const color = NEON_COLORS[Math.floor(Math.random() * NEON_COLORS.length)];
+
   star.style.background = color;
   star.style.boxShadow = `0 0 6px ${color}`;
   star.style.width = star.style.height = Math.random() * 3 + "px";
   star.style.left = Math.random() * 100 + "%";
   star.style.top = Math.random() * 100 + "%";
   star.style.animationDuration = 2 + Math.random() * 3 + "s";
+
   document.body.appendChild(star);
 }
 
+/* クリックするとネオンの破片が飛び散る */
 document.addEventListener('click', (e) => {
   const shardCount = 12;
 
   for (let i = 0; i < shardCount; i++) {
     const shard = document.createElement('div');
     shard.className = 'shard';
-    
+
     const color = NEON_COLORS[Math.floor(Math.random() * NEON_COLORS.length)];
     const size = Math.random() * 15 + 5;
+
     shard.style.borderBottom = `${size * 2}px solid ${color}`;
     shard.style.borderLeftWidth = `${size}px`;
     shard.style.borderRightWidth = `${size}px`;
@@ -399,8 +500,14 @@ document.addEventListener('click', (e) => {
     document.body.appendChild(shard);
 
     const anim = shard.animate([
-      { transform: 'translate(-50%, -50%) rotate(0deg) scale(1)', opacity: 1 },
-      { transform: `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) rotate(${rot}deg) scale(0)`, opacity: 0 }
+      {
+        transform: 'translate(-50%, -50%) rotate(0deg) scale(1)',
+        opacity: 1
+      },
+      {
+        transform: `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) rotate(${rot}deg) scale(0)`,
+        opacity: 0
+      }
     ], {
       duration: Math.random() * 500 + 500,
       easing: 'cubic-bezier(0, .9, .57, 1)'
