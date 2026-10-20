@@ -35,6 +35,7 @@ body {
     Meiryo,
     sans-serif;
   text-align: center;
+  position: relative;
 }
 
 a {
@@ -45,14 +46,20 @@ button {
   font: inherit;
 }
 
+/* ★ タイル状パターン背景 ★ */
 #background-image {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background:
+  background-color: var(--bg);
+  background-image:
     linear-gradient(rgba(7, 7, 32, 0.30), rgba(7, 7, 32, 0.40)),
-    url("files/neon_back.jpg") center / cover no-repeat;
+    url("files/neon_back.jpg");
+  background-repeat: no-repeat, repeat;
+  background-attachment: fixed, fixed;
+  background-position: center, center;
+  background-size: auto, 555px auto;
 }
 
 #mycelium,
@@ -96,16 +103,17 @@ main {
   padding: 45px 0 65px;
 }
 
+/* ★ シースルー透過＋クッキリピンクネオン大枠 ★ */
 .big-frame {
   padding: 36px 24px 38px;
-  border: 1px solid #ff7ad9aa;
+  border: 2px solid #ff7ad9;
   border-radius: 24px;
-  background: rgba(8, 6, 32, 0.55);
+  background: rgba(8, 6, 32, 0.25);
   box-shadow:
-    0 0 16px #ff7ad933,
-    0 0 40px #4de1ff18,
-    inset 0 0 30px #b68cff10;
-  backdrop-filter: blur(7px);
+    0 0 15px #ff7ad988,
+    0 0 35px #ff3dc844,
+    inset 0 0 25px #b68cff33;
+  backdrop-filter: blur(3px);
   animation: fadeIn 1.6s ease;
 }
 
@@ -173,20 +181,24 @@ h1 {
   text-shadow: 0 0 10px #ffe84a66;
 }
 
+/* ★ めじログ枠：ライムグリーン発光 ★ */
 #log {
   width: 100%;
   height: 200px;
   margin: 20px auto 24px;
   padding: 15px;
   overflow-y: auto;
-  border: 1px solid #b6ff5c;
+  border: 2px solid #b6ff5c;
   border-radius: 16px;
-  background: #080820a8;
+  background: rgba(8, 8, 32, 0.55);
   color: #e3dafa;
   font-size: 0.9rem;
   line-height: 1.7;
   text-align: left;
-  box-shadow: 0 0 10px #b6ff5c48;
+  box-shadow:
+    0 0 12px rgba(182, 255, 92, 0.4),
+    inset 0 0 10px rgba(182, 255, 92, 0.2);
+  backdrop-filter: blur(2px);
 }
 
 #log div {
@@ -200,43 +212,72 @@ h1 {
   gap: 13px;
 }
 
-.summon-btn,
-.home-btn {
+/* ★ 召喚ボタン：ネオンパープル ★ */
+.summon-btn {
   --btn-color: #b68cff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 58px;
   padding: 14px 24px;
-  border: 1px solid var(--btn-color);
+  border: 2px solid var(--btn-color);
   border-radius: 12px;
-  background: #080820cc;
+  background: rgba(8, 8, 32, 0.65);
   color: #f8f3ff;
   font-weight: bold;
   letter-spacing: 0.04em;
   text-decoration: none;
   cursor: pointer;
-  box-shadow: 0 0 10px color-mix(in srgb, var(--btn-color) 28%, transparent);
+  text-shadow: 0 0 8px var(--btn-color);
+  box-shadow: 
+    0 0 10px color-mix(in srgb, var(--btn-color) 50%, transparent),
+    inset 0 0 8px color-mix(in srgb, var(--btn-color) 25%, transparent);
   transition:
-    transform 0.2s ease,
+    transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     box-shadow 0.2s ease,
+    background 0.2s ease,
     color 0.2s ease;
 }
 
+/* ★ ホームボタン：ネオンシアン ★ */
 .home-btn {
   --btn-color: #62f7ff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 58px;
+  padding: 14px 24px;
+  border: 2px solid var(--btn-color);
+  border-radius: 12px;
+  background: rgba(8, 8, 32, 0.65);
+  color: #f8f3ff;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  text-shadow: 0 0 8px var(--btn-color);
+  box-shadow: 
+    0 0 10px color-mix(in srgb, var(--btn-color) 50%, transparent),
+    inset 0 0 8px color-mix(in srgb, var(--btn-color) 25%, transparent);
+  transition:
+    transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
 }
 
 .summon-btn:hover,
 .summon-btn:focus-visible,
 .home-btn:hover,
 .home-btn:focus-visible {
-  color: white;
-  transform: translateY(-3px);
+  color: #070720;
+  background: var(--btn-color);
+  transform: translateY(-4px) scale(1.03);
   box-shadow:
-    0 0 12px var(--btn-color),
-    0 0 24px color-mix(in srgb, var(--btn-color) 40%, transparent);
+    0 0 18px var(--btn-color),
+    0 0 32px var(--btn-color);
   outline: none;
+  text-shadow: none;
 }
 
 .floating-food {
@@ -257,12 +298,12 @@ h1 {
 }
 
 .bomb-anim {
-  animation: floatBomb 1.4s ease-in forwards;
+  animation: floatBomb 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 @keyframes floatBomb {
-  0% { transform: translateY(-20vh); opacity: 1; }
-  100% { transform: translateY(120vh); opacity: 0; }
+  0% { transform: translateY(-20vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
 }
 
 .sushi-particle {
@@ -327,12 +368,12 @@ h1 {
 <main>
   <section class="big-frame">
     <h1>🍣 ぶぶ漬け食べなはれ 🍝</h1>
-    <p class="lead">めじぃ‼️めじぃ‼️めじぃ‼️めじぃ‼️(　Д　 )</p>
+    <p class="lead">めじぃ‼️めじぃ‼️めじぃ‼️めじぃ‼️( Д  )</p>
 
     <div id="log" aria-live="polite"></div>
 
     <div class="btn-wrap">
-      <button class="summon-btn" type="button" onclick="summon(event)"> 🍚 (　´ᯅ`　)❓</button>
+      <button class="summon-btn" type="button" onclick="summon(event)"> 🍚 ( ´ᯅ` )❓</button>
       <a href="index.html" class="home-btn">さいなら</a>
     </div>
   </section>
@@ -346,20 +387,20 @@ h1 {
 const NEON_COLORS = ["#ff7ad9", "#4de1ff", "#ffe84a", "#b68cff"];
 
 const foods = ["🍣", "🐟", "🦑", "🐡", "🦪", "🐚", "🐠", "🐣", "🦠", "🍝", "🍔", "🍜", "🐙", "🍕", "🍤", "🍙"];
-const funnyLines = ["カラスミって…なんなんすかね（　´_ゝ`）", "うめえ（；´_ゝ`）", "大抵の食いもんは飲めるんすよね（　´_ゝ`）", "ふーん、よく食うじゃん（　´_ゝ`）", "ぶぶ漬けを、啜っても、あーきません🎵", "ゆ○り、飲んでなくない？"];
+const funnyLines = ["カラスミって…なんなんすかね（ ´_ゝ`）", "うめえ（；´_ゝ`）", "大抵の食いもんは飲めるんすよね（ ´_ゝ`）", "ふーん、よく食うじゃん（ ´_ゝ`）", "ぶぶ漬けを、啜っても、あーきません🎵", "ゆ○り、飲んでなくない？"];
 
 const reduceMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)"
 ).matches;
 
 function summon(e) {
-  e.stopPropagation();
+  if (e) e.stopPropagation();
 
   const log = document.getElementById("log");
 
   if (Math.random() < 0.1) {
     const div = document.createElement("div");
-    div.textContent = "❌ なんか出ない事もあるんすよね（　´_ゝ`）";
+    div.textContent = "❌ なんか出ない事もあるんすよね（ ´_ゝ`）";
     log.prepend(div);
     return;
   }
@@ -567,8 +608,9 @@ function summon(e) {
   }
 })();
 
+/* ★ クリック時の星散らし ＆ めじガチャ（30%でめじ爆弾） ★ */
 function triggerEffects(clientX, clientY, target) {
-  if (target.closest("button") || target.closest("a")) return;
+  if (target.closest("a")) return;
 
   if (!reduceMotion) {
     for (let i = 0; i < 6; i++) {
@@ -582,7 +624,7 @@ function triggerEffects(clientX, clientY, target) {
         position: "fixed",
         left: clientX + "px",
         top: clientY + "px",
-        zIndex: "99",
+        zIndex: "99999",
         pointerEvents: "none",
         color: NEON_COLORS[i % NEON_COLORS.length],
         fontSize: "13px",
@@ -594,7 +636,7 @@ function triggerEffects(clientX, clientY, target) {
 
       requestAnimationFrame(() => {
         spark.style.transform =
-          `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px)`;
+          `translate(${Math.cos(angle) * distance}px,${Math.sin(angle) * distance}px)`;
         spark.style.opacity = "0";
       });
 
@@ -602,21 +644,23 @@ function triggerEffects(clientX, clientY, target) {
     }
   }
 
-  if (Math.random() < 0.30) {
-    const isMobile = window.innerWidth < 600;
-    const isSuperBomb = Math.random() < 0.15;
-    const bombCount = isMobile ? (isSuperBomb ? 40 : 15) : (isSuperBomb ? 80 : 35);
+  const rand = Math.random();
+  const isMobile = window.innerWidth < 600;
+
+  if (rand < 0.30) {
+    const isSuperBomb = rand < 0.05;
+    const bombCount = isMobile ? (isSuperBomb ? 40 : 18) : (isSuperBomb ? 80 : 35);
 
     for (let i = 0; i < bombCount; i++) {
       const bomb = document.createElement("div");
       bomb.className = "floating-food bomb-anim";
       bomb.textContent = foods[Math.floor(Math.random() * foods.length)];
-      bomb.style.left = Math.random() * 100 + "%";
+      bomb.style.left = Math.random() * 96 + 2 + "%";
       bomb.style.top = "-10vh";
       bomb.style.fontSize = isMobile
-        ? (Math.random() * 4 + 3) + "vw"
-        : (Math.random() * 3 + 3) + "rem";
-      bomb.style.animationDelay = (Math.random() * 0.8) + "s";
+        ? (Math.random() * 3 + 2.5) + "rem"
+        : (Math.random() * 3 + 2.5) + "rem";
+      bomb.style.animationDelay = (Math.random() * 0.6) + "s";
       document.body.appendChild(bomb);
       setTimeout(() => bomb.remove(), 2500);
     }
@@ -632,27 +676,31 @@ document.addEventListener("touchstart", (e) => {
   triggerEffects(touch.clientX, touch.clientY, e.target);
 }, { passive: true });
 
-(() => {
+/* ★ DOM構築完了後に絶対に失敗しないホバーキラキラ処理 ★ */
+window.addEventListener("DOMContentLoaded", () => {
   if (reduceMotion) return;
 
   const targets = document.querySelectorAll("h1, .summon-btn, .home-btn");
   const colors = ["#ff65c3", "#b6ff5c", "#62f7ff", "#b68cff", "#ffb85c", "#ffe84a"];
   const marks = ["✦", "✧", "✨"];
 
-  function sparkle(element) {
+  function createSparkle(element) {
     const rect = element.getBoundingClientRect();
     const spark = document.createElement("span");
 
     spark.textContent = marks[Math.floor(Math.random() * marks.length)];
 
+    const leftPos = rect.left + window.scrollX + Math.random() * rect.width;
+    const topPos = rect.top + window.scrollY + Math.random() * rect.height;
+
     Object.assign(spark.style, {
-      position: "fixed",
-      left: rect.left + Math.random() * rect.width + "px",
-      top: rect.top + Math.random() * rect.height + "px",
-      zIndex: "99",
+      position: "absolute",
+      left: leftPos + "px",
+      top: topPos + "px",
+      zIndex: "99999",
       pointerEvents: "none",
       color: colors[Math.floor(Math.random() * colors.length)],
-      fontSize: 9 + Math.random() * 10 + "px",
+      fontSize: (10 + Math.random() * 10) + "px",
       textShadow: "0 0 8px currentColor",
       opacity: "1",
       transition: "transform 750ms ease-out, opacity 750ms ease-out"
@@ -664,8 +712,7 @@ document.addEventListener("touchstart", (e) => {
       const dx = (Math.random() - 0.5) * 44;
       const dy = -(18 + Math.random() * 32);
       const rot = (Math.random() - 0.5) * 180;
-      spark.style.transform =
-        `translate(${dx}px, ${dy}px) rotate(${rot}deg) scale(0.4)`;
+      spark.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg) scale(0.4)`;
       spark.style.opacity = "0";
     });
 
@@ -677,16 +724,18 @@ document.addEventListener("touchstart", (e) => {
 
     element.addEventListener("mouseenter", () => {
       if (timer) return;
-      sparkle(element);
-      timer = window.setInterval(() => sparkle(element), 90);
+      createSparkle(element);
+      timer = window.setInterval(() => createSparkle(element), 80);
     });
 
     element.addEventListener("mouseleave", () => {
-      window.clearInterval(timer);
-      timer = null;
+      if (timer) {
+        window.clearInterval(timer);
+        timer = null;
+      }
     });
   });
-})();
+});
 </script>
 </body>
 </html>

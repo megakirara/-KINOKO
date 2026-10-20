@@ -48,9 +48,14 @@ a {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background:
+  background-color: var(--bg);
+  background-image:
     linear-gradient(rgba(7, 7, 32, 0.30), rgba(7, 7, 32, 0.40)),
-    url("files/neon_back.jpg") center / cover no-repeat;
+    url("files/neon_back.jpg");
+  background-repeat: no-repeat, repeat;
+  background-attachment: fixed, fixed;
+  background-position: center, center;
+  background-size: auto, 555px auto;
 }
 
 #mycelium,
@@ -96,14 +101,14 @@ main {
 
 .big-frame {
   padding: 36px 26px 38px;
-  border: 1px solid #ff7ad9aa;
+  border: 2px solid #ff7ad9;
   border-radius: 24px;
-  background: rgba(8, 6, 32, 0.55);
+  background: rgba(8, 6, 32, 0.25);
   box-shadow:
-    0 0 16px #ff7ad933,
-    0 0 40px #4de1ff18,
-    inset 0 0 30px #b68cff10;
-  backdrop-filter: blur(7px);
+    0 0 15px #ff7ad988,
+    0 0 35px #ff3dc844,
+    inset 0 0 25px #b68cff33;
+  backdrop-filter: blur(3px);
   animation: fadeIn 1.6s ease;
 }
 
@@ -205,97 +210,115 @@ h1 {
   flex-direction: column;
   justify-content: space-between;
   padding: 24px 20px;
-  border: 1px solid var(--card-color);
+  border: 2px solid var(--card-color); 
   border-radius: 16px;
-  background: #080820a8;
-  box-shadow: 0 0 10px color-mix(in srgb, var(--card-color) 28%, transparent);
+  background: rgba(8, 8, 32, 0.40);
+  box-shadow: 
+    0 0 12px color-mix(in srgb, var(--card-color) 60%, transparent),
+    inset 0 0 15px color-mix(in srgb, var(--card-color) 20%, transparent);
+  backdrop-filter: blur(2px);
   transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+    transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .site-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px) scale(1.02);
   box-shadow:
-    0 0 14px var(--card-color),
-    0 0 28px color-mix(in srgb, var(--card-color) 40%, transparent);
+    0 0 20px var(--card-color),
+    0 0 35px color-mix(in srgb, var(--card-color) 60%, transparent);
 }
 
-.site-card:nth-child(6n + 1) { --card-color: #62f7ff; }
-.site-card:nth-child(6n + 2) { --card-color: #b6ff5c; }
-.site-card:nth-child(6n + 3) { --card-color: #b68cff; }
-.site-card:nth-child(6n + 4) { --card-color: #ffb85c; }
-.site-card:nth-child(6n + 5) { --card-color: #ffe84a; }
-.site-card:nth-child(6n + 6) { --card-color: #ff7a7a; }
+.site-card:nth-child(6n + 1) { --card-color: #62f7ff; } /* シアン */
+.site-card:nth-child(6n + 2) { --card-color: #b6ff5c; } /* ネオンライム */
+.site-card:nth-child(6n + 3) { --card-color: #b68cff; } /* パープル */
+.site-card:nth-child(6n + 4) { --card-color: #ffb85c; } /* オレンジ */
+.site-card:nth-child(6n + 5) { --card-color: #ffe84a; } /* イエロー */
+.site-card:nth-child(6n + 6) { --card-color: #ff7ad9; } /* ネオンピンク */
 
 .site-card h3 {
   margin: 0 0 10px;
   color: #fff;
   font-size: 1.15rem;
   line-height: 1.5;
-  text-shadow: 0 0 10px color-mix(in srgb, var(--card-color) 75%, transparent);
+  text-shadow: 0 0 12px var(--card-color);
 }
 
 .site-card p {
   flex-grow: 1;
   margin: 0 0 20px;
-  color: #e3dafa;
+  color: #f0eaff;
   font-size: 0.9rem;
   line-height: 1.7;
 }
 
 .card-button {
+  --btn-color: #b6ff5c;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 48px;
   padding: 12px;
-  border: 1px solid var(--btn-color);
+  border: 2px solid var(--btn-color);
   border-radius: 12px;
-  background: #080820cc;
-  color: #f8f3ff;
+  background: rgba(8, 8, 32, 0.75);
+  color: #ffffff;
   font-weight: bold;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-decoration: none;
-  box-shadow: 0 0 10px color-mix(in srgb, var(--btn-color) 28%, transparent);
+  text-shadow: 0 0 8px var(--btn-color);
+  box-shadow: 
+    0 0 10px color-mix(in srgb, var(--btn-color) 50%, transparent),
+    inset 0 0 8px color-mix(in srgb, var(--btn-color) 25%, transparent);
   transition:
-    transform 0.2s ease,
+    transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     box-shadow 0.2s ease,
+    background 0.2s ease,
     color 0.2s ease;
 }
 
 .card-button:hover,
 .card-button:focus-visible {
-  color: white;
-  transform: translateY(-3px);
+  color: #070720;
+  background: var(--btn-color); 
+  transform: translateY(-4px) scale(1.04);
   box-shadow:
-    0 0 12px var(--btn-color),
-    0 0 24px color-mix(in srgb, var(--btn-color) 40%, transparent);
+    0 0 18px var(--btn-color),
+    0 0 35px var(--btn-color);
   outline: none;
+  text-shadow: none;
 }
 
 .site-card:nth-child(6n + 1) .card-button { --btn-color: #b6ff5c; }
 .site-card:nth-child(6n + 2) .card-button { --btn-color: #b68cff; }
 .site-card:nth-child(6n + 3) .card-button { --btn-color: #ffb85c; }
 .site-card:nth-child(6n + 4) .card-button { --btn-color: #ffe84a; }
-.site-card:nth-child(6n + 5) .card-button { --btn-color: #ff7a7a; }
+.site-card:nth-child(6n + 5) .card-button { --btn-color: #ff7ad9; }
 .site-card:nth-child(6n + 6) .card-button { --btn-color: #62f7ff; }
 
 .back-link {
   display: inline-block;
+  padding: 10px 20px;
+  border: 1.5px solid var(--purple);
+  border-radius: 20px;
   color: #d8b4fe;
-  text-decoration: underline;
-  text-decoration-color: #b68cff77;
-  text-underline-offset: 5px;
+  text-decoration: none;
+  background: rgba(8, 8, 32, 0.5);
+  box-shadow: 0 0 10px #b68cff44;
   transition:
+    transform 0.2s ease,
     color 0.2s ease,
-    text-shadow 0.2s ease;
+    background 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .back-link:hover,
 .back-link:focus-visible {
   color: white;
-  text-shadow: 0 0 8px var(--purple);
+  background: rgba(182, 140, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px var(--purple);
   outline: none;
 }
 
@@ -335,8 +358,8 @@ h1 {
 
 <main>
   <section class="big-frame">
-    <h1>🍄 ヽ(　´ᯅ`　)ノ 🍄</h1>
-    <p class="tagline">💫 ヽ(　´ᯅ`　)ノ 💫</p>
+    <h1>🍄 ヽ( ´ᯅ` )ノ 🍄</h1>
+    <p class="tagline">💫 ヽ( ´ᯅ` )ノ 💫</p>
 
     <div class="marquee">
       <p>🍄ページを開いた意味は、あなたにしかわからない 🍄</p>

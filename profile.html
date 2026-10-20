@@ -136,20 +136,21 @@ a, button, .cloud {
   opacity: 1;
 }
 
+/* ★ 他のページと完全に統一したピンクネオン大枠 ★ */
 .profile-card {
   position: relative;
   z-index: 10;
   width: min(420px, calc(100% - 32px));
   margin: 5vh auto 20px;
-  padding: 26px 30px 32px;
-  border: 1px solid #ff7ad9aa;
+  padding: 36px 24px 38px;
+  border: 2px solid #ff7ad9;
   border-radius: 24px;
-  background: rgba(8, 6, 32, 0.55);
+  background: rgba(8, 6, 32, 0.25);
   box-shadow:
-    0 0 16px #ff7ad933,
-    0 0 40px #4de1ff18,
-    inset 0 0 30px #b68cff10;
-  backdrop-filter: blur(7px);
+    0 0 15px #ff7ad988,
+    0 0 35px #ff3dc844,
+    inset 0 0 25px #b68cff33;
+  backdrop-filter: blur(3px);
   text-align: center;
   animation: fadeIn 1.6s ease;
 }
@@ -334,7 +335,7 @@ a, button, .cloud {
 @media (max-width: 700px) {
   .profile-card {
     margin: 16px auto;
-    padding: 22px 18px 26px;
+    padding: 26px 16px 28px;
   }
 
   .profile-card p {

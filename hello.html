@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#070720">
-<title>(　´ᯅ`　)</title>
+<title>( ´ᯅ` )</title>
 
 <style>
 :root {
@@ -94,14 +94,14 @@ main {
 
 .big-frame {
   padding: 36px 26px 38px;
-  border: 1px solid #ff7ad9aa;
+  border: 2px solid #ff7ad9;
   border-radius: 24px;
-  background: rgba(8, 6, 32, 0.55);
+  background: rgba(8, 6, 32, 0.25);
   box-shadow:
-    0 0 16px #ff7ad933,
-    0 0 40px #4de1ff18,
-    inset 0 0 30px #b68cff10;
-  backdrop-filter: blur(7px);
+    0 0 15px #ff7ad988,
+    0 0 35px #ff3dc844,
+    inset 0 0 25px #b68cff33;
+  backdrop-filter: blur(3px);
   animation: fadeIn 1.6s ease;
 }
 
@@ -177,7 +177,6 @@ h1 {
   border-top: 1px dashed #b68cff77;
 }
 
-/* ボタン（indexのメニューボタンと同じ。1つずつ色違い） */
 .buttons {
   display: grid;
   gap: 13px;
@@ -192,28 +191,34 @@ h1 {
   justify-content: center;
   min-height: 58px;
   padding: 14px;
-  border: 1px solid var(--btn-color);
+  border: 2px solid var(--btn-color);
   border-radius: 12px;
-  background: #080820cc;
+  background: rgba(8, 8, 32, 0.65);
   color: #f8f3ff;
   text-decoration: none;
   font-weight: bold;
   letter-spacing: 0.04em;
-  box-shadow: 0 0 10px color-mix(in srgb, var(--btn-color) 28%, transparent);
+  text-shadow: 0 0 8px var(--btn-color);
+  box-shadow: 
+    0 0 10px color-mix(in srgb, var(--btn-color) 50%, transparent),
+    inset 0 0 8px color-mix(in srgb, var(--btn-color) 25%, transparent);
   transition:
-    transform 0.2s ease,
+    transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     box-shadow 0.2s ease,
+    background 0.2s ease,
     color 0.2s ease;
 }
 
 .nav-button:hover,
 .nav-button:focus-visible {
-  color: white;
-  transform: translateY(-3px);
+  color: #070720;
+  background: var(--btn-color);
+  transform: translateY(-4px) scale(1.03);
   box-shadow:
-    0 0 12px var(--btn-color),
-    0 0 24px color-mix(in srgb, var(--btn-color) 40%, transparent);
+    0 0 18px var(--btn-color),
+    0 0 32px var(--btn-color);
   outline: none;
+  text-shadow: none;
 }
 
 .nav-button:nth-child(1) { --btn-color: #62f7ff; }
@@ -252,7 +257,7 @@ h1 {
 
 <main>
   <section class="big-frame">
-    <h1>🍄(　´ᯅ`　)🍄‍🟫</h1>
+    <h1>🍄( ´ᯅ` )🍄‍🟫</h1>
 
     <hr class="divider">
 
@@ -271,7 +276,7 @@ h1 {
 
     <nav class="buttons" aria-label="メニュー">
       <a class="nav-button" href="index.html">🍄 帰る</a>
-      <a class="nav-button" href="profile.html">(　´ᯅ`　)</a>
+      <a class="nav-button" href="profile.html">( ´ᯅ` )</a>
     </nav>
   </section>
 </main>
@@ -495,14 +500,17 @@ document.addEventListener("click", (event) => {
 
     spark.textContent = marks[Math.floor(Math.random() * marks.length)];
 
+    const sparkLeft = rect.left + window.scrollX + Math.random() * rect.width;
+    const sparkTop = rect.top + window.scrollY + Math.random() * rect.height;
+
     Object.assign(spark.style, {
-      position: "fixed",
-      left: rect.left + Math.random() * rect.width + "px",
-      top: rect.top + Math.random() * rect.height + "px",
-      zIndex: "99",
+      position: "absolute",
+      left: sparkLeft + "px",
+      top: sparkTop + "px",
+      zIndex: "9999",
       pointerEvents: "none",
       color: colors[Math.floor(Math.random() * colors.length)],
-      fontSize: 9 + Math.random() * 10 + "px",
+      fontSize: (9 + Math.random() * 10) + "px",
       textShadow: "0 0 8px currentColor",
       opacity: "1",
       transition: "transform 750ms ease-out, opacity 750ms ease-out"
@@ -532,8 +540,10 @@ document.addEventListener("click", (event) => {
     });
 
     element.addEventListener("mouseleave", () => {
-      window.clearInterval(timer);
-      timer = null;
+      if (timer) {
+        window.clearInterval(timer);
+        timer = null;
+      }
     });
   });
 })();

@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>⭐️ヽ(　´ᯅ`　)ノ💫</title>
+  <meta name="theme-color" content="#070720">
+  <title>⭐️ヽ( ´ᯅ` )ノ💫</title>
 
   <style>
     :root {
@@ -12,13 +13,21 @@
       --neon-cyan: #4de1ff;
       --neon-yellow: #ffe84a;
       --neon-purple: #b68cff;
-      --panel: rgba(8, 6, 32, 0.42);
+      --panel: rgba(8, 6, 32, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
       background-color: var(--bg);
       color: #fff;
-      font-family: "MS Gothic", monospace;
+      font-family:
+        "Hiragino Kaku Gothic ProN",
+        "Yu Gothic",
+        Meiryo,
+        sans-serif;
       margin: 0;
       text-align: center;
       overflow-x: hidden;
@@ -32,10 +41,14 @@
       inset: 0;
       z-index: -2;
       pointer-events: none;
-      background-image: url("files/neon_back.jpg");
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(rgba(7, 7, 32, 0.30), rgba(7, 7, 32, 0.40)),
+        url("files/neon_back.jpg");
+      background-repeat: no-repeat, repeat;
+      background-attachment: fixed, fixed;
+      background-position: center, center;
+      background-size: auto, 555px auto;
     }
 
     #background-wrap {
@@ -88,23 +101,23 @@
       max-width: 650px;
       margin: 60px auto 80px;
       background: var(--panel);
-      border-radius: 40px;
-      padding: 40px 20px;
-      border: 4px solid var(--neon-cyan);
+      border-radius: 24px;
+      padding: 40px 24px;
+      border: 2px solid var(--neon-pink);
       box-shadow:
-        0 0 14px rgba(77, 225, 255, 0.8),
-        0 0 50px rgba(255, 122, 217, 0.5),
-        inset 0 0 30px rgba(182, 140, 255, 0.2);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-sizing: border-box;
+        0 0 15px #ff7ad988,
+        0 0 35px #ff3dc844,
+        inset 0 0 25px #b68cff33;
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
       width: calc(100% - 32px);
     }
 
     h1 {
-      font-size: 2em;
+      font-size: clamp(1.6rem, 5vw, 2.3rem);
+      margin-top: 0;
       margin-bottom: 0.3em;
-      color: #fff;
+      color: #ffe3f7;
       text-shadow:
         0 0 6px #fff,
         0 0 14px var(--neon-pink),
@@ -113,7 +126,7 @@
     }
 
     .tagline {
-      font-size: 0.85em;
+      font-size: 0.9em;
       margin-bottom: 35px;
       color: var(--neon-yellow);
       text-shadow: 0 0 8px var(--neon-yellow);
@@ -122,73 +135,81 @@
 
     .question {
       margin-bottom: 25px;
-      padding: 25px;
-      background: rgba(255, 255, 255, 0.04);
-      border-radius: 20px;
-      border: 1px solid rgba(77, 225, 255, 0.45);
-      border-left: 8px solid var(--neon-pink);
+      padding: 22px;
+      background: rgba(8, 8, 32, 0.45);
+      border-radius: 18px;
+      border: 1.5px solid var(--neon-cyan);
+      border-left: 6px solid var(--neon-pink);
       text-align: left;
-      box-shadow: 0 0 12px rgba(77, 225, 255, 0.25);
+      box-shadow:
+        0 0 12px rgba(77, 225, 255, 0.3),
+        inset 0 0 15px rgba(182, 140, 255, 0.15);
+      backdrop-filter: blur(2px);
     }
 
     .question p {
       margin-top: 0;
       font-weight: bold;
       color: #fff;
-      text-shadow: 0 0 6px var(--neon-pink);
-      font-size: 1.1em;
+      text-shadow: 0 0 8px var(--neon-pink);
+      font-size: 1.05em;
     }
 
     label {
       display: block;
       margin: 10px 0;
       cursor: pointer;
-      padding: 8px;
-      border-radius: 8px;
+      padding: 10px 12px;
+      border-radius: 10px;
       color: #d8c8ff;
-      transition: all 0.2s;
+      transition: all 0.2s ease;
     }
 
     label:hover {
-      background: rgba(255, 122, 217, 0.18);
+      background: rgba(255, 122, 217, 0.22);
       color: #fff;
       text-shadow: 0 0 8px var(--neon-pink);
-      transform: translateX(5px);
+      transform: translateX(6px);
     }
 
     input[type="radio"] {
       margin-right: 10px;
       accent-color: var(--neon-pink);
+      transform: scale(1.2);
     }
 
     .submit-btn {
       display: block;
       margin: 2rem auto 0;
-      padding: 1rem 3rem;
-      background: linear-gradient(
-        45deg,
-        var(--neon-pink),
-        var(--neon-purple),
-        var(--neon-cyan)
-      );
-      color: #1a0033;
-      font-size: 1.2rem;
-      font-weight: 900;
-      border: 2px solid #fff;
+      padding: 1rem 2.5rem;
+      background: rgba(8, 8, 32, 0.75);
+      color: #ffffff;
+      font-size: 1.15rem;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      border: 2px solid var(--neon-purple);
       border-radius: 50px;
       cursor: pointer;
+      text-shadow: 0 0 8px var(--neon-purple);
       box-shadow:
-        0 0 12px rgba(255, 122, 217, 0.9),
-        0 0 28px rgba(77, 225, 255, 0.6);
-      transition: all 0.3s ease;
-      font-family: "MS Gothic", monospace;
+        0 0 12px rgba(182, 140, 255, 0.6),
+        inset 0 0 10px rgba(182, 140, 255, 0.3);
+      transition:
+        transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+        box-shadow 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
+      font-family: inherit;
     }
 
     .submit-btn:hover {
-      transform: scale(1.05) rotate(-1deg);
+      color: #070720;
+      background: var(--neon-purple);
+      transform: translateY(-4px) scale(1.04);
       box-shadow:
-        0 0 18px rgba(255, 122, 217, 1),
-        0 0 44px rgba(77, 225, 255, 0.95);
+        0 0 20px var(--neon-purple),
+        0 0 38px var(--neon-purple);
+      text-shadow: none;
     }
 
     .shard {
@@ -229,16 +250,16 @@
   <h1>🪐 御霊を整えましょう🪐</h1>
 
   <div class="tagline">
-    〜 果たして貴殿は「めじぃ（飯）❗️」に辿り着けるか 〜
+    〜 あなたは「めじぃ（飯）❗️」に辿り着けるか 〜
   </div>
 
   <form id="soulForm">
     <div class="question">
-      <p>Q1. 世界がもし1秒で終わるなら、何をする？</p>
+      <p>Q1. 世界がもし441930秒で終わるなら、何をする？</p>
 
       <label>
         <input type="radio" name="q1" value="a">
-        叫ぶ 🔊
+        ベコ飼うだ 🐄
       </label>
 
       <label>
@@ -248,7 +269,7 @@
 
       <label>
         <input type="radio" name="q1" value="c">
-        ｼｬｲﾆﾝｸﾞ（　👁️　👄　👁️　）
+        ﾚｰｻﾞｰﾃﾞｨｽｸは何者だ( 👁️ 👄 👁️ )⁉️
       </label>
     </div>
 
@@ -276,7 +297,7 @@
       class="submit-btn"
       onclick="checkAnswers()"
     >
-      ✨御霊を拝見致しました(　´ᯅ`　)✨
+      ✨御霊を拝見致しました( ´ᯅ` )✨
     </button>
   </form>
 </div>
@@ -354,7 +375,7 @@ document.addEventListener("mousemove", (e) => {
     (e.clientY / window.innerHeight - 0.5) * 30;
 
   bgWrap.style.transform =
-    `translate(${-moveX}px, ${-moveY}px)`;
+    `translate(${-moveX}px,${-moveY}px)`;
 });
 
 document.addEventListener('click', (e) => {
@@ -372,7 +393,7 @@ document.addEventListener('click', (e) => {
     const size = Math.random() * 12 + 4;
 
     shard.style.borderBottom =
-      `${size * 2}px solid ${color}`;
+      `${size * 2}px solid${color}`;
 
     shard.style.borderLeftWidth = `${size}px`;
     shard.style.borderRightWidth = `${size}px`;
@@ -412,6 +433,66 @@ document.addEventListener('click', (e) => {
   }
 });
 
+window.addEventListener("DOMContentLoaded", () => {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const targets = document.querySelectorAll("h1, .submit-btn");
+  const marks = ["✦", "✧", "✨"];
+
+  function sparkle(element) {
+    const rect = element.getBoundingClientRect();
+    const spark = document.createElement("span");
+
+    spark.textContent = marks[Math.floor(Math.random() * marks.length)];
+
+    const sparkLeft = rect.left + window.scrollX + Math.random() * rect.width;
+    const sparkTop = rect.top + window.scrollY + Math.random() * rect.height;
+
+    Object.assign(spark.style, {
+      position: "absolute",
+      left: sparkLeft + "px",
+      top: sparkTop + "px",
+      zIndex: "9999",
+      pointerEvents: "none",
+      color: NEON_COLORS[Math.floor(Math.random() * NEON_COLORS.length)],
+      fontSize: (9 + Math.random() * 10) + "px",
+      textShadow: "0 0 8px currentColor",
+      opacity: "1",
+      transition: "transform 750ms ease-out, opacity 750ms ease-out"
+    });
+
+    document.body.appendChild(spark);
+
+    requestAnimationFrame(() => {
+      const dx = (Math.random() - 0.5) * 44;
+      const dy = -(18 + Math.random() * 32);
+      const rot = (Math.random() - 0.5) * 180;
+      spark.style.transform =
+        `translate(${dx}px, ${dy}px) rotate(${rot}deg) scale(0.4)`;
+      spark.style.opacity = "0";
+    });
+
+    window.setTimeout(() => spark.remove(), 800);
+  }
+
+  targets.forEach((element) => {
+    let timer = null;
+
+    element.addEventListener("mouseenter", () => {
+      if (timer) return;
+      sparkle(element);
+      timer = window.setInterval(() => sparkle(element), 90);
+    });
+
+    element.addEventListener("mouseleave", () => {
+      if (timer) {
+        window.clearInterval(timer);
+        timer = null;
+      }
+    });
+  });
+});
+
 const correctAnswers = {
   q1: 'c',
   q2: 'b'
@@ -431,15 +512,15 @@ function checkAnswers() {
   }
 
   if (score === Object.keys(correctAnswers).length) {
-    alert("おめでとう（　👁️_ゝ👁️）✨");
+    alert("おめでとう（ 👁️_ゝ👁️）✨");
     window.location.href = "morires.html";
   } else {
-    alert("ぶぶ漬け食べなはれや( 　´_ゝ`)🍵");
+    alert("ぶぶ漬け食べなはれや( ´ᯅ` )");
     window.location.href = "index.html";
   }
 }
 
-for (let i = 0; i < 40; i++) {
+for (let i = 0; i < 222; i++) {
   const star = document.createElement("div");
   star.classList.add("star");
 
@@ -453,8 +534,8 @@ for (let i = 0; i < 40; i++) {
   star.style.width = star.style.height =
     Math.random() * 2 + "px";
 
-  star.style.left = Math.random() * 100 + "%";
-  star.style.top = Math.random() * 100 + "%";
+  star.style.left = Math.random() * 222 + "%";
+  star.style.top = Math.random() * 222 + "%";
 
   bgWrap.appendChild(star);
 }
