@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#070720">
-<title> 🪐 ( ´ᯅ` ) 🌎 </title>
+<title>🪐( ´ᯅ` )🌎</title>
 
 <style>
 :root {
@@ -42,12 +42,10 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* リンクやボタンをクリックしたときのフォーカス枠を消す */
 a, button, .cloud {
   outline: none;
 }
 
-/* 背景画像（index・hello・baiyo・morires系と同じ。暗さは数字で調整） */
 #background-image {
   position: fixed;
   inset: 0;
@@ -91,7 +89,6 @@ a, button, .cloud {
   to { opacity: 0.48; }
 }
 
-/* 背景にふわふわ浮かぶ絵文字（マウスでゆるく動く） */
 #parallax-bg {
   position: fixed;
   top: -10%;
@@ -117,7 +114,6 @@ a, button, .cloud {
   100% { transform: translateY(-30px) rotate(15deg); opacity: 0.28; }
 }
 
-/* タッチした場所に出る光 */
 #touch-spotlight {
   position: fixed;
   z-index: 1;
@@ -140,7 +136,6 @@ a, button, .cloud {
   opacity: 1;
 }
 
-/* プロフィールカード（ピンクの大枠） */
 .profile-card {
   position: relative;
   z-index: 10;
@@ -170,7 +165,6 @@ a, button, .cloud {
   }
 }
 
-/* 瞬くネオンサイン風のタイトル */
 .profile-card h1 {
   margin: 0 0 10px;
   color: #ffe3f7;
@@ -259,7 +253,6 @@ a, button, .cloud {
   100% { background-position: 100% 50%; }
 }
 
-/* 雲（押すとめじが出る） */
 .cloud {
   display: block;
   width: 200px;
@@ -287,7 +280,6 @@ a, button, .cloud {
   50% { transform: translateY(-10px); }
 }
 
-/* めじログ（黄緑の枠） */
 #summon-log {
   position: fixed;
   top: 15vh;
@@ -319,7 +311,6 @@ a, button, .cloud {
   border-bottom: 1px dashed #b68cff55;
 }
 
-/* 出てくる食べ物 */
 .floating-emoji {
   position: fixed;
   z-index: 100;
@@ -395,9 +386,9 @@ a, button, .cloud {
 
 <div class="profile-card">
   <div class="cloud"></div>
-  <a href="index.html" class="home-link"><h1> 🪐 ( ´ᯅ` ) 🌎 </h1></a>
+  <a href="index.html" class="home-link"><h1>🪐( ´ᯅ` )🌎</h1></a>
   <p><span class="profile-label">名前：</span>にーとの輝星（まゆげちゃん）</p>
-  <p><span class="profile-label">出自：</span> 🪐✖️🌎 </p>
+  <p><span class="profile-label">出自：</span>🪐✖️🌎</p>
   <p><span class="profile-label">誕生日：</span>6月15日</p>
   <p><span class="profile-label">年齢：</span><span id="age-value">計算中...</span></p>
   <p><span class="profile-label">生年：</span>紀元前249997975年</p>
@@ -413,7 +404,6 @@ const reduceMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)"
 ).matches;
 
-/* 🍄 胞子のアニメーション（indexたちと同じ） */
 (() => {
   const canvas = document.getElementById("spore-canvas");
   const ctx = canvas.getContext("2d");
@@ -538,7 +528,6 @@ const reduceMotion = window.matchMedia(
   }
 })();
 
-/* ✦ きらきら星 */
 (() => {
   const container = document.getElementById("stars");
   const fragment = document.createDocumentFragment();
@@ -576,7 +565,6 @@ const reduceMotion = window.matchMedia(
   container.appendChild(fragment);
 })();
 
-/* 🍄 クリックした場所に小さな光 */
 document.addEventListener("click", (event) => {
   if (reduceMotion) return;
 
@@ -613,7 +601,6 @@ document.addEventListener("click", (event) => {
   }
 });
 
-/* ✦ マウスを乗せるとキラキラ（タイトルと雲） */
 (() => {
   if (reduceMotion) return;
 
@@ -670,7 +657,6 @@ document.addEventListener("click", (event) => {
   });
 })();
 
-/* 🪐 背景の絵文字・マウスやタッチでゆるく動く */
 (() => {
   const BG_EMOJIS = ["🪐", "💫", "🌎"];
 
@@ -772,7 +758,6 @@ document.addEventListener("click", (event) => {
   });
 })();
 
-/* ☁️ 雲を押すと、めじが出てくる（カード発光処理は除去して安全化） */
 (() => {
   const summons = [
     { emoji: "🍺", poems: ["とりあえず飲めよ（ ´_ゝ`）。", "ほら、冷えてんだからさァ（ ´_ゝ`）", "冷凍庫に缶入れてんの忘れたら爆発したんだけど（ ；_ゝ； ）。"] },
@@ -812,7 +797,6 @@ document.addEventListener("click", (event) => {
   });
 })();
 
-/* 🎂 年齢と誕生日までのカウントダウン */
 function updateAge() {
   const now = new Date();
   const thisBday = new Date(now.getFullYear(), 5, 15);
