@@ -393,7 +393,7 @@ document.addEventListener('click', (e) => {
     const size = Math.random() * 12 + 4;
 
     shard.style.borderBottom =
-      `${size * 2}px solid${color}`;
+      `${size * 2}px solid ${color}`;
 
     shard.style.borderLeftWidth = `${size}px`;
     shard.style.borderRightWidth = `${size}px`;
@@ -520,7 +520,7 @@ function checkAnswers() {
   }
 }
 
-for (let i = 0; i < 222; i++) {
+for (let i = 0; i < 50; i++) {
   const star = document.createElement("div");
   star.classList.add("star");
 
@@ -534,8 +534,8 @@ for (let i = 0; i < 222; i++) {
   star.style.width = star.style.height =
     Math.random() * 2 + "px";
 
-  star.style.left = Math.random() * 222 + "%";
-  star.style.top = Math.random() * 222 + "%";
+  star.style.left = Math.random() * 100 + "%";
+  star.style.top = Math.random() * 100 + "%";
 
   bgWrap.appendChild(star);
 }
