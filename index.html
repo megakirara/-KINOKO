@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#070720">
-<title>🍄(　´ᯅ`　)🍄</title>
+<title>🍄( ´ᯅ` )🍄‍🟫</title>
 
 <style>
 :root {
@@ -99,19 +99,73 @@ main {
 
 h1 {
   margin: 0;
-  color: var(--pink);
   font-size: clamp(2.8rem, 9vw, 5.5rem);
   line-height: 1.3;
-  text-shadow:
-    0 0 7px #ff7ad9,
-    0 0 20px #ff3dc8,
-    0 0 45px #ff3dc866;
-  animation: titleFlicker 5s infinite;
+  display: inline-block;
+  letter-spacing: 0.1em;
+  animation: neonRainbowMushroomFlicker 10s linear infinite;
 }
 
-@keyframes titleFlicker {
-  0%, 94%, 97%, 100% { opacity: 1; }
-  95%, 96% { opacity: 0.82; }
+@keyframes neonRainbowMushroomFlicker {
+  0% {
+    opacity: 1;
+    filter: 
+      drop-shadow(0 0 8px #ff7ad9)
+      drop-shadow(0 0 20px #ff3dc8)
+      drop-shadow(0 0 40px #b68cff88);
+  }
+  4% {
+    opacity: 0.4;
+    filter: drop-shadow(0 0 3px #ff7ad944);
+  }
+  5% {
+    opacity: 0.9;
+    filter: 
+      drop-shadow(0 0 6px #ff7ad9)
+      drop-shadow(0 0 15px #ff3dc8);
+  }
+
+  25% {
+    opacity: 1;
+    filter: 
+      drop-shadow(0 0 8px #4de1ff)
+      drop-shadow(0 0 20px #00bfff)
+      drop-shadow(0 0 40px #4de1ff88);
+  }
+
+  50% {
+    opacity: 1;
+    filter: 
+      drop-shadow(0 0 8px #b6ff5c)
+      drop-shadow(0 0 20px #70f100)
+      drop-shadow(0 0 40px #b6ff5c88);
+  }
+  54% {
+    opacity: 0.35;
+    filter: drop-shadow(0 0 2px #b6ff5c33);
+  }
+  55% {
+    opacity: 0.95;
+    filter: 
+      drop-shadow(0 0 7px #b6ff5c)
+      drop-shadow(0 0 16px #70f100);
+  }
+
+  75% {
+    opacity: 1;
+    filter: 
+      drop-shadow(0 0 8px #b68cff)
+      drop-shadow(0 0 20px #9d4edd)
+      drop-shadow(0 0 40px #ffe84a66);
+  }
+
+  100% {
+    opacity: 1;
+    filter: 
+      drop-shadow(0 0 8px #ff7ad9)
+      drop-shadow(0 0 20px #ff3dc8)
+      drop-shadow(0 0 40px #b68cff88);
+  }
 }
 
 .tagline {
@@ -139,7 +193,6 @@ h1 {
   text-shadow: 0 0 10px #ffe84a66;
 }
 
-/* 右から左へ流れる（同じ内容を4つ並べて、ちょうど半分動いたらループ） */
 .marquee-track {
   display: flex;
   width: max-content;
@@ -209,7 +262,6 @@ h1 {
   margin-top: 0;
 }
 
-/* メインメニューのボタン：カウンターと同じ並びで1つずつ色違い */
 .nav-button {
   --btn-color: #ff65c3;
   display: flex;
@@ -274,7 +326,6 @@ h1 {
   line-height: 1.8;
 }
 
-/* アクセスカウンター */
 .big-frame #visitor-counter {
   margin-top: 32px;
 }
@@ -526,12 +577,11 @@ footer {
 <canvas id="spore-canvas" aria-hidden="true"></canvas>
 
 <main>
-  <!-- ▼ ここから大枠（タイトル〜カウンターまで全部） ▼ -->
   <section class="big-frame" aria-label="メインコンテンツ">
 
   <header class="hero">
     <h1>🍄🍄‍🟫🍄</h1>
-    <p class="tagline">(　´ᯅ`　)</p>
+    <p class="tagline">( ´ᯅ` )</p>
 
     <p class="intro">
       きのこと胞子の漂う場所へようこそ。<br>
@@ -541,10 +591,10 @@ footer {
 
   <div class="marquee" aria-label="飾り文字">
     <div class="marquee-track" aria-hidden="true">
-      <span>　🍄‍🟫　🍄　🍄‍🟫　🍄　🍄‍🟫　🍄　🍄‍🟫　🍄　🍄‍🟫　🍄　🍄‍🟫　🍄　</span>
-      <span>　🍄‍🟫　🍄　🍄‍🟫　🍄　🍄‍🟫　🍄　🍄‍🟫　🍄　🍄‍🟫　🍄　🍄‍🟫　🍄　</span>
-      <span>　🍄‍🟫　🍄　🍄‍🟫　🍄　🍄‍🟫　🍄　🍄‍🟫　🍄　🍄‍🟫　🍄　🍄‍🟫　🍄　</span>
-      <span>　🍄‍🟫　🍄　🍄‍🟫　🍄　🍄‍🟫　🍄　🍄‍🟫　🍄　🍄‍🟫　🍄　🍄‍🟫　🍄　</span>
+      <span> 　🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 </span>
+      <span> 　🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 </span>
+      <span> 　🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 </span>
+      <span> 　🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 </span>
     </div>
   </div>
 
@@ -566,7 +616,7 @@ footer {
     <section class="section" id="guestbook">
       <h2>✦ GUESTBOOK ✦</h2>
       <p class="small-note">
-       🍄‍🟫 ひとことどうぞ 🍄<br>
+        🍄‍🟫 ひとことどうぞ 🍄<br>
         ※ 投稿内容はこのページを開いている間だけ保持されます。
       </p>
 
@@ -612,7 +662,7 @@ footer {
       <ul class="history">
         <li>
           <time datetime="2026-10-20">2026.10.20</time>
-          🍄　ほぼ全改装に伴い、履歴ﾘｾｯﾂ(　´〜`　)🍘
+          🍄 ほぼ全改装に伴い、履歴ﾘｾｯﾂ( ´〜` )🍘
         </li>
       </ul>
     </section>
@@ -992,9 +1042,6 @@ document.addEventListener("click", (event) => {
   });
 })();
 
-/* 🍄 累計アクセスカウンター
-   ページが開かれるたびにカウントされます。
-   ユニーク訪問者数ではありません。 */
 (async function initVisitorCounter() {
   const digits = document.getElementById("visitor-counter-digits");
   const number = document.getElementById("visitor-counter-number");
