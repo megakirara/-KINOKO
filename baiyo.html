@@ -3,125 +3,188 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#070720">
 <title> 🍄 </title>
+
 <style>
 :root {
   --bg: #070720;
-  --neon-pink: #ff7ad9;
-  --neon-cyan: #4de1ff;
-  --neon-yellow: #ffe84a;
-  --neon-purple: #b68cff;
-  --panel: rgba(8, 6, 32, 0.42);
+  --pink: #ff7ad9;
+  --cyan: #4de1ff;
+  --yellow: #ffe84a;
+  --purple: #b68cff;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html {
   min-height: 100%;
   background-color: var(--bg);
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--bg);
-  color: #fff;
-  font-family: "MS Gothic", monospace;
-  text-align: center;
   margin: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
   min-height: 100vh;
-  position: relative;
-  isolation: isolate;
+  overflow-x: hidden;
+  color: #f8edff;
+  background-color: var(--bg);
+  font-family:
+    "Hiragino Kaku Gothic ProN",
+    "Yu Gothic",
+    Meiryo,
+    sans-serif;
+  text-align: center;
+}
+
+a {
+  color: inherit;
 }
 
 #background-image {
   position: fixed;
   inset: 0;
-  z-index: -3;
+  z-index: 0;
   pointer-events: none;
-  background-image: url("files/neon_back.jpg");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background:
+    linear-gradient(rgba(7, 7, 32, 0.30), rgba(7, 7, 32, 0.40)),
+    url("files/neon_back.jpg") center / cover no-repeat;
+}
+
+#mycelium,
+#spore-canvas,
+#stars {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 #mycelium {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -2;
-  pointer-events: none;
+  z-index: 0;
+  opacity: 0.3;
   background:
-    radial-gradient(circle at 30% 40%, rgba(255,122,217,0.28) 0%, transparent 55%),
-    radial-gradient(circle at 70% 60%, rgba(77,225,255,0.25) 0%, transparent 55%);
-  animation: spores 5s infinite ease-in-out alternate;
-  filter: blur(2px);
+    radial-gradient(ellipse at 15% 25%, #642cff33, transparent 45%),
+    radial-gradient(ellipse at 85% 65%, #ff36bd22, transparent 45%),
+    radial-gradient(ellipse at 50% 90%, #00eaff1a, transparent 40%);
+  animation: myceliumGlow 9s ease-in-out infinite alternate;
 }
 
-@keyframes spores {
-  from { transform: scale(1); opacity: 0.4; }
-  to { transform: scale(1.25); opacity: 0.8; }
+#spore-canvas {
+  z-index: 1;
 }
 
-#spores {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  pointer-events: none;
-  transition: transform 0.1s ease-out;
+#stars {
+  z-index: 1;
 }
 
-.main-container {
+@keyframes myceliumGlow {
+  from { opacity: 0.18; }
+  to { opacity: 0.48; }
+}
+
+main {
   position: relative;
   z-index: 2;
-  max-width: 900px;
-  margin: 60px auto;
-  background: var(--panel);
-  border-radius: 30px;
-  padding: 40px 30px;
-  border: 2px solid var(--neon-cyan);
+  width: min(900px, 92%);
+  margin: 0 auto;
+  padding: 55px 0 65px;
+}
+
+.big-frame {
+  padding: 36px 26px 38px;
+  border: 1px solid #ff7ad9aa;
+  border-radius: 24px;
+  background: rgba(8, 6, 32, 0.55);
   box-shadow:
-    0 0 12px rgba(77,225,255,0.7),
-    0 0 40px rgba(255,122,217,0.4),
-    inset 0 0 25px rgba(182,140,255,0.18);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+    0 0 16px #ff7ad933,
+    0 0 40px #4de1ff18,
+    inset 0 0 30px #b68cff10;
+  backdrop-filter: blur(7px);
+  animation: fadeIn 1.6s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 h1 {
-  margin-top: 10px;
-  font-size: 2.2em;
-  letter-spacing: 0.05em;
-  color: #fff;
+  margin: 0 0 6px;
+  color: #ffe3f7;
+  font-size: clamp(1.7rem, 6vw, 2.8rem);
+  line-height: 1.4;
   text-shadow:
-    0 0 6px #fff,
-    0 0 14px var(--neon-pink),
-    0 0 30px var(--neon-pink),
-    0 0 50px var(--neon-cyan);
+    0 0 4px #fff,
+    0 0 10px #ff7ad9,
+    0 0 22px #ff3dc8,
+    0 0 44px #ff3dc8,
+    0 0 80px #ff3dc888,
+    0 0 6px #4de1ff66;
+  animation: neonFlicker 4.5s linear infinite;
+}
+
+@keyframes neonFlicker {
+  0%, 17%, 21%, 24%, 52%, 56%, 80%, 83%, 100% {
+    opacity: 1;
+    color: #ffe3f7;
+    text-shadow:
+      0 0 4px #fff,
+      0 0 10px #ff7ad9,
+      0 0 22px #ff3dc8,
+      0 0 44px #ff3dc8,
+      0 0 80px #ff3dc888,
+      0 0 6px #4de1ff66;
+  }
+
+  18%, 22%, 54%, 81% {
+    opacity: 0.55;
+    color: #c98ab5;
+    text-shadow:
+      0 0 2px #ff7ad966,
+      0 0 6px #ff7ad944;
+  }
+
+  19%, 23%, 55%, 82% {
+    opacity: 0.9;
+    color: #ffd0f0;
+    text-shadow:
+      0 0 3px #fff,
+      0 0 8px #ff7ad9,
+      0 0 16px #ff3dc8;
+  }
 }
 
 .tagline {
-  font-size: 1em;
-  margin-bottom: 15px;
-  color: var(--neon-cyan);
-  text-shadow: 0 0 8px var(--neon-cyan);
+  margin: 0 0 14px;
+  color: var(--cyan);
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 10px #4de1ff99;
 }
 
 .marquee {
-  position: relative;
+  margin: 0 0 34px;
+  padding: 6px 0;
   overflow: hidden;
   white-space: nowrap;
-  margin-bottom: 40px;
 }
 
 .marquee p {
   display: inline-block;
+  margin: 0;
+  color: var(--yellow);
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 10px #ffe84a66;
   animation: scrollText 25s linear infinite;
-  color: var(--neon-yellow);
-  text-shadow: 0 0 8px var(--neon-yellow);
 }
 
 @keyframes scrollText {
@@ -132,324 +195,460 @@ h1 {
 .site-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
-  margin: 0 auto 40px;
+  gap: 22px;
+  margin: 0 auto 36px;
 }
 
 .site-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(77, 225, 255, 0.45);
-  border-radius: 20px;
-  padding: 25px 20px;
-  box-shadow: 0 0 10px rgba(77, 225, 255, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+  --card-color: #62f7ff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 24px 20px;
+  border: 1px solid var(--card-color);
+  border-radius: 16px;
+  background: #080820a8;
+  box-shadow: 0 0 10px color-mix(in srgb, var(--card-color) 28%, transparent);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .site-card:hover {
   transform: translateY(-5px);
   box-shadow:
-    0 0 14px rgba(255, 122, 217, 0.7),
-    0 10px 30px rgba(255, 122, 217, 0.3);
-  background: rgba(255, 255, 255, 0.08);
-  border-color: var(--neon-pink);
+    0 0 14px var(--card-color),
+    0 0 28px color-mix(in srgb, var(--card-color) 40%, transparent);
 }
+
+.site-card:nth-child(6n + 1) { --card-color: #62f7ff; }
+.site-card:nth-child(6n + 2) { --card-color: #b6ff5c; }
+.site-card:nth-child(6n + 3) { --card-color: #b68cff; }
+.site-card:nth-child(6n + 4) { --card-color: #ffb85c; }
+.site-card:nth-child(6n + 5) { --card-color: #ffe84a; }
+.site-card:nth-child(6n + 6) { --card-color: #ff7a7a; }
 
 .site-card h3 {
   margin: 0 0 10px;
-  font-size: 1.2em;
   color: #fff;
-  text-shadow: 0 0 6px var(--neon-pink), 0 0 14px var(--neon-pink);
+  font-size: 1.15rem;
+  line-height: 1.5;
+  text-shadow: 0 0 10px color-mix(in srgb, var(--card-color) 75%, transparent);
 }
 
 .site-card p {
-  font-size: 0.9em;
-  color: #d8c8ff;
-  line-height: 1.5;
-  margin-bottom: 20px;
   flex-grow: 1;
+  margin: 0 0 20px;
+  color: #e3dafa;
+  font-size: 0.9rem;
+  line-height: 1.7;
 }
 
-button {
-  background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple), var(--neon-cyan));
-  color: #1a0033;
-  border: 2px solid #fff;
-  padding: 12px 30px;
-  font-size: 1em;
-  font-family: "MS Gothic", monospace;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow:
-    0 0 10px rgba(255,122,217,0.8),
-    0 0 24px rgba(77,225,255,0.5);
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
+.card-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px;
+  border: 1px solid var(--btn-color);
+  border-radius: 12px;
+  background: #080820cc;
+  color: #f8f3ff;
   font-weight: bold;
-  width: 100%;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  box-shadow: 0 0 10px color-mix(in srgb, var(--btn-color) 28%, transparent);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    color 0.2s ease;
 }
 
-button:hover {
-  transform: scale(1.05);
+.card-button:hover,
+.card-button:focus-visible {
+  color: white;
+  transform: translateY(-3px);
   box-shadow:
-    0 0 16px rgba(255,122,217,1),
-    0 0 40px rgba(77,225,255,0.9);
+    0 0 12px var(--btn-color),
+    0 0 24px color-mix(in srgb, var(--btn-color) 40%, transparent);
+  outline: none;
 }
+
+.site-card:nth-child(6n + 1) .card-button { --btn-color: #b6ff5c; }
+.site-card:nth-child(6n + 2) .card-button { --btn-color: #b68cff; }
+.site-card:nth-child(6n + 3) .card-button { --btn-color: #ffb85c; }
+.site-card:nth-child(6n + 4) .card-button { --btn-color: #ffe84a; }
+.site-card:nth-child(6n + 5) .card-button { --btn-color: #ff7a7a; }
+.site-card:nth-child(6n + 6) .card-button { --btn-color: #62f7ff; }
 
 .back-link {
   display: inline-block;
-  color: var(--neon-cyan);
-  text-shadow: 0 0 8px rgba(77,225,255,0.8);
-  text-decoration: none;
-  margin-top: 20px;
-  font-size: 0.9em;
-  transition: 0.3s;
-  border-bottom: 1px dashed var(--neon-cyan);
+  color: #d8b4fe;
+  text-decoration: underline;
+  text-decoration-color: #b68cff77;
+  text-underline-offset: 5px;
+  transition:
+    color 0.2s ease,
+    text-shadow 0.2s ease;
 }
 
-.back-link:hover {
-  color: #fff;
-  text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
-  border-bottom: 1px dashed var(--neon-pink);
-}
-
-.shard {
-  position: fixed;
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 20px solid var(--neon-purple);
-  pointer-events: none;
-  z-index: 9999;
-  filter: drop-shadow(0 0 6px rgba(255,255,255,0.9));
-}
-
-@keyframes twinkle {
-  0%,100% { opacity: 0.4; }
-  50% { opacity: 1; }
-}
-
-.star {
-  position: absolute;
-  border-radius: 50%;
-  animation: twinkle 3s infinite ease-in-out;
-  pointer-events: none;
+.back-link:hover,
+.back-link:focus-visible {
+  color: white;
+  text-shadow: 0 0 8px var(--purple);
+  outline: none;
 }
 
 @media (max-width: 700px) {
-  .main-container {
-    width: calc(100% - 24px);
-    box-sizing: border-box;
-    margin: 20px auto;
-    padding: 28px 18px;
-    border-radius: 24px;
+  main {
+    padding-top: 25px;
+  }
+
+  .big-frame {
+    padding: 26px 14px 28px;
   }
 
   .site-grid {
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 16px;
   }
+}
 
-  h1 {
-    font-size: 1.7em;
-  }
-
-  .marquee {
-    margin-bottom: 28px;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 </style>
 </head>
 
 <body>
-<div id="background-image"></div>
-<div id="mycelium"></div>
-<canvas id="spores"></canvas>
+<div id="background-image" aria-hidden="true"></div>
+<div id="mycelium" aria-hidden="true"></div>
+<div id="stars" aria-hidden="true"></div>
+<canvas id="spore-canvas" aria-hidden="true"></canvas>
 
-<div class="main-container">
-  <h1>🍄 ヽ(　´ᯅ`　)ノ 🍄</h1>
-  <p class="tagline">💫 ヽ(　´ᯅ`　)ノ 💫</p>
+<main>
+  <section class="big-frame">
+    <h1>🍄 ヽ(　´ᯅ`　)ノ 🍄</h1>
+    <p class="tagline">💫 ヽ(　´ᯅ`　)ノ 💫</p>
 
-  <div class="marquee">
-    <p>🍄ページを開いた意味は、あなたにしかわからない 🍄</p>
-  </div>
-
-  <div class="site-grid">
-
-    <div class="site-card">
-      <h3>チョコボール先輩(PC推奨)</h3>
-      <p>…何を見せられているんだろう</p>
-      <a href="https://megakirara.github.io/CHOCO/" style="text-decoration: none;">
-        <button>🍄 のぞく</button>
-      </a>
+    <div class="marquee">
+      <p>🍄ページを開いた意味は、あなたにしかわからない 🍄</p>
     </div>
 
-    <div class="site-card">
-      <h3>ステルス卓上計算機🌸</h3>
-      <p>Xに投稿する為だけに存在する意味のないページ。</p>
-      <a href="https://megakirara.github.io/-STTK/" style="text-decoration: none;">
-        <button>🍄 のぞく</button>
-      </a>
+    <div class="site-grid">
+
+      <div class="site-card">
+        <h3>チョコボール先輩(PC推奨)</h3>
+        <p>…何を見せられているんだろう</p>
+        <a class="card-button" href="https://megakirara.github.io/CHOCO/">🍄 のぞく</a>
+      </div>
+
+      <div class="site-card">
+        <h3>ステルス卓上計算機🌸</h3>
+        <p>Xに投稿する為だけに存在する意味のないページ。</p>
+        <a class="card-button" href="https://megakirara.github.io/-STTK/">🍄 のぞく</a>
+      </div>
+
+      <div class="site-card">
+        <h3>金運が上がるサイト</h3>
+        <p>（ 👁️_ゝ👁️）ノ💞✨</p>
+        <a class="card-button" href="https://megakirara.github.io/GOLD/">🍄 のぞく</a>
+      </div>
+
+      <div class="site-card">
+        <h3>ゴミ虫と彼岸花🐞</h3>
+        <p>…何をやらされているんだろう</p>
+        <a class="card-button" href="https://megakirara.github.io/5364/">🍄 のぞく</a>
+      </div>
+
+      <div class="site-card">
+        <h3>鼻くそわっしょい</h3>
+        <p>(☝︎ ՞ਊ ՞)☝︎〜〜❄️</p>
+        <a class="card-button" href="https://megakirara.github.io/8793/">🍄 のぞく</a>
+      </div>
+
+      <div class="site-card">
+        <h3>眉モーメント集</h3>
+        <p>（ 👁️_ゝ👁️）ぶるっ</p>
+        <a class="card-button" href="https://megakirara.github.io/88/">🍄 のぞく</a>
+      </div>
+
     </div>
 
-    <div class="site-card">
-      <h3>金運が上がるサイト</h3>
-      <p>（ 👁️_ゝ👁️）ノ💞✨</p>
-      <a href="https://megakirara.github.io/GOLD/" style="text-decoration: none;">
-        <button>🍄 のぞく</button>
-      </a>
+    <div>
+      <a href="index.html" class="back-link">🍄 帰る</a>
     </div>
-
-    <div class="site-card">
-      <h3>ゴミ虫と彼岸花🐞</h3>
-      <p>…何をやらされているんだろう</p>
-      <a href="https://megakirara.github.io/5364/" style="text-decoration: none;">
-        <button>🍄 のぞく</button>
-      </a>
-    </div>
-
-    <div class="site-card">
-      <h3>鼻くそわっしょい</h3>
-      <p>(☝︎ ՞ਊ ՞)☝︎〜〜❄️</p>
-      <a href="https://megakirara.github.io/8793/" style="text-decoration: none;">
-        <button>🍄 のぞく</button>
-      </a>
-    </div>
-
-    <div class="site-card">
-      <h3>眉モーメント集</h3>
-      <p>（ 👁️_ゝ👁️）ぶるっ</p>
-      <a href="https://megakirara.github.io/88/" style="text-decoration: none;">
-        <button>🍄 のぞく</button>
-      </a>
-    </div>
-
-  </div>
-
-  <div>
-    <a href="index.html" class="back-link">🍄 帰る</a>
-  </div>
-</div>
+  </section>
+</main>
 
 <script>
-const NEON_COLORS = ['#ff7ad9', '#4de1ff', '#ffe84a', '#b68cff'];
+"use strict";
 
-const canvas = document.getElementById("spores");
-const ctx = canvas.getContext("2d");
-let w, h, spores = [];
+(() => {
+  const canvas = document.getElementById("spore-canvas");
+  const ctx = canvas.getContext("2d");
 
-function resize() {
-  w = canvas.width = window.innerWidth;
-  h = canvas.height = window.innerHeight;
-  spores = Array.from({length: 250}, () => ({
-    x: Math.random() * w,
-    y: Math.random() * h,
-    r: Math.random() * 2 + 1,
-    o: Math.random(),
-    s: Math.random() * 0.5 + 0.2,
-    z: Math.random() * 2
-  }));
-}
+  if (!ctx) return;
 
-function draw() {
-  ctx.clearRect(0, 0, w, h);
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
-  spores.forEach(s => {
-    s.x += Math.sin(Date.now() * 0.0001 + s.y) * 0.2 * s.z;
-    s.y += Math.cos(Date.now() * 0.00005 + s.x) * 0.2 * s.z;
+  let width = 0;
+  let height = 0;
+  let spores = [];
+  let mouseX = 0;
+  let mouseY = 0;
 
-    if (s.x < 0) s.x = w;
-    if (s.x > w) s.x = 0;
-    if (s.y < 0) s.y = h;
-    if (s.y > h) s.y = 0;
+  const colors = [
+    "#ff7ad9",
+    "#4de1ff",
+    "#ffe84a",
+    "#b68cff",
+    "#b6ff5c"
+  ];
 
-    s.o += (Math.random() - 0.5) * 0.05;
-    s.o = Math.max(0.1, Math.min(1, s.o));
+  function resize() {
+    const ratio = Math.min(window.devicePixelRatio || 1, 2);
 
-    const idx = Math.min(
-      NEON_COLORS.length - 1,
-      Math.floor((s.x / w) * NEON_COLORS.length)
+    width = window.innerWidth;
+    height = window.innerHeight;
+
+    canvas.width = Math.round(width * ratio);
+    canvas.height = Math.round(height * ratio);
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+    const count = Math.min(
+      180,
+      Math.max(60, Math.floor((width * height) / 8500))
     );
 
-    const alpha = Math.floor(s.o * 255).toString(16).padStart(2, '0');
+    spores = Array.from({ length: count }, () => createSpore(true));
 
-    ctx.beginPath();
-    ctx.fillStyle = `${NEON_COLORS[idx]}${alpha}`;
-    ctx.arc(s.x, s.y, s.r * s.z, 0, Math.PI * 2);
-    ctx.fill();
-  });
+    if (reduceMotion) drawStatic();
+  }
 
-  requestAnimationFrame(draw);
-}
+  function createSpore(randomY = false) {
+    return {
+      x: Math.random() * width,
+      y: randomY ? Math.random() * height : height + 10,
+      size: Math.random() * 2.1 + 0.5,
+      speed: Math.random() * 0.55 + 0.12,
+      drift: (Math.random() - 0.5) * 0.45,
+      alpha: Math.random() * 0.65 + 0.2,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      phase: Math.random() * Math.PI * 2
+    };
+  }
 
-window.addEventListener("resize", resize);
-resize();
-draw();
+  function drawStatic() {
+    ctx.clearRect(0, 0, width, height);
 
-document.addEventListener("mousemove", (e) => {
-  const x = (e.clientX / window.innerWidth - 0.5) * 2;
-  const y = (e.clientY / window.innerHeight - 0.5) * 2;
-  canvas.style.transform = `translate(${x * 10}px, ${y * 10}px)`;
-});
+    for (const spore of spores) {
+      ctx.globalAlpha = spore.alpha;
+      ctx.fillStyle = spore.color;
+      ctx.beginPath();
+      ctx.arc(spore.x, spore.y, spore.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
 
-for (let i = 0; i < 50; i++) {
-  const star = document.createElement("div");
-  star.classList.add("star");
+    ctx.globalAlpha = 1;
+  }
 
-  const color = NEON_COLORS[Math.floor(Math.random() * NEON_COLORS.length)];
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
 
-  star.style.background = color;
-  star.style.boxShadow = `0 0 6px ${color}`;
-  star.style.width = star.style.height = Math.random() * 3 + "px";
-  star.style.left = Math.random() * 100 + "%";
-  star.style.top = Math.random() * 100 + "%";
-  star.style.animationDuration = 2 + Math.random() * 3 + "s";
+    for (const spore of spores) {
+      spore.phase += 0.015;
+      spore.x += spore.drift + Math.sin(spore.phase) * 0.12;
+      spore.y -= spore.speed;
 
-  document.body.appendChild(star);
-}
-
-document.addEventListener('click', (e) => {
-  const shardCount = 12;
-
-  for (let i = 0; i < shardCount; i++) {
-    const shard = document.createElement('div');
-    shard.className = 'shard';
-
-    const color = NEON_COLORS[Math.floor(Math.random() * NEON_COLORS.length)];
-    const size = Math.random() * 15 + 5;
-
-    shard.style.borderBottom = `${size * 2}px solid ${color}`;
-    shard.style.borderLeftWidth = `${size}px`;
-    shard.style.borderRightWidth = `${size}px`;
-    shard.style.left = e.clientX + 'px';
-    shard.style.top = e.clientY + 'px';
-
-    const angle = Math.random() * Math.PI * 2;
-    const velocity = Math.random() * 150 + 50;
-    const tx = Math.cos(angle) * velocity;
-    const ty = Math.sin(angle) * velocity;
-    const rot = Math.random() * 360;
-
-    document.body.appendChild(shard);
-
-    const anim = shard.animate([
-      {
-        transform: 'translate(-50%, -50%) rotate(0deg) scale(1)',
-        opacity: 1
-      },
-      {
-        transform: `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) rotate(${rot}deg) scale(0)`,
-        opacity: 0
+      if (spore.y < -10) {
+        Object.assign(spore, createSpore(false));
       }
-    ], {
-      duration: Math.random() * 500 + 500,
-      easing: 'cubic-bezier(0, .9, .57, 1)'
+
+      if (spore.x < -10) spore.x = width + 10;
+      if (spore.x > width + 10) spore.x = -10;
+
+      const parallaxX = mouseX * 0.012;
+      const parallaxY = mouseY * 0.012;
+
+      ctx.globalAlpha = spore.alpha;
+      ctx.fillStyle = spore.color;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = spore.color;
+
+      ctx.beginPath();
+      ctx.arc(
+        spore.x + parallaxX,
+        spore.y + parallaxY,
+        spore.size,
+        0,
+        Math.PI * 2
+      );
+      ctx.fill();
+    }
+
+    ctx.globalAlpha = 1;
+    ctx.shadowBlur = 0;
+
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener("resize", resize, { passive: true });
+
+  window.addEventListener("mousemove", (event) => {
+    mouseX = event.clientX - width / 2;
+    mouseY = event.clientY - height / 2;
+  }, { passive: true });
+
+  resize();
+
+  if (!reduceMotion) {
+    animate();
+  }
+})();
+
+(() => {
+  const container = document.getElementById("stars");
+  const fragment = document.createDocumentFragment();
+
+  for (let i = 0; i < 50; i++) {
+    const star = document.createElement("span");
+
+    star.textContent = "✦";
+    star.setAttribute("aria-hidden", "true");
+
+    Object.assign(star.style, {
+      position: "absolute",
+      left: Math.random() * 100 + "%",
+      top: Math.random() * 100 + "%",
+      color: i % 2 ? "#4de1ff" : "#ff7ad9",
+      fontSize: Math.random() * 9 + 5 + "px",
+      opacity: String(Math.random() * 0.55 + 0.12),
+      textShadow: "0 0 8px currentColor",
+      animation: `starBlink ${Math.random() * 3 + 2}s ease-in-out infinite alternate`,
+      animationDelay: Math.random() * -5 + "s"
     });
 
-    anim.onfinish = () => shard.remove();
+    fragment.appendChild(star);
+  }
+
+  const style = document.createElement("style");
+  style.textContent = `
+    @keyframes starBlink {
+      from { opacity: 0.12; }
+      to { opacity: 0.85; }
+    }
+  `;
+
+  document.head.appendChild(style);
+  container.appendChild(fragment);
+})();
+
+document.addEventListener("click", (event) => {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return;
+  }
+
+  const colors = ["#ff7ad9", "#4de1ff", "#ffe84a", "#b68cff"];
+
+  for (let i = 0; i < 6; i++) {
+    const spark = document.createElement("span");
+    const angle = Math.PI * 2 * i / 6;
+    const distance = 18 + Math.random() * 24;
+
+    spark.textContent = "✦";
+
+    Object.assign(spark.style, {
+      position: "fixed",
+      left: event.clientX + "px",
+      top: event.clientY + "px",
+      zIndex: "99",
+      pointerEvents: "none",
+      color: colors[i % colors.length],
+      fontSize: "13px",
+      textShadow: "0 0 8px currentColor",
+      transition: "transform 550ms ease-out, opacity 550ms ease-out"
+    });
+
+    document.body.appendChild(spark);
+
+    requestAnimationFrame(() => {
+      spark.style.transform =
+        `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px)`;
+      spark.style.opacity = "0";
+    });
+
+    window.setTimeout(() => spark.remove(), 650);
   }
 });
+
+(() => {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const targets = document.querySelectorAll("h1, .card-button");
+  const colors = ["#ff65c3", "#b6ff5c", "#62f7ff", "#b68cff", "#ffb85c", "#ffe84a"];
+  const marks = ["✦", "✧", "✨"];
+
+  function sparkle(element) {
+    const rect = element.getBoundingClientRect();
+    const spark = document.createElement("span");
+
+    spark.textContent = marks[Math.floor(Math.random() * marks.length)];
+
+    Object.assign(spark.style, {
+      position: "fixed",
+      left: rect.left + Math.random() * rect.width + "px",
+      top: rect.top + Math.random() * rect.height + "px",
+      zIndex: "99",
+      pointerEvents: "none",
+      color: colors[Math.floor(Math.random() * colors.length)],
+      fontSize: 9 + Math.random() * 10 + "px",
+      textShadow: "0 0 8px currentColor",
+      opacity: "1",
+      transition: "transform 750ms ease-out, opacity 750ms ease-out"
+    });
+
+    document.body.appendChild(spark);
+
+    requestAnimationFrame(() => {
+      const dx = (Math.random() - 0.5) * 44;
+      const dy = -(18 + Math.random() * 32);
+      const rot = (Math.random() - 0.5) * 180;
+      spark.style.transform =
+        `translate(${dx}px, ${dy}px) rotate(${rot}deg) scale(0.4)`;
+      spark.style.opacity = "0";
+    });
+
+    window.setTimeout(() => spark.remove(), 800);
+  }
+
+  targets.forEach((element) => {
+    let timer = null;
+
+    element.addEventListener("mouseenter", () => {
+      if (timer) return;
+      sparkle(element);
+      timer = window.setInterval(() => sparkle(element), 90);
+    });
+
+    element.addEventListener("mouseleave", () => {
+      window.clearInterval(timer);
+      timer = null;
+    });
+  });
+})();
 </script>
 </body>
 </html>
