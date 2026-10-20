@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -13,6 +14,10 @@
   --neon-yellow: #ffe84a;
   --neon-purple: #b68cff;
   --panel: rgba(8, 6, 32, 0.42);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -72,6 +77,7 @@ body {
   position: relative;
   z-index: 2;
   max-width: 850px;
+  width: calc(100% - 24px);
   margin: 60px auto;
   background: var(--panel);
   border-radius: 30px;
@@ -82,6 +88,7 @@ body {
     0 0 40px rgba(255,122,217,0.4),
     inset 0 0 25px rgba(182,140,255,0.18);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 h1 {
@@ -135,7 +142,12 @@ h1 {
 }
 
 button {
-  background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple), var(--neon-cyan));
+  background: linear-gradient(
+    45deg,
+    var(--neon-pink),
+    var(--neon-purple),
+    var(--neon-cyan)
+  );
   color: #1a0033;
   border: 2px solid #fff;
   padding: 15px 40px;
@@ -172,7 +184,14 @@ button.wip:hover {
 
 .litlink-mini-button {
   display: inline-block;
-  background: linear-gradient(45deg, var(--neon-pink), var(--neon-yellow), var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+  background: linear-gradient(
+    45deg,
+    var(--neon-pink),
+    var(--neon-yellow),
+    var(--neon-cyan),
+    var(--neon-purple),
+    var(--neon-pink)
+  );
   background-size: 200% 200%;
   color: #1a0033;
   text-decoration: none;
@@ -275,6 +294,202 @@ button.wip:hover {
   margin-top: 4px;
 }
 
+#guestbook {
+  width: 92%;
+  max-width: 620px;
+  margin: 42px auto 10px;
+  padding: 22px;
+  text-align: left;
+  color: #fff;
+  background: rgba(8, 6, 32, 0.78);
+  border: 2px solid var(--neon-purple);
+  border-radius: 22px;
+  box-shadow:
+    0 0 12px rgba(182,140,255,0.55),
+    0 0 28px rgba(255,122,217,0.2),
+    inset 0 0 18px rgba(77,225,255,0.08);
+}
+
+#guestbook h2 {
+  margin: 0 0 8px;
+  text-align: center;
+  color: var(--neon-pink);
+  font-size: 1.35em;
+  text-shadow:
+    0 0 8px var(--neon-pink),
+    0 0 18px rgba(255,122,217,0.5);
+}
+
+.guestbook-description {
+  margin: 0 0 22px;
+  text-align: center;
+  color: var(--neon-cyan);
+  font-size: 0.85em;
+  line-height: 1.8;
+}
+
+#guestbook-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#guestbook-input {
+  display: block;
+  width: 100%;
+  min-height: 105px;
+  resize: vertical;
+  padding: 13px;
+  border-radius: 12px;
+  border: 1px solid var(--neon-cyan);
+  background: rgba(3, 3, 20, 0.85);
+  color: #fff;
+  font-family: "MS Gothic", monospace;
+  font-size: 16px;
+  line-height: 1.7;
+  outline: none;
+  box-shadow: inset 0 0 12px rgba(77,225,255,0.08);
+}
+
+#guestbook-input::placeholder {
+  color: rgba(210, 197, 235, 0.65);
+}
+
+#guestbook-input:focus {
+  border-color: var(--neon-pink);
+  box-shadow:
+    0 0 10px rgba(255,122,217,0.3),
+    inset 0 0 12px rgba(77,225,255,0.08);
+}
+
+.guestbook-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#guestbook-count {
+  color: var(--neon-purple);
+  font-size: 0.8em;
+}
+
+#guestbook-form button {
+  align-self: center;
+  padding: 11px 30px;
+  font-size: 0.95em;
+}
+
+#guestbook-status {
+  min-height: 1.5em;
+  margin: 8px 0 0;
+  text-align: center;
+  font-size: 0.82em;
+  color: var(--neon-yellow);
+}
+
+.guestbook-list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 28px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed rgba(77,225,255,0.55);
+}
+
+.guestbook-list-heading h3 {
+  margin: 0;
+  color: var(--neon-yellow);
+  font-size: 1em;
+  text-shadow: 0 0 8px rgba(255,232,74,0.35);
+}
+
+#guestbook-clear {
+  padding: 6px 12px;
+  font-size: 0.75em;
+  border-radius: 20px;
+  background: rgba(255,122,217,0.12);
+  color: #fff;
+  border: 1px solid rgba(255,122,217,0.7);
+  box-shadow: none;
+}
+
+#guestbook-clear:hover {
+  background: rgba(255,122,217,0.28);
+  box-shadow: 0 0 12px rgba(255,122,217,0.3);
+}
+
+#guestbook-empty {
+  margin: 20px 0 8px;
+  text-align: center;
+  color: rgba(220,210,245,0.72);
+  font-size: 0.9em;
+  line-height: 1.9;
+}
+
+.guestbook-entry {
+  position: relative;
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(182,140,255,0.42);
+  background: rgba(30, 20, 62, 0.72);
+  overflow-wrap: anywhere;
+  animation: entryAppear 0.35s ease-out;
+}
+
+@keyframes entryAppear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.guestbook-entry-text {
+  margin: 0;
+  font-size: 0.95em;
+  line-height: 1.9;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.guestbook-entry-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(77,225,255,0.25);
+}
+
+.guestbook-entry-time {
+  color: var(--neon-cyan);
+  font-size: 0.72em;
+}
+
+.guestbook-delete {
+  padding: 5px 10px;
+  font-size: 0.72em;
+  border-radius: 16px;
+  background: transparent;
+  color: #ffd2f2;
+  border: 1px solid rgba(255,122,217,0.55);
+  box-shadow: none;
+}
+
+.guestbook-delete:hover {
+  background: rgba(255,122,217,0.18);
+  box-shadow: 0 0 10px rgba(255,122,217,0.25);
+}
+
 #growMsg {
   position: fixed;
   bottom: 10px;
@@ -285,6 +500,8 @@ button.wip:hover {
   font-size: 0.9em;
   color: var(--neon-cyan);
   text-shadow: 0 0 8px var(--neon-cyan);
+  pointer-events: none;
+  z-index: 5;
 }
 
 .shard {
@@ -308,40 +525,119 @@ button.wip:hover {
   position: absolute;
   border-radius: 50%;
   animation: twinkle 3s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@media (max-width: 600px) {
+  .main-container {
+    margin: 20px auto;
+    padding: 28px 12px;
+    border-radius: 22px;
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+
+  .buttons {
+    gap: 12px;
+  }
+
+  .buttons button {
+    padding: 12px 22px;
+    font-size: 0.95em;
+  }
+
+  #note-box {
+    width: 96%;
+    padding: 14px;
+  }
+
+  #guestbook {
+    width: 96%;
+    padding: 16px;
+  }
+
+  #guestbook h2 {
+    font-size: 1.2em;
+  }
 }
 </style>
 </head>
 
 <body>
 <div id="background-image"></div>
-
 <div id="mycelium"></div>
 <canvas id="spores"></canvas>
 
 <div class="main-container">
-  <h1> 🍄🍄‍🟫🍄 </h1>
+  <h1>🍄🍄‍🟫🍄</h1>
   <p class="tagline">(　´ᯅ`　)</p>
 
   <div class="marquee">
-    <p> (　´ᯅ`　) ………🍄‍🟫…🍄</p>
+    <p>(　´ᯅ`　) ………🍄‍🟫…🍄</p>
   </div>
 
   <div class="buttons">
-    <a href="morires_into.html"><button> 🍱 (　´ᯅ`　) </button></a>
-    <a href="baiyo.html"><button> 🍄 </button></a>
-    <button class="wip" disabled> (　´ᯅ`　) 🎨 </button>
+    <a href="morires_into.html"><button>🍱 (　´ᯅ`　)</button></a>
+    <a href="baiyo.html"><button>🍄</button></a>
+    <button class="wip" disabled>(　´ᯅ`　) 🎨</button>
   </div>
 
   <div class="sub-links">
-    <a href="hello.html"> 🍄‍🟫(　´ᯅ`　) </a>
-    <a href="profile.html"> (　´ᯅ`　)🍄 </a>
+    <a href="hello.html">🍄‍🟫(　´ᯅ`　)</a>
+    <a href="profile.html">(　´ᯅ`　)🍄</a>
   </div>
 
+  <section id="guestbook" aria-labelledby="guestbook-title">
+    <h2 id="guestbook-title">🫵（　👁️　👄　👁️　）🎙️</h2>
+    <p class="guestbook-description">
+      一言どうぞ🫱<br>
+      <span>※ 投稿はこの画面の中だけに表示されます。</span>
+    </p>
+
+    <form id="guestbook-form">
+      <label for="guestbook-input">あなたのひとこと</label>
+      <textarea
+        id="guestbook-input"
+        maxlength="500"
+        placeholder="今日は何を生やしますか(　´ᯅ`　)"
+        aria-describedby="guestbook-count"
+        required
+      ></textarea>
+
+      <div class="guestbook-controls">
+        <span id="guestbook-count">0 / 500文字</span>
+        <button type="submit">🍄‍🟫🎙️</button>
+      </div>
+
+      <p id="guestbook-status" role="status" aria-live="polite"></p>
+    </form>
+
+    <div class="guestbook-list-heading">
+      <h3>🍄あなたの言葉</h3>
+      <button type="button" id="guestbook-clear">全部消す</button>
+    </div>
+
+    <p id="guestbook-empty">
+      まだ何も生えていません。<br>
+      最初のひとことをどうぞ……(　´ᯅ`　)ノ🍄‍🟫
+    </p>
+
+    <div id="guestbook-list" aria-live="polite"></div>
+  </section>
+
+  <!-- 更新履歴 -->
   <div id="note-box">
     <h2>(　´ᯅ`　)</h2>
 
     <div class="note-item">
-      <a href="baiyo.html"> 🆕‼️ 🍄に「眉モーメント」追加</a>
+      <a href="baiyo.html">🆕‼️ 「🫵（　👁️　👄　👁️　）🎙️」追加</a>
+      <span class="note-date">2026-10-20</span>
+    </div>
+
+    <div class="note-item">
+      <a href="baiyo.html">🍄に「眉モーメント」追加</a>
       <span class="note-date">2026-10-19</span>
     </div>
 
@@ -367,7 +663,7 @@ button.wip:hover {
   </div>
 </div>
 
-<div id="growMsg">……(　´ᯅ`　) </div>
+<div id="growMsg">……(　´ᯅ`　)</div>
 
 <script>
 const NEON_COLORS = ['#ff7ad9', '#4de1ff', '#ffe84a', '#b68cff'];
@@ -445,9 +741,10 @@ function resetIdleTimer() {
   idleTimer = setTimeout(showGrowMsg, 30000);
 }
 
-window.onload = resetIdleTimer;
-document.onmousemove = resetIdleTimer;
-document.onkeydown = resetIdleTimer;
+window.addEventListener("load", resetIdleTimer);
+document.addEventListener("mousemove", resetIdleTimer);
+document.addEventListener("keydown", resetIdleTimer);
+document.addEventListener("touchstart", resetIdleTimer, {passive: true});
 
 for (let i = 0; i < 50; i++) {
   const star = document.createElement("div");
@@ -507,6 +804,101 @@ document.addEventListener('click', (e) => {
     anim.onfinish = () => shard.remove();
   }
 });
+
+/* ひとこと菌床：メモリ上だけで管理し、保存しない */
+const guestbookForm = document.getElementById("guestbook-form");
+const guestbookInput = document.getElementById("guestbook-input");
+const guestbookCount = document.getElementById("guestbook-count");
+const guestbookStatus = document.getElementById("guestbook-status");
+const guestbookList = document.getElementById("guestbook-list");
+const guestbookEmpty = document.getElementById("guestbook-empty");
+const guestbookClear = document.getElementById("guestbook-clear");
+
+let guestbookMessages = [];
+let nextMessageId = 1;
+
+guestbookInput.addEventListener("input", () => {
+  guestbookCount.textContent = `${guestbookInput.value.length} / 500文字`;
+});
+
+function renderGuestbook() {
+  guestbookList.replaceChildren();
+  guestbookEmpty.hidden = guestbookMessages.length > 0;
+  guestbookClear.hidden = guestbookMessages.length === 0;
+
+  guestbookMessages.forEach((message) => {
+    const entry = document.createElement("article");
+    entry.className = "guestbook-entry";
+
+    const text = document.createElement("p");
+    text.className = "guestbook-entry-text";
+    /* textContentを使い、入力内容をHTMLとして実行させない */
+    text.textContent = message.text;
+
+    const footer = document.createElement("div");
+    footer.className = "guestbook-entry-footer";
+
+    const time = document.createElement("time");
+    time.className = "guestbook-entry-time";
+    time.textContent = message.time;
+
+    const deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.className = "guestbook-delete";
+    deleteButton.textContent = "このひとことを消す";
+    deleteButton.setAttribute("aria-label", "このひとことを削除");
+
+    deleteButton.addEventListener("click", () => {
+      guestbookMessages = guestbookMessages.filter(
+        item => item.id !== message.id
+      );
+      guestbookStatus.textContent = "ひとことを土に還しました。🍄";
+      renderGuestbook();
+    });
+
+    footer.append(time, deleteButton);
+    entry.append(text, footer);
+    guestbookList.appendChild(entry);
+  });
+}
+
+guestbookForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const text = guestbookInput.value.trim();
+
+  if (!text) {
+    guestbookStatus.textContent = "ひとことを入力してくださいね。(　´ᯅ`　)";
+    guestbookInput.focus();
+    return;
+  }
+
+  guestbookMessages.unshift({
+    id: nextMessageId++,
+    text,
+    time: new Date().toLocaleTimeString("ja-JP", {
+      hour: "2-digit",
+      minute: "2-digit"
+    })
+  });
+
+  guestbookInput.value = "";
+  guestbookCount.textContent = "0 / 500文字";
+  guestbookStatus.textContent = "ぽとん！ ひとことが生えました。🍄";
+
+  renderGuestbook();
+  guestbookInput.focus();
+});
+
+guestbookClear.addEventListener("click", () => {
+  if (guestbookMessages.length === 0) return;
+
+  guestbookMessages = [];
+  guestbookStatus.textContent = "菌床をきれいにしました。(　´ᯅ`　)";
+  renderGuestbook();
+});
+
+renderGuestbook();
 </script>
 </body>
 </html>
