@@ -46,7 +46,6 @@ button {
   font: inherit;
 }
 
-/* ★ タイル状パターン背景 ★ */
 #background-image {
   position: fixed;
   inset: 0;
@@ -59,7 +58,7 @@ button {
   background-repeat: no-repeat, repeat;
   background-attachment: fixed, fixed;
   background-position: center, center;
-  background-size: auto, 555px auto;
+  background-size: auto, 888px auto;
 }
 
 #mycelium,
@@ -103,7 +102,6 @@ main {
   padding: 45px 0 65px;
 }
 
-/* ★ シースルー透過＋クッキリピンクネオン大枠 ★ */
 .big-frame {
   padding: 36px 24px 38px;
   border: 2px solid #ff7ad9;
@@ -181,7 +179,6 @@ h1 {
   text-shadow: 0 0 10px #ffe84a66;
 }
 
-/* ★ めじログ枠：ライムグリーン発光 ★ */
 #log {
   width: 100%;
   height: 200px;
@@ -212,7 +209,6 @@ h1 {
   gap: 13px;
 }
 
-/* ★ 召喚ボタン：ネオンパープル ★ */
 .summon-btn {
   --btn-color: #b68cff;
   display: inline-flex;
@@ -239,7 +235,6 @@ h1 {
     color 0.2s ease;
 }
 
-/* ★ ホームボタン：ネオンシアン ★ */
 .home-btn {
   --btn-color: #62f7ff;
   display: inline-flex;
@@ -608,7 +603,6 @@ function summon(e) {
   }
 })();
 
-/* ★ クリック時の星散らし ＆ めじガチャ（30%でめじ爆弾） ★ */
 function triggerEffects(clientX, clientY, target) {
   if (target.closest("a")) return;
 

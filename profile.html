@@ -51,9 +51,14 @@ a, button, .cloud {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background:
-    linear-gradient(rgba(7, 7, 32, 0.30), rgba(7, 7, 32, 0.40)),
-    url("files/neon_back.jpg") center / cover no-repeat;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(7, 7, 32, 0.40), rgba(7, 7, 32, 0.55)),
+    url("files/neon_back.jpg");
+  background-repeat: no-repeat, repeat;
+  background-attachment: fixed, fixed;
+  background-position: center, center;
+  background-size: auto, 888px auto;
 }
 
 #mycelium,
@@ -136,7 +141,6 @@ a, button, .cloud {
   opacity: 1;
 }
 
-/* ★ 他のページと完全に統一したピンクネオン大枠 ★ */
 .profile-card {
   position: relative;
   z-index: 10;
@@ -616,7 +620,7 @@ document.addEventListener("click", (event) => {
     spark.textContent = marks[Math.floor(Math.random() * marks.length)];
 
     Object.assign(spark.style, {
-      position: "fixed",
+      position: "absolute",
       left: rect.left + Math.random() * rect.width + "px",
       top: rect.top + Math.random() * rect.height + "px",
       zIndex: "99",
