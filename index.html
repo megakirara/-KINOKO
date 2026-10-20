@@ -103,10 +103,15 @@ main {
 
 h1 {
   margin: 0;
-  font-size: clamp(2.8rem, 9vw, 5.5rem);
-  line-height: 1.3;
   display: inline-block;
-  letter-spacing: 0.1em;
+  line-height: 0;
+}
+
+.title-img {
+  display: block;
+  width: min(380px, 80vw);
+  height: auto;
+  margin: 0 auto;
   animation: neonRainbowMushroomFlicker 10s linear infinite;
 }
 
@@ -190,22 +195,30 @@ h1 {
   margin: 22px 0;
   padding: 10px 0;
   overflow: hidden;
-  color: var(--yellow);
-  font-size: 0.95rem;
-  letter-spacing: 0.12em;
   white-space: nowrap;
-  text-shadow: 0 0 10px #ffe84a66;
 }
 
 .marquee-track {
   display: flex;
+  align-items: center;
   width: max-content;
   animation: marqueeScroll 18s linear infinite;
 }
 
-.marquee-track span {
-  display: inline-block;
+.marquee-track .marquee-group {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding-right: 28px;
   flex-shrink: 0;
+}
+
+.marquee-track img {
+  height: 28px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  filter: drop-shadow(0 0 6px rgba(255, 232, 74, 0.6));
 }
 
 @keyframes marqueeScroll {
@@ -567,21 +580,6 @@ footer {
     margin-right: 8px;
   }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none !important;
-  }
-
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
 </style>
 </head>
 
@@ -594,7 +592,9 @@ footer {
   <section class="big-frame" aria-label="メインコンテンツ">
 
   <header class="hero">
-    <h1>🍄 🍄‍🟫 🍄</h1>
+    <h1>
+      <img src="files/title_kinoko.png" alt="キノコタイトル" class="title-img">
+    </h1>
     <p class="tagline">( ´ᯅ` )</p>
 
     <p class="intro">
@@ -603,12 +603,14 @@ footer {
     </p>
   </header>
 
-  <div class="marquee" aria-label="飾り文字">
+  <div class="marquee" aria-label="飾りライン">
     <div class="marquee-track" aria-hidden="true">
-      <span>🍄‍🟫 　🍄　 🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 </span>
-      <span>🍄‍🟫 　🍄 　🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 </span>
-      <span>🍄‍🟫 　🍄 　🍄‍🟫 　🍄　 🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 </span>
-      <span>🍄‍🟫 　🍄　 🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 🍄‍🟫　 🍄　 </span>
+      <div class="marquee-group">
+        <img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt="">
+      </div>
+      <div class="marquee-group">
+        <img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt="">
+      </div>
     </div>
   </div>
 
@@ -725,9 +727,7 @@ footer {
 
   if (!ctx) return;
 
-  const reduceMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
+  const reduceMotion = false;
 
   let width = 0;
   let height = 0;
@@ -886,10 +886,6 @@ footer {
 })();
 
 document.addEventListener("click", (event) => {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    return;
-  }
-
   const colors = ["#ff7ad9", "#4de1ff", "#ffe84a", "#b68cff"];
 
   for (let i = 0; i < 6; i++) {
@@ -1003,8 +999,6 @@ document.addEventListener("click", (event) => {
 })();
 
 window.addEventListener("DOMContentLoaded", () => {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
   const targets = document.querySelectorAll(".nav-button, #guestbook-form .action-button");
   const colors = ["#ff65c3", "#b6ff5c", "#62f7ff", "#b68cff", "#ffb85c", "#ffe84a"];
   const marks = ["✦", "✧", "✨"];
@@ -1111,6 +1105,44 @@ window.addEventListener("DOMContentLoaded", () => {
     number.textContent = "----";
     status.textContent = "COUNTER ACTIVE";
   }
+})();
+
+(() => {
+  const marquee = document.querySelector(".marquee");
+  const track = document.querySelector(".marquee-track");
+
+  if (!marquee || !track) return;
+
+  const baseDuration = 18;
+
+  function fillMarquee() {
+    const groups = track.querySelectorAll(".marquee-group");
+    if (groups.length < 2) return;
+
+    groups.forEach((group, index) => {
+      if (index >= 2) group.remove();
+    });
+
+    const first = track.querySelector(".marquee-group");
+    const groupWidth = first.getBoundingClientRect().width;
+
+    if (!groupWidth) return;
+
+    let total = 2;
+    while ((groupWidth * total) / 2 < marquee.clientWidth && total < 40) {
+      total += 2;
+    }
+
+    for (let i = 2; i < total; i++) {
+      track.appendChild(first.cloneNode(true));
+    }
+
+
+    track.style.animationDuration = baseDuration * (total / 2) + "s";
+  }
+
+  window.addEventListener("load", fillMarquee);
+  window.addEventListener("resize", fillMarquee, { passive: true });
 })();
 </script>
 
