@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#070720">
-<title> 🍄 </title>
+<title>🍄( ´ᯅ` )🍄</title>
 
 <style>
 :root {
@@ -13,6 +13,7 @@
   --cyan: #4de1ff;
   --yellow: #ffe84a;
   --purple: #b68cff;
+  --panel: rgba(8, 6, 32, 0.35);
 }
 
 * {
@@ -20,8 +21,6 @@
 }
 
 html {
-  min-height: 100%;
-  background-color: var(--bg);
   scroll-behavior: smooth;
 }
 
@@ -31,6 +30,13 @@ body {
   overflow-x: hidden;
   color: #f8edff;
   background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(7, 7, 32, 0.40), rgba(7, 7, 32, 0.55)),
+    url("files/neon_back.jpg");
+  background-repeat: no-repeat, repeat;
+  background-attachment: fixed, fixed;
+  background-position: center, center;
+  background-size: auto, 888px auto;
   font-family:
     "Hiragino Kaku Gothic ProN",
     "Yu Gothic",
@@ -43,19 +49,10 @@ a {
   color: inherit;
 }
 
-#background-image {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-color: var(--bg);
-  background-image:
-    linear-gradient(rgba(7, 7, 32, 0.30), rgba(7, 7, 32, 0.40)),
-    url("files/neon_back.jpg");
-  background-repeat: no-repeat, repeat;
-  background-attachment: fixed, fixed;
-  background-position: center, center;
-  background-size: auto, 888px auto;
+button,
+input,
+textarea {
+  font: inherit;
 }
 
 #mycelium,
@@ -99,8 +96,138 @@ main {
   padding: 55px 0 65px;
 }
 
+.hero {
+  padding: 4px 0 0;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  display: inline-block;
+  line-height: 0;
+}
+
+.title-img {
+  display: block;
+  width: min(380px, 80vw);
+  height: auto;
+  margin: 0 auto;
+  animation: neonRainbowMushroomFlicker 10s linear infinite;
+}
+
+@keyframes neonRainbowMushroomFlicker {
+  0% {
+    opacity: 1;
+    filter: 
+      drop-shadow(0 0 8px #ff7ad9)
+      drop-shadow(0 0 20px #ff3dc8)
+      drop-shadow(0 0 40px #b68cff88);
+  }
+  4% {
+    opacity: 0.4;
+    filter: drop-shadow(0 0 3px #ff7ad944);
+  }
+  5% {
+    opacity: 0.9;
+    filter: 
+      drop-shadow(0 0 6px #ff7ad9)
+      drop-shadow(0 0 15px #ff3dc8);
+  }
+
+  25% {
+    opacity: 1;
+    filter: 
+      drop-shadow(0 0 8px #4de1ff)
+      drop-shadow(0 0 20px #00bfff)
+      drop-shadow(0 0 40px #4de1ff88);
+  }
+
+  50% {
+    opacity: 1;
+    filter: 
+      drop-shadow(0 0 8px #b6ff5c)
+      drop-shadow(0 0 20px #70f100)
+      drop-shadow(0 0 40px #b6ff5c88);
+  }
+  54% {
+    opacity: 0.35;
+    filter: drop-shadow(0 0 2px #b6ff5c33);
+  }
+  55% {
+    opacity: 0.95;
+    filter: 
+      drop-shadow(0 0 7px #b6ff5c)
+      drop-shadow(0 0 16px #70f100);
+  }
+
+  75% {
+    opacity: 1;
+    filter: 
+      drop-shadow(0 0 8px #b68cff)
+      drop-shadow(0 0 20px #9d4edd)
+      drop-shadow(0 0 40px #ffe84a66);
+  }
+
+  100% {
+    opacity: 1;
+    filter: 
+      drop-shadow(0 0 8px #ff7ad9)
+      drop-shadow(0 0 20px #ff3dc8)
+      drop-shadow(0 0 40px #b68cff88);
+  }
+}
+
+.tagline {
+  margin: 12px 0 8px;
+  color: var(--cyan);
+  font-size: clamp(1rem, 3vw, 1.35rem);
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 12px #4de1ff99;
+}
+
+.intro {
+  margin: 12px auto;
+  color: #e7dcff;
+  line-height: 1.9;
+}
+
+.marquee {
+  margin: 22px 0;
+  padding: 10px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: marqueeScroll 18s linear infinite;
+}
+
+.marquee-track .marquee-group {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding-right: 28px;
+  flex-shrink: 0;
+}
+
+.marquee-track img {
+  height: 28px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  filter: drop-shadow(0 0 6px rgba(255, 232, 74, 0.6));
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 .big-frame {
-  padding: 36px 26px 38px;
+  padding: 30px 22px 30px;
   border: 2px solid #ff7ad9;
   border-radius: 24px;
   background: rgba(8, 6, 32, 0.25);
@@ -109,164 +236,64 @@ main {
     0 0 35px #ff3dc844,
     inset 0 0 25px #b68cff33;
   backdrop-filter: blur(3px);
-  animation: fadeIn 1.6s ease;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-h1 {
-  margin: 0 0 6px;
-  color: #ffe3f7;
-  font-size: clamp(1.7rem, 6vw, 2.8rem);
-  line-height: 1.4;
-  text-shadow:
-    0 0 4px #fff,
-    0 0 10px #ff7ad9,
-    0 0 22px #ff3dc8,
-    0 0 44px #ff3dc8,
-    0 0 80px #ff3dc888,
-    0 0 6px #4de1ff66;
-  animation: neonFlicker 4.5s linear infinite;
-}
-
-@keyframes neonFlicker {
-  0%, 17%, 21%, 24%, 52%, 56%, 80%, 83%, 100% {
-    opacity: 1;
-    color: #ffe3f7;
-    text-shadow:
-      0 0 4px #fff,
-      0 0 10px #ff7ad9,
-      0 0 22px #ff3dc8,
-      0 0 44px #ff3dc8,
-      0 0 80px #ff3dc888,
-      0 0 6px #4de1ff66;
-  }
-
-  18%, 22%, 54%, 81% {
-    opacity: 0.55;
-    color: #c98ab5;
-    text-shadow:
-      0 0 2px #ff7ad966,
-      0 0 6px #ff7ad944;
-  }
-
-  19%, 23%, 55%, 82% {
-    opacity: 0.9;
-    color: #ffd0f0;
-    text-shadow:
-      0 0 3px #fff,
-      0 0 8px #ff7ad9,
-      0 0 16px #ff3dc8;
-  }
-}
-
-.tagline {
-  margin: 0 0 14px;
-  color: var(--cyan);
-  letter-spacing: 0.08em;
-  text-shadow: 0 0 10px #4de1ff99;
-}
-
-.marquee {
-  margin: 0 0 34px;
-  padding: 6px 0;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.marquee p {
-  display: inline-block;
-  margin: 0;
-  color: var(--yellow);
-  letter-spacing: 0.08em;
-  text-shadow: 0 0 10px #ffe84a66;
-  animation: scrollText 25s linear infinite;
-}
-
-@keyframes scrollText {
-  from { transform: translateX(100%); }
-  to { transform: translateX(-100%); }
-}
-
-.site-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 22px;
-  margin: 0 auto 36px;
-}
-
-.site-card {
-  --card-color: #62f7ff;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 24px 20px;
-  border: 2px solid var(--card-color); 
-  border-radius: 16px;
-  background: rgba(8, 8, 32, 0.40);
-  box-shadow: 
-    0 0 12px color-mix(in srgb, var(--card-color) 60%, transparent),
-    inset 0 0 15px color-mix(in srgb, var(--card-color) 20%, transparent);
-  backdrop-filter: blur(2px);
-  transition:
-    transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;
-}
-
-.site-card:hover {
-  transform: translateY(-6px) scale(1.02);
+.section {
+  margin-top: 25px;
+  padding: 23px 20px;
+  border: 1.5px solid #b68cffaa;
+  border-radius: 18px;
+  background: var(--panel);
   box-shadow:
-    0 0 20px var(--card-color),
-    0 0 35px color-mix(in srgb, var(--card-color) 60%, transparent);
+    0 0 12px #b68cff44,
+    inset 0 0 15px #4de1ff15;
+  backdrop-filter: blur(3px);
 }
 
-.site-card:nth-child(6n + 1) { --card-color: #62f7ff; } /* シアン */
-.site-card:nth-child(6n + 2) { --card-color: #b6ff5c; } /* ネオンライム */
-.site-card:nth-child(6n + 3) { --card-color: #b68cff; } /* パープル */
-.site-card:nth-child(6n + 4) { --card-color: #ffb85c; } /* オレンジ */
-.site-card:nth-child(6n + 5) { --card-color: #ffe84a; } /* イエロー */
-.site-card:nth-child(6n + 6) { --card-color: #ff7ad9; } /* ネオンピンク */
+.big-frame .section {
+  margin-top: 28px;
+  padding: 24px 4px 0;
+  border: none;
+  border-top: 1px dashed #b68cff77;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
 
-.site-card h3 {
-  margin: 0 0 10px;
-  color: #fff;
+.section h2 {
+  margin: 0 0 18px;
+  color: var(--cyan);
   font-size: 1.15rem;
-  line-height: 1.5;
-  text-shadow: 0 0 12px var(--card-color);
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 10px #4de1ff66;
 }
 
-.site-card p {
-  flex-grow: 1;
-  margin: 0 0 20px;
-  color: #f0eaff;
-  font-size: 0.9rem;
-  line-height: 1.7;
+.nav-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+  margin-top: 25px;
 }
 
-.card-button {
-  --btn-color: #b6ff5c;
+.big-frame .nav-buttons {
+  margin-top: 0;
+}
+
+.nav-button {
+  --btn-color: #ff65c3;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
-  padding: 12px;
+  min-height: 65px;
+  padding: 15px;
   border: 2px solid var(--btn-color);
   border-radius: 12px;
-  background: rgba(8, 8, 32, 0.75);
-  color: #ffffff;
-  font-weight: bold;
-  letter-spacing: 0.06em;
+  background: rgba(8, 8, 32, 0.65);
+  color: #f8f3ff;
   text-decoration: none;
+  font-weight: bold;
+  letter-spacing: 0.04em;
   text-shadow: 0 0 8px var(--btn-color);
   box-shadow: 
     0 0 10px color-mix(in srgb, var(--btn-color) 50%, transparent),
@@ -278,138 +305,418 @@ h1 {
     color 0.2s ease;
 }
 
-.card-button:hover,
-.card-button:focus-visible {
+.nav-button:hover,
+.nav-button:focus-visible {
   color: #070720;
-  background: var(--btn-color); 
-  transform: translateY(-4px) scale(1.04);
+  background: var(--btn-color);
+  transform: translateY(-4px) scale(1.03);
   box-shadow:
     0 0 18px var(--btn-color),
-    0 0 35px var(--btn-color);
+    0 0 32px var(--btn-color);
   outline: none;
   text-shadow: none;
 }
 
-.site-card:nth-child(6n + 1) .card-button { --btn-color: #b6ff5c; }
-.site-card:nth-child(6n + 2) .card-button { --btn-color: #b68cff; }
-.site-card:nth-child(6n + 3) .card-button { --btn-color: #ffb85c; }
-.site-card:nth-child(6n + 4) .card-button { --btn-color: #ffe84a; }
-.site-card:nth-child(6n + 5) .card-button { --btn-color: #ff7ad9; }
-.site-card:nth-child(6n + 6) .card-button { --btn-color: #62f7ff; }
+.nav-button:nth-child(1) { --btn-color: #ff65c3; }
+.nav-button:nth-child(2) { --btn-color: #b6ff5c; }
+.nav-button:nth-child(3) { --btn-color: #62f7ff; }
+.nav-button:nth-child(4) { --btn-color: #b68cff; }
 
-.back-link {
-  display: inline-block;
-  padding: 10px 20px;
-  border: 1.5px solid var(--purple);
-  border-radius: 20px;
-  color: #d8b4fe;
-  text-decoration: none;
-  background: rgba(8, 8, 32, 0.5);
-  box-shadow: 0 0 10px #b68cff44;
-  transition:
-    transform 0.2s ease,
-    color 0.2s ease,
-    background 0.2s ease,
-    box-shadow 0.2s ease;
+.sub-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin-top: 22px;
 }
 
-.back-link:hover,
-.back-link:focus-visible {
+.sub-links a {
+  color: #d8b4fe;
+  text-decoration: underline;
+  text-decoration-color: #b68cff77;
+  text-underline-offset: 5px;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.sub-links a:hover {
   color: white;
-  background: rgba(182, 140, 255, 0.3);
+  text-shadow: 0 0 8px var(--purple);
+}
+
+.small-note {
+  color: #bdb5d8;
+  font-size: 0.82rem;
+  line-height: 1.8;
+}
+
+.big-frame #visitor-counter {
+  margin-top: 32px;
+}
+
+#visitor-counter {
+  width: fit-content;
+  max-width: 100%;
+  margin: 24px auto 0;
+  padding: 15px 18px;
+  border: 1.5px solid #b68cffaa;
+  border-radius: 15px;
+  background: rgba(8, 6, 32, 0.45);
+  box-shadow:
+    0 0 12px #b68cff44,
+    0 0 24px #4de1ff12,
+    inset 0 0 15px #4de1ff0d;
+}
+
+.visitor-counter-label {
+  margin-bottom: 11px;
+  color: #d8b4fe;
+  font-size: 0.72rem;
+  letter-spacing: 0.17em;
+  text-shadow: 0 0 8px var(--purple);
+}
+
+.visitor-counter-digits {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.visitor-counter-digit {
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 39px;
+  border: 1px solid var(--digit-color);
+  border-radius: 5px;
+  background: #070720;
+  color: var(--digit-color);
+  font-family: monospace;
+  font-size: 1.3rem;
+  font-weight: bold;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 8px var(--digit-color);
+  box-shadow: 0 0 7px var(--digit-color);
+}
+
+.visitor-counter-caption {
+  margin-top: 10px;
+  color: #c7c4d8;
+  font-size: 0.65rem;
+  letter-spacing: 0.07em;
+}
+
+#visitor-counter-status {
+  margin-top: 8px;
+  color: #8b89a1;
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+}
+
+#guestbook-form {
+  display: grid;
+  gap: 12px;
+}
+
+#guestbook-name,
+#guestbook-message {
+  width: 100%;
+  padding: 12px 13px;
+  border: 1.5px solid #b68cffaa;
+  border-radius: 9px;
+  background: rgba(8, 8, 32, 0.60);
+  color: #fff;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#guestbook-name:focus,
+#guestbook-message:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 12px #4de1ff66;
+}
+
+#guestbook-message {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.action-button {
+  padding: 10px 16px;
+  border: 1.5px solid var(--pink);
+  border-radius: 9px;
+  background: rgba(22, 11, 43, 0.7);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0 8px #ff7ad944;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.action-button:hover,
+.action-button:focus-visible {
+  box-shadow: 0 0 14px #ff7ad9aa;
   transform: translateY(-2px);
-  box-shadow: 0 0 15px var(--purple);
   outline: none;
 }
 
-@media (max-width: 700px) {
+.action-button.secondary {
+  border-color: #8b89a1;
+  color: #d9d3e9;
+  font-size: 0.82rem;
+  box-shadow: none;
+}
+
+.guestbook-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.guestbook-entry {
+  padding: 13px;
+  border-left: 3px solid var(--purple);
+  border-radius: 5px;
+  background: rgba(182, 140, 255, 0.08);
+  overflow-wrap: anywhere;
+}
+
+.guestbook-entry-header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+  color: var(--cyan);
+  font-size: 0.82rem;
+}
+
+.guestbook-entry-message {
+  margin: 0;
+  color: #f0eaff;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.guestbook-entry .action-button {
+  margin-top: 10px;
+}
+
+#guestbook-empty {
+  color: #a6a0bc;
+  font-size: 0.9rem;
+}
+
+.history {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.history li {
+  padding: 10px 0;
+  border-bottom: 1px dashed #b68cff44;
+  color: #e3dafa;
+  line-height: 1.7;
+}
+
+.history time {
+  display: inline-block;
+  min-width: 100px;
+  color: var(--yellow);
+  font-family: monospace;
+}
+
+footer {
+  position: relative;
+  z-index: 2;
+  padding: 20px 12px 35px;
+  color: #918aa9;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 600px) {
   main {
     padding-top: 25px;
   }
 
   .big-frame {
-    padding: 26px 14px 28px;
+    padding: 22px 14px 24px;
   }
 
-  .site-grid {
+  .section {
+    padding: 19px 14px;
+  }
+
+  .big-frame .section {
+    padding: 20px 0 0;
+  }
+
+  .nav-buttons {
     grid-template-columns: 1fr;
-    gap: 16px;
   }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  .nav-button {
+    min-height: 54px;
+  }
+
+  #visitor-counter {
+    padding: 12px 14px;
+  }
+
+  .visitor-counter-digit {
+    width: 27px;
+    height: 35px;
+    font-size: 1.15rem;
+  }
+
+  .visitor-counter-digits {
+    gap: 4px;
+  }
+
+  .history time {
+    min-width: 0;
+    margin-right: 8px;
   }
 }
 </style>
 </head>
 
 <body>
-<div id="background-image" aria-hidden="true"></div>
 <div id="mycelium" aria-hidden="true"></div>
 <div id="stars" aria-hidden="true"></div>
 <canvas id="spore-canvas" aria-hidden="true"></canvas>
 
 <main>
-  <section class="big-frame">
-    <h1>🍄 ヽ( ´ᯅ` )ノ 🍄</h1>
-    <p class="tagline">💫 ヽ( ´ᯅ` )ノ 💫</p>
+  <section class="big-frame" aria-label="メインコンテンツ">
 
-    <div class="marquee">
-      <p>🍄ページを開いた意味は、あなたにしかわからない 🍄</p>
+  <header class="hero">
+    <h1>
+      <img src="files/title_kinoko.png" alt="キノコタイトル" class="title-img">
+    </h1>
+    <p class="tagline">( ´ᯅ` )</p>
+
+    <p class="intro">
+      きのこと胞子の漂う場所へようこそ。<br>
+      ゆっくりしていってください。
+    </p>
+  </header>
+
+  <div class="marquee" aria-label="飾りライン">
+    <div class="marquee-track" aria-hidden="true">
+      <div class="marquee-group">
+        <img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt="">
+      </div>
+      <div class="marquee-group">
+        <img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt=""><img src="files/mini_kinoko.png" alt="">
+      </div>
+    </div>
+  </div>
+
+    <nav class="nav-buttons" aria-label="メインメニュー">
+      <a class="nav-button" href="morires_into.html">🍄 森の小さなレストラン</a>
+      <a class="nav-button" href="baiyo.html">🧫 培養室</a>
+      <a class="nav-button"
+         href="https://megakirara.github.io/OEKAKI/"
+         target="_blank" rel="noopener noreferrer">🎨 お絵描き</a>
+      <a class="nav-button" href="hello.html">🍄 HELLO</a>
+    </nav>
+
+    <div class="sub-links">
+      <a href="profile.html">プロフィール</a>
+      <a href="#guestbook">ひとこと掲示板</a>
+      <a href="#updates">更新履歴</a>
     </div>
 
-    <div class="site-grid">
+    <section class="section" id="guestbook">
+      <h2>✦ GUESTBOOK ✦</h2>
+      <p class="small-note">
+        🍄‍🟫 ひとことどうぞ 🍄<br>
+        ※ 投稿内容はこのページを開いている間だけ保持されます。
+      </p>
 
-      <div class="site-card">
-        <h3>チョコボール先輩(PC推奨)</h3>
-        <p>…何を見せられているんだろう</p>
-        <a class="card-button" href="https://megakirara.github.io/CHOCO/">🍄 のぞく</a>
-      </div>
+      <form id="guestbook-form">
+        <input
+          id="guestbook-name"
+          name="name"
+          type="text"
+          maxlength="40"
+          placeholder="おなまえ（省略可）"
+          autocomplete="nickname"
+        >
 
-      <div class="site-card">
-        <h3>ステルス卓上計算機🌸</h3>
-        <p>Xに投稿する為だけに存在する意味のないページ。</p>
-        <a class="card-button" href="https://megakirara.github.io/-STTK/">🍄 のぞく</a>
-      </div>
+        <textarea
+          id="guestbook-message"
+          name="message"
+          maxlength="500"
+          placeholder="あなたの言葉を胞子に乗せて……"
+          required
+        ></textarea>
 
-      <div class="site-card">
-        <h3>金運が上がるサイト</h3>
-        <p>（ 👁️_ゝ👁️）ノ💞✨</p>
-        <a class="card-button" href="https://megakirara.github.io/GOLD/">🍄 のぞく</a>
-      </div>
+        <button class="action-button" type="submit">
+          🍄‍🟫 いってらっしゃい
+        </button>
+      </form>
 
-      <div class="site-card">
-        <h3>ゴミ虫と彼岸花🐞</h3>
-        <p>…何をやらされているんだろう</p>
-        <a class="card-button" href="https://megakirara.github.io/5364/">🍄 のぞく</a>
-      </div>
+      <div class="guestbook-list" id="guestbook-list" aria-live="polite"></div>
 
-      <div class="site-card">
-        <h3>鼻くそわっしょい</h3>
-        <p>(☝︎ ՞ਊ ՞)☝︎〜〜❄️</p>
-        <a class="card-button" href="https://megakirara.github.io/8793/">🍄 のぞく</a>
-      </div>
+      <p id="guestbook-empty">まだ何も生えてません。</p>
 
-      <div class="site-card">
-        <h3>眉モーメント集</h3>
-        <p>（ 👁️_ゝ👁️）ぶるっ</p>
-        <a class="card-button" href="https://megakirara.github.io/88/">🍄 のぞく</a>
-      </div>
+      <button
+        class="action-button secondary"
+        id="guestbook-clear"
+        type="button"
+      >
+        胞子を一掃する
+      </button>
+    </section>
 
-    </div>
+    <section class="section" id="updates">
+      <h2>✦ UPDATE LOG ✦</h2>
 
-    <div>
-      <a href="index.html" class="back-link">🍄 帰る</a>
-    </div>
+      <ul class="history">
+        <li>
+          <time datetime="2026-10-20">2026.10.20</time>
+          🍄 ほぼ全改装に伴い、履歴ﾘｾｯﾂ( ´〜` )🍘
+        </li>
+      </ul>
+    </section>
+
+      <section id="visitor-counter" aria-label="累計アクセスカウンター">
+        <div class="visitor-counter-label">🍄 ACCESS LOG 🍄</div>
+
+        <div
+          id="visitor-counter-digits"
+          class="visitor-counter-digits"
+          role="img"
+          aria-label="アクセス数を読み込み中"
+        >
+          <span class="visitor-counter-digit" style="--digit-color:#ff65c3">0</span>
+          <span class="visitor-counter-digit" style="--digit-color:#b6ff5c">0</span>
+          <span class="visitor-counter-digit" style="--digit-color:#62f7ff">0</span>
+          <span class="visitor-counter-digit" style="--digit-color:#b68cff">0</span>
+          <span class="visitor-counter-digit" style="--digit-color:#ffb85c">0</span>
+          <span class="visitor-counter-digit" style="--digit-color:#ff65c3">0</span>
+        </div>
+
+        <div class="visitor-counter-caption">
+          YOU ARE VISITOR No.
+          <span id="visitor-counter-number">------</span>
+        </div>
+
+        <div id="visitor-counter-status" role="status" aria-live="polite">
+          CONNECTING TO THE SPORE NETWORK...
+        </div>
+      </section>
+
   </section>
 </main>
+
+<footer>
+  <p>🍄 YUKKURI SHITE ITTENE 🍄</p>
+  <p>© 2026 KINOKO no ZONE</p>
+</footer>
 
 <script>
 "use strict";
@@ -420,15 +727,14 @@ h1 {
 
   if (!ctx) return;
 
-  const reduceMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
+  const reduceMotion = false;
 
   let width = 0;
   let height = 0;
   let spores = [];
   let mouseX = 0;
   let mouseY = 0;
+  let animationFrame = null;
 
   const colors = [
     "#ff7ad9",
@@ -525,7 +831,7 @@ h1 {
     ctx.globalAlpha = 1;
     ctx.shadowBlur = 0;
 
-    requestAnimationFrame(animate);
+    animationFrame = requestAnimationFrame(animate);
   }
 
   window.addEventListener("resize", resize, { passive: true });
@@ -580,10 +886,6 @@ h1 {
 })();
 
 document.addEventListener("click", (event) => {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    return;
-  }
-
   const colors = ["#ff7ad9", "#4de1ff", "#ffe84a", "#b68cff"];
 
   for (let i = 0; i < 6; i++) {
@@ -618,9 +920,86 @@ document.addEventListener("click", (event) => {
 });
 
 (() => {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const form = document.getElementById("guestbook-form");
+  const nameInput = document.getElementById("guestbook-name");
+  const messageInput = document.getElementById("guestbook-message");
+  const list = document.getElementById("guestbook-list");
+  const empty = document.getElementById("guestbook-empty");
+  const clearButton = document.getElementById("guestbook-clear");
 
-  const targets = document.querySelectorAll("h1, .card-button");
+  let entries = [];
+
+  function renderGuestbook() {
+    list.replaceChildren();
+    empty.hidden = entries.length > 0;
+
+    entries.forEach((entry) => {
+      const article = document.createElement("article");
+      article.className = "guestbook-entry";
+
+      const header = document.createElement("div");
+      header.className = "guestbook-entry-header";
+
+      const author = document.createElement("strong");
+      author.textContent = entry.name || "ななしの胞子";
+
+      const date = document.createElement("time");
+      date.textContent = entry.date;
+
+      const message = document.createElement("p");
+      message.className = "guestbook-entry-message";
+      message.textContent = entry.message;
+
+      const removeButton = document.createElement("button");
+      removeButton.type = "button";
+      removeButton.className = "action-button secondary";
+      removeButton.textContent = "この投稿を削除";
+      removeButton.addEventListener("click", () => {
+        entries = entries.filter((item) => item.id !== entry.id);
+        renderGuestbook();
+      });
+
+      header.append(author, date);
+      article.append(header, message, removeButton);
+      list.appendChild(article);
+    });
+  }
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const message = messageInput.value.trim();
+
+    if (!message) {
+      messageInput.focus();
+      return;
+    }
+
+    entries.unshift({
+      id: Date.now() + Math.random(),
+      name: nameInput.value.trim().slice(0, 40),
+      message: message.slice(0, 500),
+      date: new Date().toLocaleString("ja-JP")
+    });
+
+    messageInput.value = "";
+    renderGuestbook();
+  });
+
+  clearButton.addEventListener("click", () => {
+    if (!entries.length) return;
+
+    if (window.confirm("掲示板の投稿をすべて消しますか？")) {
+      entries = [];
+      renderGuestbook();
+    }
+  });
+
+  renderGuestbook();
+})();
+
+window.addEventListener("DOMContentLoaded", () => {
+  const targets = document.querySelectorAll(".nav-button, #guestbook-form .action-button");
   const colors = ["#ff65c3", "#b6ff5c", "#62f7ff", "#b68cff", "#ffb85c", "#ffe84a"];
   const marks = ["✦", "✧", "✨"];
 
@@ -630,14 +1009,17 @@ document.addEventListener("click", (event) => {
 
     spark.textContent = marks[Math.floor(Math.random() * marks.length)];
 
+    const sparkLeft = rect.left + window.scrollX + Math.random() * rect.width;
+    const sparkTop = rect.top + window.scrollY + Math.random() * rect.height;
+
     Object.assign(spark.style, {
-      position: "fixed",
-      left: rect.left + Math.random() * rect.width + "px",
-      top: rect.top + Math.random() * rect.height + "px",
-      zIndex: "99",
+      position: "absolute",
+      left: sparkLeft + "px",
+      top: sparkTop + "px",
+      zIndex: "9999",
       pointerEvents: "none",
       color: colors[Math.floor(Math.random() * colors.length)],
-      fontSize: 9 + Math.random() * 10 + "px",
+      fontSize: (9 + Math.random() * 9) + "px",
       textShadow: "0 0 8px currentColor",
       opacity: "1",
       transition: "transform 750ms ease-out, opacity 750ms ease-out"
@@ -667,11 +1049,102 @@ document.addEventListener("click", (event) => {
     });
 
     element.addEventListener("mouseleave", () => {
-      window.clearInterval(timer);
-      timer = null;
+      if (timer) {
+        window.clearInterval(timer);
+        timer = null;
+      }
     });
   });
+});
+
+/* ★ アクセスカウンター ★ */
+(function initVisitorCounter() {
+  const digits = document.getElementById("visitor-counter-digits");
+  const number = document.getElementById("visitor-counter-number");
+  const status = document.getElementById("visitor-counter-status");
+
+  const colors = [
+    "#ff65c3",
+    "#b6ff5c",
+    "#62f7ff",
+    "#b68cff",
+    "#ffb85c",
+    "#ff65c3"
+  ];
+
+  try {
+    let count = Number(localStorage.getItem("spore_zone_visit_count") || "1024");
+    
+    count += 1;
+    localStorage.setItem("spore_zone_visit_count", String(count));
+
+    const displayCount = String(count).padStart(6, "0");
+    digits.replaceChildren();
+
+    [...displayCount].forEach((digit, index) => {
+      const span = document.createElement("span");
+      span.className = "visitor-counter-digit";
+      span.style.setProperty(
+        "--digit-color",
+        colors[index % colors.length]
+      );
+      span.textContent = digit;
+      digits.appendChild(span);
+    });
+
+    digits.setAttribute(
+      "aria-label",
+      `累計アクセス数 ${count.toLocaleString("ja-JP")} 回`
+    );
+
+    number.textContent = count.toLocaleString("ja-JP");
+    status.textContent = "✦ SPORES DETECTED ✦";
+
+  } catch (error) {
+    console.error("アクセスカウンターの初期化に失敗しました:", error);
+    number.textContent = "----";
+    status.textContent = "COUNTER ACTIVE";
+  }
+})();
+
+(() => {
+  const marquee = document.querySelector(".marquee");
+  const track = document.querySelector(".marquee-track");
+
+  if (!marquee || !track) return;
+
+  const baseDuration = 18;
+
+  function fillMarquee() {
+    const groups = track.querySelectorAll(".marquee-group");
+    if (groups.length < 2) return;
+
+    groups.forEach((group, index) => {
+      if (index >= 2) group.remove();
+    });
+
+    const first = track.querySelector(".marquee-group");
+    const groupWidth = first.getBoundingClientRect().width;
+
+    if (!groupWidth) return;
+
+    let total = 2;
+    while ((groupWidth * total) / 2 < marquee.clientWidth && total < 40) {
+      total += 2;
+    }
+
+    for (let i = 2; i < total; i++) {
+      track.appendChild(first.cloneNode(true));
+    }
+
+
+    track.style.animationDuration = baseDuration * (total / 2) + "s";
+  }
+
+  window.addEventListener("load", fillMarquee);
+  window.addEventListener("resize", fillMarquee, { passive: true });
 })();
 </script>
+
 </body>
 </html>
