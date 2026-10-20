@@ -13,7 +13,6 @@
   --cyan: #4de1ff;
   --yellow: #ffe84a;
   --purple: #b68cff;
-  --unicorn-gradient: linear-gradient(135deg, #ff7ad9, #4de1ff, #b68cff, #ffe84a, #ff7ad9);
 }
 
 * {
@@ -258,26 +257,48 @@ a, button, .cloud {
   100% { background-position: 100% 50%; }
 }
 
+/* 土星（クラス .cloud を付与） */
 .cloud {
   display: block;
-  width: 200px;
-  height: 75px;
+  max-width: 220px;
+  height: auto;
+  max-height: 120px;
   margin: 0 auto 16px;
-  background: var(--unicorn-gradient);
-  background-size: 200% 200%;
-  border-radius: 50% / 100%;
-  filter: drop-shadow(0 0 12px rgba(255, 122, 217, 0.9));
-  box-shadow: 20px 10px 15px rgba(77, 225, 255, 0.3);
+  object-fit: contain;
   cursor: pointer;
   z-index: 20;
   animation:
     floatCloud 5s ease-in-out infinite,
-    rainbowShift 10s linear infinite;
+    ultraSoftRainbowNeon 80s infinite ease-in-out;
   transition: transform 0.1s ease;
 }
 
 .cloud:active {
   transform: scale(0.95);
+}
+
+/* 80秒周期のぼわぁ〜ん滑らかネオン変化 */
+@keyframes ultraSoftRainbowNeon {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px #fff) drop-shadow(0 0 18px #ff7ad9) drop-shadow(0 0 32px #ff3dc8);
+    opacity: 0.95;
+  }
+  20% {
+    filter: drop-shadow(0 0 8px #fff) drop-shadow(0 0 18px #4de1ff) drop-shadow(0 0 32px #00eaff);
+    opacity: 0.9;
+  }
+  40% {
+    filter: drop-shadow(0 0 8px #fff) drop-shadow(0 0 18px #b6ff5c) drop-shadow(0 0 32px #82ff28);
+    opacity: 0.95;
+  }
+  60% {
+    filter: drop-shadow(0 0 8px #fff) drop-shadow(0 0 18px #ffe84a) drop-shadow(0 0 32px #ffcc00);
+    opacity: 0.9;
+  }
+  80% {
+    filter: drop-shadow(0 0 8px #fff) drop-shadow(0 0 18px #b68cff) drop-shadow(0 0 32px #924dff);
+    opacity: 0.95;
+  }
 }
 
 @keyframes floatCloud {
@@ -348,8 +369,8 @@ a, button, .cloud {
   }
 
   .cloud {
-    width: 160px;
-    height: 60px;
+    max-width: 170px;
+    max-height: 90px;
   }
 
   #summon-log {
@@ -390,7 +411,7 @@ a, button, .cloud {
 <canvas id="spore-canvas" aria-hidden="true"></canvas>
 
 <div class="profile-card">
-  <div class="cloud"></div>
+  <img src="files/dosei.png" alt="土星" class="cloud">
   <a href="index.html" class="home-link"><h1>🪐( ´ᯅ` )🌎</h1></a>
   <p><span class="profile-label">名前：</span>にーとの輝星（まゆげちゃん）</p>
   <p><span class="profile-label">出自：</span>🪐✖️🌎</p>
@@ -409,10 +430,11 @@ const reduceMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)"
 ).matches;
 
+// 背景の胞子パーティクルアニメーション
 (() => {
   const canvas = document.getElementById("spore-canvas");
+  if (!canvas) return;
   const ctx = canvas.getContext("2d");
-
   if (!ctx) return;
 
   let width = 0;
@@ -533,8 +555,10 @@ const reduceMotion = window.matchMedia(
   }
 })();
 
+// 星の配置
 (() => {
   const container = document.getElementById("stars");
+  if (!container) return;
   const fragment = document.createDocumentFragment();
 
   for (let i = 0; i < 50; i++) {
@@ -570,6 +594,7 @@ const reduceMotion = window.matchMedia(
   container.appendChild(fragment);
 })();
 
+// クリック時のきらめきエフェクト
 document.addEventListener("click", (event) => {
   if (reduceMotion) return;
 
@@ -598,7 +623,7 @@ document.addEventListener("click", (event) => {
 
     requestAnimationFrame(() => {
       spark.style.transform =
-        `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px)`;
+        `translate(${Math.cos(angle) * distance}px,${Math.sin(angle) * distance}px)`;
       spark.style.opacity = "0";
     });
 
@@ -606,6 +631,7 @@ document.addEventListener("click", (event) => {
   }
 });
 
+// オンマウスのキラキラ
 (() => {
   if (reduceMotion) return;
 
@@ -656,17 +682,22 @@ document.addEventListener("click", (event) => {
     });
 
     element.addEventListener("mouseleave", () => {
-      window.clearInterval(timer);
-      timer = null;
+      if (timer) {
+        window.clearInterval(timer);
+        timer = null;
+      }
     });
   });
 })();
 
+// パララックス＆スポットライト
 (() => {
   const BG_EMOJIS = ["🪐", "💫", "🌎"];
 
   const parallaxBg = document.getElementById("parallax-bg");
   const spotlight = document.getElementById("touch-spotlight");
+  if (!parallaxBg || !spotlight) return;
+
   const fragment = document.createDocumentFragment();
 
   const PARTICLE_COUNT = 60;
@@ -694,7 +725,7 @@ document.addEventListener("click", (event) => {
     p.className = "brain-particle";
     p.textContent = BG_EMOJIS[count % BG_EMOJIS.length];
     p.style.cssText =
-      `left:${x}%;top:${y}%;--dur:${7 + Math.random() * 8}s;--delay:${Math.random() * 5}s`;
+      `left:${x}\%;top:${y}%;--dur:${7 + Math.random() * 8}s;--delay:${Math.random() * 5}s`;
 
     fragment.appendChild(p);
     count++;
@@ -763,6 +794,7 @@ document.addEventListener("click", (event) => {
   });
 })();
 
+// 土星クリックの召喚機能
 (() => {
   const summons = [
     { emoji: "🍺", poems: ["とりあえず飲めよ（ ´_ゝ`）。", "ほら、冷えてんだからさァ（ ´_ゝ`）", "冷凍庫に缶入れてんの忘れたら爆発したんだけど（ ；_ゝ； ）。"] },
@@ -773,6 +805,7 @@ document.addEventListener("click", (event) => {
 
   const cloud = document.querySelector(".cloud");
   const summonLog = document.getElementById("summon-log");
+  if (!cloud || !summonLog) return;
 
   function addSummonLog(text) {
     const line = document.createElement("div");
@@ -798,19 +831,23 @@ document.addEventListener("click", (event) => {
     document.body.appendChild(float);
     setTimeout(() => float.remove(), 1000);
 
-    addSummonLog(`${item.emoji} ${poem}`);
+    addSummonLog(`${item.emoji}${poem}`);
   });
 })();
 
+// 誕生日カウントダウン
 function updateAge() {
+  const ageEl = document.getElementById("age-value");
+  const daysEl = document.getElementById("days-until-birthday");
+  if (!ageEl || !daysEl) return;
+
   const now = new Date();
   const thisBday = new Date(now.getFullYear(), 5, 15);
 
   let age = now.getFullYear() + 249997976;
   if (now < thisBday) age -= 1;
 
-  document.getElementById("age-value").textContent =
-    age.toLocaleString() + "歳";
+  ageEl.textContent = age.toLocaleString() + "歳";
 
   if (now > thisBday) thisBday.setFullYear(now.getFullYear() + 1);
 
@@ -820,8 +857,7 @@ function updateAge() {
   const m = Math.floor((diff % 3600000) / 60000);
   const s = Math.floor((diff % 60000) / 1000);
 
-  document.getElementById("days-until-birthday").textContent =
-    `${d}日 ${h}時間 ${m}分 ${s}秒`;
+  daysEl.textContent = `${d}日 ${h}時間 ${m}分 ${s}秒`;
 }
 
 setInterval(updateAge, 1000);
