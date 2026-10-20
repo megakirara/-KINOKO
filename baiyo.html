@@ -125,47 +125,39 @@ main {
 
 h1 {
   margin: 0 0 6px;
-  color: #ffe3f7;
-  font-size: clamp(1.7rem, 6vw, 2.8rem);
-  line-height: 1.4;
-  text-shadow:
-    0 0 4px #fff,
-    0 0 10px #ff7ad9,
-    0 0 22px #ff3dc8,
-    0 0 44px #ff3dc8,
-    0 0 80px #ff3dc888,
-    0 0 6px #4de1ff66;
-  animation: neonFlicker 4.5s linear infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@keyframes neonFlicker {
-  0%, 17%, 21%, 24%, 52%, 56%, 80%, 83%, 100% {
-    opacity: 1;
-    color: #ffe3f7;
-    text-shadow:
-      0 0 4px #fff,
-      0 0 10px #ff7ad9,
-      0 0 22px #ff3dc8,
-      0 0 44px #ff3dc8,
-      0 0 80px #ff3dc888,
-      0 0 6px #4de1ff66;
-  }
+.neon-kinoko-dosei {
+  max-width: 100%;
+  height: auto;
+  max-height: 130px;
+  object-fit: contain;
+  animation: ultraSoftRainbowNeon 80s infinite ease-in-out;
+}
 
-  18%, 22%, 54%, 81% {
-    opacity: 0.55;
-    color: #c98ab5;
-    text-shadow:
-      0 0 2px #ff7ad966,
-      0 0 6px #ff7ad944;
+@keyframes ultraSoftRainbowNeon {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px #fff) drop-shadow(0 0 18px #ff7ad9) drop-shadow(0 0 32px #ff3dc8);
+    opacity: 0.95;
   }
-
-  19%, 23%, 55%, 82% {
+  20% {
+    filter: drop-shadow(0 0 8px #fff) drop-shadow(0 0 18px #4de1ff) drop-shadow(0 0 32px #00eaff);
     opacity: 0.9;
-    color: #ffd0f0;
-    text-shadow:
-      0 0 3px #fff,
-      0 0 8px #ff7ad9,
-      0 0 16px #ff3dc8;
+  }
+  40% {
+    filter: drop-shadow(0 0 8px #fff) drop-shadow(0 0 18px #b6ff5c) drop-shadow(0 0 32px #82ff28);
+    opacity: 0.95;
+  }
+  60% {
+    filter: drop-shadow(0 0 8px #fff) drop-shadow(0 0 18px #ffe84a) drop-shadow(0 0 32px #ffcc00);
+    opacity: 0.9;
+  }
+  80% {
+    filter: drop-shadow(0 0 8px #fff) drop-shadow(0 0 18px #b68cff) drop-shadow(0 0 32px #924dff);
+    opacity: 0.95;
   }
 }
 
@@ -232,12 +224,12 @@ h1 {
     0 0 35px color-mix(in srgb, var(--card-color) 60%, transparent);
 }
 
-.site-card:nth-child(6n + 1) { --card-color: #62f7ff; } /* シアン */
-.site-card:nth-child(6n + 2) { --card-color: #b6ff5c; } /* ネオンライム */
-.site-card:nth-child(6n + 3) { --card-color: #b68cff; } /* パープル */
-.site-card:nth-child(6n + 4) { --card-color: #ffb85c; } /* オレンジ */
-.site-card:nth-child(6n + 5) { --card-color: #ffe84a; } /* イエロー */
-.site-card:nth-child(6n + 6) { --card-color: #ff7ad9; } /* ネオンピンク */
+.site-card:nth-child(6n + 1) { --card-color: #62f7ff; }
+.site-card:nth-child(6n + 2) { --card-color: #b6ff5c; }
+.site-card:nth-child(6n + 3) { --card-color: #b68cff; }
+.site-card:nth-child(6n + 4) { --card-color: #ffb85c; }
+.site-card:nth-child(6n + 5) { --card-color: #ffe84a; }
+.site-card:nth-child(6n + 6) { --card-color: #ff7ad9; }
 
 .site-card h3 {
   margin: 0 0 10px;
@@ -360,7 +352,7 @@ h1 {
 
 <main>
   <section class="big-frame">
-    <h1>🍄 ヽ( ´ᯅ` )ノ 🍄</h1>
+    <h1><img src="files/kinoko_dosei.png" alt="🍄 ヽ( ´ᯅ` )ノ 🍄" class="neon-kinoko-dosei"></h1>
     <p class="tagline">💫 ヽ( ´ᯅ` )ノ 💫</p>
 
     <div class="marquee">
@@ -611,7 +603,7 @@ document.addEventListener("click", (event) => {
 
     requestAnimationFrame(() => {
       spark.style.transform =
-        `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px)`;
+        `translate(${Math.cos(angle) * distance}px,${Math.sin(angle) * distance}px)`;
       spark.style.opacity = "0";
     });
 
@@ -633,7 +625,7 @@ document.addEventListener("click", (event) => {
     spark.textContent = marks[Math.floor(Math.random() * marks.length)];
 
     Object.assign(spark.style, {
-      position: "fixed",
+      position: "absolute",
       left: rect.left + Math.random() * rect.width + "px",
       top: rect.top + Math.random() * rect.height + "px",
       zIndex: "99",
