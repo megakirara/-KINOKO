@@ -39,6 +39,11 @@ body {
   user-select: none;
   -webkit-overflow-scrolling: touch;
   -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.15s ease-out;
+}
+
+body.saturn-flash {
+  background-color: #d3baff !important; /* めっちゃ薄い紫 */
 }
 
 a, button, .cloud {
@@ -58,6 +63,11 @@ a, button, .cloud {
   background-attachment: fixed, fixed;
   background-position: center, center;
   background-size: auto, 888px auto;
+  transition: opacity 0.15s ease-out;
+}
+
+body.saturn-flash #background-image {
+  opacity: 0.9;
 }
 
 #mycelium,
@@ -114,7 +124,7 @@ a, button, .cloud {
 }
 
 @keyframes floatParticle {
-  0%   { transform: translateY(0) rotate(0deg); opacity: 0.08; }
+  0%    { transform: translateY(0) rotate(0deg); opacity: 0.08; }
   100% { transform: translateY(-30px) rotate(15deg); opacity: 0.28; }
 }
 
@@ -257,7 +267,6 @@ a, button, .cloud {
   100% { background-position: 100% 50%; }
 }
 
-/* 土星（クラス .cloud を付与） */
 .cloud {
   display: block;
   max-width: 220px;
@@ -277,7 +286,6 @@ a, button, .cloud {
   transform: scale(0.95);
 }
 
-/* 80秒周期のぼわぁ〜ん滑らかネオン変化 */
 @keyframes ultraSoftRainbowNeon {
   0%, 100% {
     filter: drop-shadow(0 0 8px #fff) drop-shadow(0 0 18px #ff7ad9) drop-shadow(0 0 32px #ff3dc8);
@@ -430,7 +438,6 @@ const reduceMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)"
 ).matches;
 
-// 背景の胞子パーティクルアニメーション
 (() => {
   const canvas = document.getElementById("spore-canvas");
   if (!canvas) return;
@@ -555,7 +562,6 @@ const reduceMotion = window.matchMedia(
   }
 })();
 
-// 星の配置
 (() => {
   const container = document.getElementById("stars");
   if (!container) return;
@@ -594,7 +600,6 @@ const reduceMotion = window.matchMedia(
   container.appendChild(fragment);
 })();
 
-// クリック時のきらめきエフェクト
 document.addEventListener("click", (event) => {
   if (reduceMotion) return;
 
@@ -631,7 +636,6 @@ document.addEventListener("click", (event) => {
   }
 });
 
-// オンマウスのキラキラ
 (() => {
   if (reduceMotion) return;
 
@@ -690,7 +694,6 @@ document.addEventListener("click", (event) => {
   });
 })();
 
-// パララックス＆スポットライト
 (() => {
   const BG_EMOJIS = ["🪐", "💫", "🌎"];
 
@@ -794,7 +797,6 @@ document.addEventListener("click", (event) => {
   });
 })();
 
-// 土星クリックの召喚機能
 (() => {
   const summons = [
     { emoji: "🍺", poems: ["とりあえず飲めよ（ ´_ゝ`）。", "ほら、冷えてんだからさァ（ ´_ゝ`）", "冷凍庫に缶入れてんの忘れたら爆発したんだけど（ ；_ゝ； ）。"] },
@@ -814,7 +816,18 @@ document.addEventListener("click", (event) => {
     summonLog.scrollTop = summonLog.scrollHeight;
   }
 
+  let flashTimer = null;
+
   cloud.addEventListener("click", () => {
+    if (flashTimer) clearTimeout(flashTimer);
+    
+    document.body.classList.add('saturn-flash');
+    
+    flashTimer = setTimeout(() => {
+      document.body.classList.remove('saturn-flash');
+      flashTimer = null;
+    }, 250);
+
     if (Math.random() < 0.1) {
       addSummonLog("❌ 出ないこともあるんすよね（ ´_ゝ`）。");
       return;
