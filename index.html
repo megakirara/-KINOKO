@@ -322,6 +322,11 @@ h1 {
 .nav-button:nth-child(3) { --btn-color: #62f7ff; }
 .nav-button:nth-child(4) { --btn-color: #b68cff; }
 
+.nav-button.wide {
+  grid-column: 1 / -1;
+  --btn-color: #ffb85c; /* ネオンゴールド/オレンジ */
+}
+
 .sub-links {
   display: flex;
   justify-content: center;
@@ -621,6 +626,9 @@ footer {
          href="https://megakirara.github.io/OEKAKI/"
          target="_blank" rel="noopener noreferrer">🎨 お絵描き</a>
       <a class="nav-button" href="hello.html">🍄 HELLO</a>
+      <a class="nav-button wide"
+         href="https://megakirara.github.io/BLOG/"
+         target="_blank" rel="noopener noreferrer">📖 にーとの日記</a>
     </nav>
 
     <div class="sub-links">
@@ -1136,7 +1144,6 @@ window.addEventListener("DOMContentLoaded", () => {
     for (let i = 2; i < total; i++) {
       track.appendChild(first.cloneNode(true));
     }
-
 
     track.style.animationDuration = baseDuration * (total / 2) + "s";
   }
