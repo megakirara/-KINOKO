@@ -324,7 +324,7 @@ h1 {
 
 .nav-button.wide {
   grid-column: 1 / -1;
-  --btn-color: #ffb85c; /* ネオンゴールド/オレンジ */
+  --btn-color: #ffb85c;
 }
 
 .sub-links {
@@ -628,7 +628,7 @@ footer {
       <a class="nav-button" href="hello.html">🍄 HELLO</a>
       <a class="nav-button wide"
          href="https://megakirara.github.io/BLOG/"
-         target="_blank" rel="noopener noreferrer">📖 にーとの日記（準備中）</a>
+         target="_blank" rel="noopener noreferrer">📖 にーとの日記</a>
     </nav>
 
     <div class="sub-links">
@@ -682,11 +682,16 @@ footer {
 
     <section class="section" id="updates">
       <h2>✦ UPDATE LOG ✦</h2>
-
+      <ul class="history">
+        <li>
+          <time datetime="2026-10-22">2026.10.22</time>
+          🍄 「📖にーとの日記」設置( ´〜` )🍘
+        </li>
+      </ul>
       <ul class="history">
         <li>
           <time datetime="2026-10-20">2026.10.20</time>
-          🍄 ほぼ全改装に伴い、履歴ﾘｾｯﾂ( ´〜` )🍘
+          🍄 全改装したよ〜( ´〜` )🍘
         </li>
       </ul>
     </section>
@@ -1065,7 +1070,6 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-/* ★ アクセスカウンター ★ */
 (function initVisitorCounter() {
   const digits = document.getElementById("visitor-counter-digits");
   const number = document.getElementById("visitor-counter-number");
@@ -1152,6 +1156,5 @@ window.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", fillMarquee, { passive: true });
 })();
 </script>
-
 </body>
 </html>
