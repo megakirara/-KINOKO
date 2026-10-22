@@ -279,11 +279,17 @@ body.saturn-flash #background-image {
   animation:
     floatCloud 5s ease-in-out infinite,
     ultraSoftRainbowNeon 80s infinite ease-in-out;
-  transition: transform 0.1s ease;
+  transition: scale 0.1s ease;
 }
 
 .cloud:active {
-  transform: scale(0.95);
+  scale: 0.95;
+}
+
+.cloud:focus-visible {
+  outline: 2px dashed var(--cyan);
+  outline-offset: 8px;
+  border-radius: 12px;
 }
 
 @keyframes ultraSoftRainbowNeon {
@@ -419,7 +425,7 @@ body.saturn-flash #background-image {
 <canvas id="spore-canvas" aria-hidden="true"></canvas>
 
 <div class="profile-card">
-  <img src="files/dosei.png" alt="土星" class="cloud">
+  <img src="files/dosei.png" alt="土星" class="cloud" role="button" tabindex="0">
   <a href="index.html" class="home-link"><h1>🪐( ´ᯅ` )🌎</h1></a>
   <p><span class="profile-label">名前：</span>にーとの輝星（まゆげちゃん）</p>
   <p><span class="profile-label">出自：</span>🪐✖️🌎</p>
@@ -650,7 +656,7 @@ document.addEventListener("click", (event) => {
     spark.textContent = marks[Math.floor(Math.random() * marks.length)];
 
     Object.assign(spark.style, {
-      position: "absolute",
+      position: "fixed",
       left: rect.left + Math.random() * rect.width + "px",
       top: rect.top + Math.random() * rect.height + "px",
       zIndex: "99",
@@ -728,7 +734,7 @@ document.addEventListener("click", (event) => {
     p.className = "brain-particle";
     p.textContent = BG_EMOJIS[count % BG_EMOJIS.length];
     p.style.cssText =
-      `left:${x}\%;top:${y}%;--dur:${7 + Math.random() * 8}s;--delay:${Math.random() * 5}s`;
+      `left:${x}%;top:${y}%;--dur:${7 + Math.random() * 8}s;--delay:${Math.random() * 5}s`;
 
     fragment.appendChild(p);
     count++;
@@ -818,15 +824,17 @@ document.addEventListener("click", (event) => {
 
   let flashTimer = null;
 
-  cloud.addEventListener("click", () => {
-    if (flashTimer) clearTimeout(flashTimer);
-    
-    document.body.classList.add('saturn-flash');
-    
-    flashTimer = setTimeout(() => {
-      document.body.classList.remove('saturn-flash');
-      flashTimer = null;
-    }, 250);
+  function summon() {
+    if (!reduceMotion) {
+      if (flashTimer) clearTimeout(flashTimer);
+
+      document.body.classList.add("saturn-flash");
+
+      flashTimer = setTimeout(() => {
+        document.body.classList.remove("saturn-flash");
+        flashTimer = null;
+      }, 250);
+    }
 
     if (Math.random() < 0.1) {
       addSummonLog("❌ 出ないこともあるんすよね（ ´_ゝ`）。");
@@ -845,10 +853,18 @@ document.addEventListener("click", (event) => {
     setTimeout(() => float.remove(), 1000);
 
     addSummonLog(`${item.emoji}${poem}`);
+  }
+
+  cloud.addEventListener("click", summon);
+
+  cloud.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      summon();
+    }
   });
 })();
 
-// 誕生日カウントダウン
 function updateAge() {
   const ageEl = document.getElementById("age-value");
   const daysEl = document.getElementById("days-until-birthday");
