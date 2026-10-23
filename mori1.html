@@ -42,6 +42,11 @@ a {
   color: inherit;
 }
 
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
 button {
   font: inherit;
 }
@@ -363,7 +368,7 @@ h1 {
 <main>
   <section class="big-frame">
     <h1>🍣 ぶぶ漬け食べなはれ 🍝</h1>
-    <p class="lead">めじぃ‼️めじぃ‼️めじぃ‼️めじぃ‼️( Д  )</p>
+    <p class="lead">めじぃ‼️めじぃ‼️めじぃ‼️めじぃ‼️( Д )</p>
 
     <div id="log" aria-live="polite"></div>
 
@@ -378,6 +383,16 @@ h1 {
 
 <script>
 "use strict";
+
+document.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+});
+
+document.addEventListener("dragstart", (e) => {
+  if (e.target.tagName === "IMG") {
+    e.preventDefault();
+  }
+});
 
 const NEON_COLORS = ["#ff7ad9", "#4de1ff", "#ffe84a", "#b68cff"];
 

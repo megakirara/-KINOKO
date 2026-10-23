@@ -49,6 +49,11 @@ a {
   color: inherit;
 }
 
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
 button,
 input,
 textarea {
@@ -324,7 +329,7 @@ h1 {
 
 .nav-button.wide {
   grid-column: 1 / -1;
-  --btn-color: #ffb85c; /* ネオンゴールド/オレンジ */
+  --btn-color: #ffb85c;
 }
 
 .sub-links {
@@ -732,6 +737,16 @@ footer {
 
 <script>
 "use strict";
+
+document.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+});
+
+document.addEventListener("dragstart", (e) => {
+  if (e.target.tagName === "IMG") {
+    e.preventDefault();
+  }
+});
 
 (() => {
   const canvas = document.getElementById("spore-canvas");

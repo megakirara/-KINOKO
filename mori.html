@@ -36,6 +36,11 @@
       -webkit-overflow-scrolling: touch;
     }
 
+    img {
+      -webkit-user-drag: none;
+      user-select: none;
+    }
+
     #background-image {
       position: fixed;
       inset: 0;
@@ -303,6 +308,18 @@
 </div>
 
 <script>
+"use strict";
+
+document.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+});
+
+document.addEventListener("dragstart", (e) => {
+  if (e.target.tagName === "IMG") {
+    e.preventDefault();
+  }
+});
+
 const NEON_COLORS = [
   '#ff7ad9',
   '#4de1ff',

@@ -52,6 +52,12 @@ a {
   color: inherit;
 }
 
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+}
+
 #mycelium,
 #spore-canvas,
 #stars {
@@ -399,6 +405,16 @@ h1 {
 
 <script>
 "use strict";
+
+document.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+});
+
+document.addEventListener("dragstart", (e) => {
+  if (e.target.tagName === "IMG") {
+    e.preventDefault();
+  }
+});
 
 (() => {
   const canvas = document.getElementById("spore-canvas");

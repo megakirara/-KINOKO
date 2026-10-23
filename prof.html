@@ -42,6 +42,11 @@ body {
   transition: background-color 0.15s ease-out;
 }
 
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
 body.saturn-flash {
   background-color: #d3baff !important; /* めっちゃ薄い紫 */
 }
@@ -439,6 +444,16 @@ body.saturn-flash #background-image {
 
 <script>
 "use strict";
+
+document.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+});
+
+document.addEventListener("dragstart", (e) => {
+  if (e.target.tagName === "IMG") {
+    e.preventDefault();
+  }
+});
 
 const reduceMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)"
