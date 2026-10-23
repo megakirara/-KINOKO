@@ -126,7 +126,7 @@ h1 {
   align-items: center;
 }
 
-.neon-kinoko {
+.neon-hello {
   max-width: 100%;
   height: auto;
   max-height: 120px;
@@ -157,6 +157,35 @@ h1 {
   }
 }
 
+.dosei-container {
+  margin: 32px auto 8px;
+  display: inline-block;
+  cursor: pointer;
+  animation: floatDosei 4s ease-in-out infinite alternate;
+  transition: transform 0.3s ease;
+}
+
+.dosei-container:hover {
+  transform: scale(1.05);
+}
+
+@keyframes floatDosei {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-8px);
+  }
+}
+
+.neon-dosei {
+  max-width: 100%;
+  height: auto;
+  max-height: 90px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px #ff7ad9) drop-shadow(0 0 20px #4de1ff);
+}
+
 .message {
   margin: 24px auto;
   color: #e7dcff;
@@ -164,54 +193,15 @@ h1 {
   font-size: 1rem;
 }
 
-.buttons {
-  display: grid;
-  gap: 13px;
-  width: min(320px, 100%);
-  margin: 0 auto;
+#flash-overlay {
+  position: fixed;
+  inset: 0;
+  background: #ffffff;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 99999;
+  transition: opacity 0.5s ease-in-out;
 }
-
-.nav-button {
-  --btn-color: #54c0ff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 58px;
-  padding: 14px;
-  border: 2px solid var(--btn-color);
-  border-radius: 12px;
-  background: rgba(8, 8, 32, 0.65);
-  color: #f8f3ff;
-  text-decoration: none;
-  font-weight: bold;
-  letter-spacing: 0.04em;
-  text-shadow: 0 0 8px var(--btn-color);
-  box-shadow: 
-    0 0 10px color-mix(in srgb, var(--btn-color) 50%, transparent),
-    inset 0 0 8px color-mix(in srgb, var(--btn-color) 25%, transparent);
-  transition:
-    transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-    box-shadow 0.2s ease,
-    background 0.2s ease,
-    color 0.2s ease;
-}
-
-.nav-button:hover,
-.nav-button:focus-visible {
-  color: #070720;
-  background: var(--btn-color);
-  transform: translateY(-4px) scale(1.03);
-  box-shadow:
-    0 0 18px var(--btn-color),
-    0 0 32px var(--btn-color);
-  outline: none;
-  text-shadow: none;
-}
-
-.nav-button:nth-child(1) { --btn-color: #62f7ff; }
-.nav-button:nth-child(2) { --btn-color: #b6ff5c; }
-.nav-button:nth-child(3) { --btn-color: #62f7ff; }
-.nav-button:nth-child(4) { --btn-color: #b68cff; }
 
 @media (max-width: 600px) {
   main {
@@ -222,8 +212,12 @@ h1 {
     padding: 26px 16px 28px;
   }
   
-  .neon-kinoko {
+  .neon-hello {
     max-height: 90px;
+  }
+
+  .neon-dosei {
+    max-height: 70px;
   }
 }
 
@@ -245,10 +239,11 @@ h1 {
 <div id="mycelium" aria-hidden="true"></div>
 <div id="stars" aria-hidden="true"></div>
 <canvas id="spore-canvas" aria-hidden="true"></canvas>
+<div id="flash-overlay"></div>
 
 <main>
   <section class="big-frame">
-    <h1><img src="files/hello.png" alt="( ´ᯅ` )" class="neon-kinoko"></h1>
+    <h1><a href="https://megakirara.github.io/-KINOKO/"><img src="files/hello.png" alt="( ´ᯅ` )" class="neon-hello"></a></h1>
 
     <p class="message">
       ようこそ、きのこの庭へ。<br>
@@ -261,10 +256,9 @@ h1 {
       たまに新しいのが生えます🍄
     </p>
 
-    <nav class="buttons" aria-label="メニュー">
-      <a class="nav-button" href="index.html">🍄 帰る</a>
-      <a class="nav-button" href="profile.html">( ´ᯅ` )</a>
-    </nav>
+    <div class="dosei-container" id="dosei-btn">
+      <img src="files/dosei.png" alt="( ´ᯅ` )" class="neon-dosei">
+    </div>
   </section>
 </main>
 
@@ -477,7 +471,7 @@ document.addEventListener("click", (event) => {
 (() => {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  const targets = document.querySelectorAll("h1, .nav-button");
+  const targets = document.querySelectorAll(".neon-hello, .dosei-container");
   const colors = ["#ff65c3", "#b6ff5c", "#62f7ff", "#b68cff", "#ffb85c", "#ffe84a"];
   const marks = ["✦", "✧", "✨"];
 
@@ -534,6 +528,19 @@ document.addEventListener("click", (event) => {
     });
   });
 })();
+
+document.getElementById("dosei-btn").addEventListener("click", () => {
+  const container = document.getElementById("dosei-btn");
+  const overlay = document.getElementById("flash-overlay");
+
+  container.style.transition = "transform 0.4s ease-in";
+  container.style.transform = "scale(1.8)";
+  overlay.style.opacity = "0.4";
+
+  window.setTimeout(() => {
+    window.location.href = "prof.html";
+  }, 450);
+});
 </script>
 </body>
 </html>
