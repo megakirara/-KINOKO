@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#070720">
+<title>🍣森の小さなレストラン🍣</title>
+
+<style>
+:root {
+  --bg: #070720;
+  --pink: #ff7ad9;
+  --cyan: #4de1ff;
+  --yellow: #ffe84a;
+  --purple: #b68cff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: #f8edff;
+  background-color: var(--bg);
+  font-family:
+    "Hiragino Kaku Gothic ProN",
+    "Yu Gothic",
+    Meiryo,
+    sans-serif;
+  text-align: center;
+  position: relative;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+}
+
+#background-image {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(7, 7, 32, 0.30), rgba(7, 7, 32, 0.40)),
+    url("files/neon_back.jpg");
+  background-repeat: no-repeat, repeat;
+  background-attachment: fixed, fixed;
+  background-position: center, center;
+  background-size: auto, 1111px auto;
+}
+
+#mycelium,
+#spore-canvas,
+#stars {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+#mycelium {
+  z-index: 0;
+  opacity: 0.3;
+  background:
+    radial-gradient(ellipse at 15% 25%, #642cff33, transparent 45%),
+    radial-gradient(ellipse at 85% 65%, #ff36bd22, transparent 45%),
+    radial-gradient(ellipse at 50% 90%, #00eaff1a, transparent 40%);
+  animation: myceliumGlow 9s ease-in-out infinite alternate;
+}
+
+#spore-canvas {
+  z-index: 1;
+}
+
+#stars {
+  z-index: 1;
+}
+
+@keyframes myceliumGlow {
+  from { opacity: 0.18; }
+  to { opacity: 0.48; }
+}
+
+main {
+  position: relative;
+  z-index: 10;
+  width: min(600px, 92%);
+  margin: 0 auto;
+  padding: 45px 0 65px;
+}
+
+.big-frame {
+  padding: 36px 24px 38px;
+  border: 2px solid #ff7ad9;
+  border-radius: 24px;
+  background: rgba(8, 6, 32, 0.25);
+  box-shadow:
+    0 0 15px #ff7ad988,
+    0 0 35px #ff3dc844,
+    inset 0 0 25px #b68cff33;
+  backdrop-filter: blur(3px);
+  animation: fadeIn 1.6s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1 {
+  margin: 0 0 12px;
+  color: #ffe3f7;
+  font-size: clamp(1.6rem, 6vw, 2.6rem);
+  line-height: 1.4;
+  text-shadow:
+    0 0 4px #fff,
+    0 0 10px #ff7ad9,
+    0 0 22px #ff3dc8,
+    0 0 44px #ff3dc8,
+    0 0 80px #ff3dc888,
+    0 0 6px #4de1ff66;
+  animation: neonFlicker 4.5s linear infinite;
+}
+
+@keyframes neonFlicker {
+  0%, 17%, 21%, 24%, 52%, 56%, 80%, 83%, 100% {
+    opacity: 1;
+    color: #ffe3f7;
+    text-shadow:
+      0 0 4px #fff,
+      0 0 10px #ff7ad9,
+      0 0 22px #ff3dc8,
+      0 0 44px #ff3dc8,
+      0 0 80px #ff3dc888,
+      0 0 6px #4de1ff66;
+  }
+
+  18%, 22%, 54%, 81% {
+    opacity: 0.55;
+    color: #c98ab5;
+    text-shadow:
+      0 0 2px #ff7ad966,
+      0 0 6px #ff7ad944;
+  }
+
+  19%, 23%, 55%, 82% {
+    opacity: 0.9;
+    color: #ffd0f0;
+    text-shadow:
+      0 0 3px #fff,
+      0 0 8px #ff7ad9,
+      0 0 16px #ff3dc8;
+  }
+}
+
+.lead {
+  margin: 0 0 8px;
+  color: var(--yellow);
+  line-height: 1.8;
+  text-shadow: 0 0 10px #ffe84a66;
+}
+
+#log {
+  width: 100%;
+  height: 200px;
+  margin: 20px auto 24px;
+  padding: 15px;
+  overflow-y: auto;
+  border: 2px solid #b6ff5c;
+  border-radius: 16px;
+  background: rgba(8, 8, 32, 0.55);
+  color: #e3dafa;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  text-align: left;
+  box-shadow:
+    0 0 12px rgba(182, 255, 92, 0.4),
+    inset 0 0 10px rgba(182, 255, 92, 0.2);
+  backdrop-filter: blur(2px);
+}
+
+#log div {
+  padding: 4px 0;
+}
+
+.btn-wrap {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 13px;
+}
+
+.summon-btn {
+  --btn-color: #b68cff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 58px;
+  padding: 14px 24px;
+  border: 2px solid var(--btn-color);
+  border-radius: 12px;
+  background: rgba(8, 8, 32, 0.65);
+  color: #f8f3ff;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  text-shadow: 0 0 8px var(--btn-color);
+  box-shadow: 
+    0 0 10px color-mix(in srgb, var(--btn-color) 50%, transparent),
+    inset 0 0 8px color-mix(in srgb, var(--btn-color) 25%, transparent);
+  transition:
+    transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.home-btn {
+  --btn-color: #62f7ff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 58px;
+  padding: 14px 24px;
+  border: 2px solid var(--btn-color);
+  border-radius: 12px;
+  background: rgba(8, 8, 32, 0.65);
+  color: #f8f3ff;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  text-shadow: 0 0 8px var(--btn-color);
+  box-shadow: 
+    0 0 10px color-mix(in srgb, var(--btn-color) 50%, transparent),
+    inset 0 0 8px color-mix(in srgb, var(--btn-color) 25%, transparent);
+  transition:
+    transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.summon-btn:hover,
+.summon-btn:focus-visible,
+.home-btn:hover,
+.home-btn:focus-visible {
+  color: #070720;
+  background: var(--btn-color);
+  transform: translateY(-4px) scale(1.03);
+  box-shadow:
+    0 0 18px var(--btn-color),
+    0 0 32px var(--btn-color);
+  outline: none;
+  text-shadow: none;
+}
+
+.floating-food {
+  position: fixed;
+  pointer-events: none;
+  z-index: 100;
+  text-shadow: 0 0 15px var(--pink);
+}
+
+.summon-anim {
+  font-size: 6rem;
+  animation: floatUp 1.6s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-150px) rotate(20deg); opacity: 0; }
+}
+
+.bomb-anim {
+  animation: floatBomb 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes floatBomb {
+  0% { transform: translateY(-20vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+}
+
+.sushi-particle {
+  position: fixed;
+  font-size: 2rem;
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 1;
+}
+
+#darkOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+#darkOverlay.active {
+  opacity: 1;
+}
+
+@media (max-width: 600px) {
+  main {
+    padding-top: 25px;
+  }
+
+  .big-frame {
+    padding: 26px 14px 28px;
+  }
+
+  .btn-wrap {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<div id="background-image" aria-hidden="true"></div>
+<div id="mycelium" aria-hidden="true"></div>
+<div id="stars" aria-hidden="true"></div>
+<canvas id="spore-canvas" aria-hidden="true"></canvas>
+
+<main>
+  <section class="big-frame">
+    <h1>🍣 ぶぶ漬け食べなはれ 🍝</h1>
+    <p class="lead">めじぃ‼️めじぃ‼️めじぃ‼️めじぃ‼️( Д  )</p>
+
+    <div id="log" aria-live="polite"></div>
+
+    <div class="btn-wrap">
+      <button class="summon-btn" type="button" onclick="summon(event)"> 🍚 ( ´ᯅ` )❓</button>
+      <a href="index.html" class="home-btn">さいなら</a>
+    </div>
+  </section>
+</main>
+
+<div id="darkOverlay"></div>
+
+<script>
+"use strict";
+
+const NEON_COLORS = ["#ff7ad9", "#4de1ff", "#ffe84a", "#b68cff"];
+
+const foods = ["🍣", "🐟", "🦑", "🐡", "🦪", "🐚", "🐠", "🐣", "🦠", "🍝", "🍔", "🍜", "🐙", "🍕", "🍤", "🍙"];
+const funnyLines = ["カラスミって…なんなんすかね（ ´_ゝ`）", "うめえ（；´_ゝ`）", "大抵の食いもんは飲めるんすよね（ ´_ゝ`）", "ふーん、よく食うじゃん（ ´_ゝ`）", "ぶぶ漬けを、啜っても、あーきません🎵", "ゆ○り、飲んでなくない？"];
+
+const reduceMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
+
+function summon(e) {
+  if (e) e.stopPropagation();
+
+  const log = document.getElementById("log");
+
+  if (Math.random() < 0.1) {
+    const div = document.createElement("div");
+    div.textContent = "❌ なんか出ない事もあるんすよね（ ´_ゝ`）";
+    log.prepend(div);
+    return;
+  }
+
+  const chosen = foods[Math.floor(Math.random() * foods.length)];
+  const line = funnyLines[Math.floor(Math.random() * funnyLines.length)];
+
+  const div = document.createElement("div");
+  div.textContent = `🌀 ${chosen} めじぃ❗️：${line}`;
+  log.prepend(div);
+
+  const el = document.createElement("div");
+  el.className = "floating-food summon-anim";
+  el.textContent = chosen;
+  el.style.left = Math.random() * 80 + 10 + "%";
+  el.style.top = "40%";
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1600);
+
+  if (chosen === "🍝" || chosen === "🦠") {
+    const overlay = document.getElementById("darkOverlay");
+    overlay.classList.add("active");
+    setTimeout(() => overlay.classList.remove("active"), 800);
+  }
+}
+
+(() => {
+  const canvas = document.getElementById("spore-canvas");
+  const ctx = canvas.getContext("2d");
+
+  if (!ctx) return;
+
+  let width = 0;
+  let height = 0;
+  let spores = [];
+  let mouseX = 0;
+  let mouseY = 0;
+
+  const colors = ["#ff7ad9", "#4de1ff", "#ffe84a", "#b68cff", "#b6ff5c"];
+
+  function resize() {
+    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+
+    width = window.innerWidth;
+    height = window.innerHeight;
+
+    canvas.width = Math.round(width * ratio);
+    canvas.height = Math.round(height * ratio);
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+    const count = Math.min(
+      180,
+      Math.max(60, Math.floor((width * height) / 8500))
+    );
+
+    spores = Array.from({ length: count }, () => createSpore(true));
+
+    if (reduceMotion) drawStatic();
+  }
+
+  function createSpore(randomY = false) {
+    return {
+      x: Math.random() * width,
+      y: randomY ? Math.random() * height : height + 10,
+      size: Math.random() * 2.1 + 0.5,
+      speed: Math.random() * 0.55 + 0.12,
+      drift: (Math.random() - 0.5) * 0.45,
+      alpha: Math.random() * 0.65 + 0.2,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      phase: Math.random() * Math.PI * 2
+    };
+  }
+
+  function drawStatic() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (const spore of spores) {
+      ctx.globalAlpha = spore.alpha;
+      ctx.fillStyle = spore.color;
+      ctx.beginPath();
+      ctx.arc(spore.x, spore.y, spore.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    ctx.globalAlpha = 1;
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (const spore of spores) {
+      spore.phase += 0.015;
+      spore.x += spore.drift + Math.sin(spore.phase) * 0.12;
+      spore.y -= spore.speed;
+
+      if (spore.y < -10) {
+        Object.assign(spore, createSpore(false));
+      }
+
+      if (spore.x < -10) spore.x = width + 10;
+      if (spore.x > width + 10) spore.x = -10;
+
+      const parallaxX = mouseX * 0.012;
+      const parallaxY = mouseY * 0.012;
+
+      ctx.globalAlpha = spore.alpha;
+      ctx.fillStyle = spore.color;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = spore.color;
+
+      ctx.beginPath();
+      ctx.arc(
+        spore.x + parallaxX,
+        spore.y + parallaxY,
+        spore.size,
+        0,
+        Math.PI * 2
+      );
+      ctx.fill();
+    }
+
+    ctx.globalAlpha = 1;
+    ctx.shadowBlur = 0;
+
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener("resize", resize, { passive: true });
+
+  window.addEventListener("mousemove", (event) => {
+    mouseX = event.clientX - width / 2;
+    mouseY = event.clientY - height / 2;
+  }, { passive: true });
+
+  resize();
+
+  if (!reduceMotion) {
+    animate();
+  }
+})();
+
+(() => {
+  const container = document.getElementById("stars");
+  const fragment = document.createDocumentFragment();
+
+  for (let i = 0; i < 50; i++) {
+    const star = document.createElement("span");
+
+    star.textContent = "✦";
+    star.setAttribute("aria-hidden", "true");
+
+    Object.assign(star.style, {
+      position: "absolute",
+      left: Math.random() * 100 + "%",
+      top: Math.random() * 100 + "%",
+      color: i % 2 ? "#4de1ff" : "#ff7ad9",
+      fontSize: Math.random() * 9 + 5 + "px",
+      opacity: String(Math.random() * 0.55 + 0.12),
+      textShadow: "0 0 8px currentColor",
+      animation: `starBlink ${Math.random() * 3 + 2}s ease-in-out infinite alternate`,
+      animationDelay: Math.random() * -5 + "s"
+    });
+
+    fragment.appendChild(star);
+  }
+
+  const style = document.createElement("style");
+  style.textContent = `
+    @keyframes starBlink {
+      from { opacity: 0.12; }
+      to { opacity: 0.85; }
+    }
+  `;
+
+  document.head.appendChild(style);
+  container.appendChild(fragment);
+})();
+
+(() => {
+  if (reduceMotion) return;
+
+  for (let i = 0; i < 100; i++) {
+    const p = document.createElement("div");
+    p.className = "sushi-particle";
+    p.setAttribute("aria-hidden", "true");
+    p.textContent = foods[Math.floor(Math.random() * foods.length)];
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.top = Math.random() * 100 + "vh";
+    p.style.fontSize = (Math.random() * 1.5 + 1.5) + "rem";
+
+    p.animate([
+      { transform: "translateY(0) rotate(0deg)" },
+      { transform: `translateY(-20px) rotate(${Math.random() * 20}deg)` }
+    ], {
+      duration: 3000 + Math.random() * 3000,
+      iterations: Infinity,
+      direction: "alternate",
+      easing: "ease-in-out"
+    });
+
+    document.body.appendChild(p);
+  }
+})();
+
+function triggerEffects(clientX, clientY, target) {
+  if (target.closest("a")) return;
+
+  if (!reduceMotion) {
+    for (let i = 0; i < 6; i++) {
+      const spark = document.createElement("span");
+      const angle = Math.PI * 2 * i / 6;
+      const distance = 18 + Math.random() * 24;
+
+      spark.textContent = "✦";
+
+      Object.assign(spark.style, {
+        position: "fixed",
+        left: clientX + "px",
+        top: clientY + "px",
+        zIndex: "99999",
+        pointerEvents: "none",
+        color: NEON_COLORS[i % NEON_COLORS.length],
+        fontSize: "13px",
+        textShadow: "0 0 8px currentColor",
+        transition: "transform 550ms ease-out, opacity 550ms ease-out"
+      });
+
+      document.body.appendChild(spark);
+
+      requestAnimationFrame(() => {
+        spark.style.transform =
+          `translate(${Math.cos(angle) * distance}px,${Math.sin(angle) * distance}px)`;
+        spark.style.opacity = "0";
+      });
+
+      window.setTimeout(() => spark.remove(), 650);
+    }
+  }
+
+  const rand = Math.random();
+  const isMobile = window.innerWidth < 600;
+
+  if (rand < 0.30) {
+    const isSuperBomb = rand < 0.05;
+    const bombCount = isMobile ? (isSuperBomb ? 40 : 18) : (isSuperBomb ? 80 : 35);
+
+    for (let i = 0; i < bombCount; i++) {
+      const bomb = document.createElement("div");
+      bomb.className = "floating-food bomb-anim";
+      bomb.textContent = foods[Math.floor(Math.random() * foods.length)];
+      bomb.style.left = Math.random() * 96 + 2 + "%";
+      bomb.style.top = "-10vh";
+      bomb.style.fontSize = isMobile
+        ? (Math.random() * 3 + 2.5) + "rem"
+        : (Math.random() * 3 + 2.5) + "rem";
+      bomb.style.animationDelay = (Math.random() * 0.6) + "s";
+      document.body.appendChild(bomb);
+      setTimeout(() => bomb.remove(), 2500);
+    }
+  }
+}
+
+document.addEventListener("mousedown", (e) => {
+  triggerEffects(e.clientX, e.clientY, e.target);
+});
+
+document.addEventListener("touchstart", (e) => {
+  const touch = e.touches[0];
+  triggerEffects(touch.clientX, touch.clientY, e.target);
+}, { passive: true });
+
+/* ★ DOM構築完了後に絶対に失敗しないホバーキラキラ処理 ★ */
+window.addEventListener("DOMContentLoaded", () => {
+  if (reduceMotion) return;
+
+  const targets = document.querySelectorAll("h1, .summon-btn, .home-btn");
+  const colors = ["#ff65c3", "#b6ff5c", "#62f7ff", "#b68cff", "#ffb85c", "#ffe84a"];
+  const marks = ["✦", "✧", "✨"];
+
+  function createSparkle(element) {
+    const rect = element.getBoundingClientRect();
+    const spark = document.createElement("span");
+
+    spark.textContent = marks[Math.floor(Math.random() * marks.length)];
+
+    const leftPos = rect.left + window.scrollX + Math.random() * rect.width;
+    const topPos = rect.top + window.scrollY + Math.random() * rect.height;
+
+    Object.assign(spark.style, {
+      position: "absolute",
+      left: leftPos + "px",
+      top: topPos + "px",
+      zIndex: "99999",
+      pointerEvents: "none",
+      color: colors[Math.floor(Math.random() * colors.length)],
+      fontSize: (10 + Math.random() * 10) + "px",
+      textShadow: "0 0 8px currentColor",
+      opacity: "1",
+      transition: "transform 750ms ease-out, opacity 750ms ease-out"
+    });
+
+    document.body.appendChild(spark);
+
+    requestAnimationFrame(() => {
+      const dx = (Math.random() - 0.5) * 44;
+      const dy = -(18 + Math.random() * 32);
+      const rot = (Math.random() - 0.5) * 180;
+      spark.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg) scale(0.4)`;
+      spark.style.opacity = "0";
+    });
+
+    window.setTimeout(() => spark.remove(), 800);
+  }
+
+  targets.forEach((element) => {
+    let timer = null;
+
+    element.addEventListener("mouseenter", () => {
+      if (timer) return;
+      createSparkle(element);
+      timer = window.setInterval(() => createSparkle(element), 80);
+    });
+
+    element.addEventListener("mouseleave", () => {
+      if (timer) {
+        window.clearInterval(timer);
+        timer = null;
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

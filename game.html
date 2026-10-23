@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#070720">
+<title> 🍄 </title>
+
+<style>
+:root {
+  --bg: #070720;
+  --pink: #ff7ad9;
+  --cyan: #4de1ff;
+  --yellow: #ffe84a;
+  --purple: #b68cff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background-color: var(--bg);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: #f8edff;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(7, 7, 32, 0.30), rgba(7, 7, 32, 0.40)),
+    url("files/neon_back.jpg"),
+    url("files/neon_back.jpg");
+  background-repeat: no-repeat, repeat, repeat;
+  background-attachment: fixed, fixed, fixed;
+  background-position: center, center, calc(50% + 444px) calc(50% + 444px);
+  background-size: auto, 888px auto, 888px auto;
+  background-blend-mode: normal, normal, soft-light;
+  font-family:
+    "Hiragino Kaku Gothic ProN",
+    "Yu Gothic",
+    Meiryo,
+    sans-serif;
+  text-align: center;
+}
+
+a {
+  color: inherit;
+}
+
+#mycelium,
+#spore-canvas,
+#stars {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+#mycelium {
+  z-index: 0;
+  opacity: 0.3;
+  background:
+    radial-gradient(ellipse at 15% 25%, #642cff33, transparent 45%),
+    radial-gradient(ellipse at 85% 65%, #ff36bd22, transparent 45%),
+    radial-gradient(ellipse at 50% 90%, #00eaff1a, transparent 40%);
+  animation: myceliumGlow 9s ease-in-out infinite alternate;
+}
+
+#spore-canvas {
+  z-index: 1;
+}
+
+#stars {
+  z-index: 1;
+}
+
+@keyframes myceliumGlow {
+  from { opacity: 0.18; }
+  to { opacity: 0.48; }
+}
+
+main {
+  position: relative;
+  z-index: 2;
+  width: min(900px, 92%);
+  margin: 0 auto;
+  padding: 55px 0 65px;
+}
+
+.big-frame {
+  padding: 36px 26px 38px;
+  border: 2px solid #ff7ad9;
+  border-radius: 24px;
+  background: rgba(8, 6, 32, 0.7);
+  box-shadow:
+    0 0 15px #ff7ad988,
+    0 0 35px #ff3dc844,
+    inset 0 0 25px #b68cff33;
+  backdrop-filter: blur(3px);
+  animation: fadeIn 1.6s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1 {
+  margin: 0 0 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.neon-kinoko-dosei {
+  max-width: 100%;
+  height: auto;
+  max-height: 130px;
+  object-fit: contain;
+  animation: ultraSoftRainbowNeon 80s infinite ease-in-out;
+}
+
+@keyframes ultraSoftRainbowNeon {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px #fff) drop-shadow(0 0 18px #ff7ad9) drop-shadow(0 0 32px #ff3dc8);
+    opacity: 0.95;
+  }
+  20% {
+    filter: drop-shadow(0 0 8px #fff) drop-shadow(0 0 18px #4de1ff) drop-shadow(0 0 32px #00eaff);
+    opacity: 0.9;
+  }
+  40% {
+    filter: drop-shadow(0 0 8px #fff) drop-shadow(0 0 18px #b6ff5c) drop-shadow(0 0 32px #82ff28);
+    opacity: 0.95;
+  }
+  60% {
+    filter: drop-shadow(0 0 8px #fff) drop-shadow(0 0 18px #ffe84a) drop-shadow(0 0 32px #ffcc00);
+    opacity: 0.9;
+  }
+  80% {
+    filter: drop-shadow(0 0 8px #fff) drop-shadow(0 0 18px #b68cff) drop-shadow(0 0 32px #924dff);
+    opacity: 0.95;
+  }
+}
+
+.tagline {
+  margin: 0 0 14px;
+  color: var(--cyan);
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 10px #4de1ff99;
+}
+
+.marquee {
+  margin: 0 0 34px;
+  padding: 6px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.marquee p {
+  display: inline-block;
+  margin: 0;
+  padding-left: 100%;
+  color: var(--yellow);
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 10px #ffe84a66;
+  animation: scrollText 25s linear infinite;
+}
+
+@keyframes scrollText {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+.site-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+  margin: 0 auto 36px;
+}
+
+.site-card {
+  --card-color: #62f7ff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 20px;
+  border: 2px solid var(--card-color); 
+  border-radius: 16px;
+  background: rgba(8, 8, 32, 0.40);
+  box-shadow: 
+    0 0 12px color-mix(in srgb, var(--card-color) 60%, transparent),
+    inset 0 0 15px color-mix(in srgb, var(--card-color) 20%, transparent);
+  backdrop-filter: blur(2px);
+  transition:
+    transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.site-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow:
+    0 0 20px var(--card-color),
+    0 0 35px color-mix(in srgb, var(--card-color) 60%, transparent);
+}
+
+.site-card:nth-child(6n + 1) { --card-color: #62f7ff; }
+.site-card:nth-child(6n + 2) { --card-color: #b6ff5c; }
+.site-card:nth-child(6n + 3) { --card-color: #b68cff; }
+.site-card:nth-child(6n + 4) { --card-color: #ffb85c; }
+.site-card:nth-child(6n + 5) { --card-color: #ffe84a; }
+.site-card:nth-child(6n + 6) { --card-color: #ff7ad9; }
+
+.site-card h3 {
+  margin: 0 0 10px;
+  color: #fff;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  text-shadow: 0 0 12px var(--card-color);
+}
+
+.site-card p {
+  flex-grow: 1;
+  margin: 0 0 20px;
+  color: #f0eaff;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.card-button {
+  --btn-color: #b6ff5c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px;
+  border: 2px solid var(--btn-color);
+  border-radius: 12px;
+  background: rgba(8, 8, 32, 0.75);
+  color: #ffffff;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-shadow: 0 0 8px var(--btn-color);
+  box-shadow: 
+    0 0 10px color-mix(in srgb, var(--btn-color) 50%, transparent),
+    inset 0 0 8px color-mix(in srgb, var(--btn-color) 25%, transparent);
+  transition:
+    transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.card-button:hover,
+.card-button:focus-visible {
+  color: #070720;
+  background: var(--btn-color); 
+  transform: translateY(-4px) scale(1.04);
+  box-shadow:
+    0 0 18px var(--btn-color),
+    0 0 35px var(--btn-color);
+  outline: none;
+  text-shadow: none;
+}
+
+.site-card:nth-child(6n + 1) .card-button { --btn-color: #b6ff5c; }
+.site-card:nth-child(6n + 2) .card-button { --btn-color: #b68cff; }
+.site-card:nth-child(6n + 3) .card-button { --btn-color: #ffb85c; }
+.site-card:nth-child(6n + 4) .card-button { --btn-color: #ffe84a; }
+.site-card:nth-child(6n + 5) .card-button { --btn-color: #ff7ad9; }
+.site-card:nth-child(6n + 6) .card-button { --btn-color: #62f7ff; }
+
+.back-link {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1.5px solid var(--purple);
+  border-radius: 20px;
+  color: #d8b4fe;
+  text-decoration: none;
+  background: rgba(8, 8, 32, 0.5);
+  box-shadow: 0 0 10px #b68cff44;
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.back-link:hover,
+.back-link:focus-visible {
+  color: white;
+  background: rgba(182, 140, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px var(--purple);
+  outline: none;
+}
+
+@media (max-width: 700px) {
+  main {
+    padding-top: 25px;
+  }
+
+  .big-frame {
+    padding: 26px 14px 28px;
+  }
+
+  .site-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<div id="mycelium" aria-hidden="true"></div>
+<div id="stars" aria-hidden="true"></div>
+<canvas id="spore-canvas" aria-hidden="true"></canvas>
+
+<main>
+  <section class="big-frame">
+    <h1><a href="https://megakirara.github.io/-KINOKO/"><img src="files/game.png" alt="🍄 ヽ( ´ᯅ` )ノ 🍄" class="neon-kinoko-dosei"></a></h1>
+
+    <div class="marquee">
+      <p>🍄ページを開いた意味は、あなたにしかわからない 🍄</p>
+    </div>
+
+    <div class="site-grid">
+
+      <div class="site-card">
+        <h3>チョコボール先輩(PC推奨)</h3>
+        <p>…何を見せられているんだろう</p>
+        <a class="card-button" href="https://megakirara.github.io/CHOCO/">🍄 のぞく</a>
+      </div>
+
+      <div class="site-card">
+        <h3>ステルス卓上計算機🌸</h3>
+        <p>Xに投稿する為だけに存在する意味のないページ。</p>
+        <a class="card-button" href="https://megakirara.github.io/-STTK/">🍄 のぞく</a>
+      </div>
+
+      <div class="site-card">
+        <h3>金運が上がるサイト</h3>
+        <p>（ 👁️_ゝ👁️）ノ💞✨</p>
+        <a class="card-button" href="https://megakirara.github.io/GOLD/">🍄 のぞく</a>
+      </div>
+
+      <div class="site-card">
+        <h3>ゴミ虫と彼岸花🐞</h3>
+        <p>…何をやらされているんだろう</p>
+        <a class="card-button" href="https://megakirara.github.io/5364/">🍄 のぞく</a>
+      </div>
+
+      <div class="site-card">
+        <h3>鼻くそわっしょい</h3>
+        <p>(☝︎ ՞ਊ ՞)☝︎〜〜❄️</p>
+        <a class="card-button" href="https://megakirara.github.io/8793/">🍄 のぞく</a>
+      </div>
+
+      <div class="site-card">
+        <h3>眉モーメント集</h3>
+        <p>（ 👁️_ゝ👁️）ぶるっ</p>
+        <a class="card-button" href="https://megakirara.github.io/88/">🍄 のぞく</a>
+      </div>
+
+    </div>
+
+    <div>
+      <a href="index.html" class="back-link">🍄 帰る</a>
+    </div>
+  </section>
+</main>
+
+<script>
+"use strict";
+
+(() => {
+  const canvas = document.getElementById("spore-canvas");
+  const ctx = canvas.getContext("2d");
+
+  if (!ctx) return;
+
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  let width = 0;
+  let height = 0;
+  let spores = [];
+  let mouseX = 0;
+  let mouseY = 0;
+
+  const colors = [
+    "#ff7ad9",
+    "#4de1ff",
+    "#ffe84a",
+    "#b68cff",
+    "#b6ff5c"
+  ];
+
+  function resize() {
+    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+
+    width = window.innerWidth;
+    height = window.innerHeight;
+
+    canvas.width = Math.round(width * ratio);
+    canvas.height = Math.round(height * ratio);
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+    const count = Math.min(
+      180,
+      Math.max(60, Math.floor((width * height) / 8500))
+    );
+
+    spores = Array.from({ length: count }, () => createSpore(true));
+
+    if (reduceMotion) drawStatic();
+  }
+
+  function createSpore(randomY = false) {
+    return {
+      x: Math.random() * width,
+      y: randomY ? Math.random() * height : height + 10,
+      size: Math.random() * 2.1 + 0.5,
+      speed: Math.random() * 0.55 + 0.12,
+      drift: (Math.random() - 0.5) * 0.45,
+      alpha: Math.random() * 0.65 + 0.2,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      phase: Math.random() * Math.PI * 2
+    };
+  }
+
+  function drawStatic() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (const spore of spores) {
+      ctx.globalAlpha = spore.alpha;
+      ctx.fillStyle = spore.color;
+      ctx.beginPath();
+      ctx.arc(spore.x, spore.y, spore.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    ctx.globalAlpha = 1;
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (const spore of spores) {
+      spore.phase += 0.015;
+      spore.x += spore.drift + Math.sin(spore.phase) * 0.12;
+      spore.y -= spore.speed;
+
+      if (spore.y < -10) {
+        Object.assign(spore, createSpore(false));
+      }
+
+      if (spore.x < -10) spore.x = width + 10;
+      if (spore.x > width + 10) spore.x = -10;
+
+      const parallaxX = mouseX * 0.012;
+      const parallaxY = mouseY * 0.012;
+
+      ctx.globalAlpha = spore.alpha;
+      ctx.fillStyle = spore.color;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = spore.color;
+
+      ctx.beginPath();
+      ctx.arc(
+        spore.x + parallaxX,
+        spore.y + parallaxY,
+        spore.size,
+        0,
+        Math.PI * 2
+      );
+      ctx.fill();
+    }
+
+    ctx.globalAlpha = 1;
+    ctx.shadowBlur = 0;
+
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener("resize", resize, { passive: true });
+
+  window.addEventListener("mousemove", (event) => {
+    mouseX = event.clientX - width / 2;
+    mouseY = event.clientY - height / 2;
+  }, { passive: true });
+
+  resize();
+
+  if (!reduceMotion) {
+    animate();
+  }
+})();
+
+(() => {
+  const container = document.getElementById("stars");
+  const fragment = document.createDocumentFragment();
+
+  for (let i = 0; i < 50; i++) {
+    const star = document.createElement("span");
+
+    star.textContent = "✦";
+    star.setAttribute("aria-hidden", "true");
+
+    Object.assign(star.style, {
+      position: "absolute",
+      left: Math.random() * 100 + "%",
+      top: Math.random() * 100 + "%",
+      color: i % 2 ? "#4de1ff" : "#ff7ad9",
+      fontSize: Math.random() * 9 + 5 + "px",
+      opacity: String(Math.random() * 0.55 + 0.12),
+      textShadow: "0 0 8px currentColor",
+      animation: `starBlink ${Math.random() * 3 + 2}s ease-in-out infinite alternate`,
+      animationDelay: Math.random() * -5 + "s"
+    });
+
+    fragment.appendChild(star);
+  }
+
+  const style = document.createElement("style");
+  style.textContent = `
+    @keyframes starBlink {
+      from { opacity: 0.12; }
+      to { opacity: 0.85; }
+    }
+  `;
+
+  document.head.appendChild(style);
+  container.appendChild(fragment);
+})();
+
+document.addEventListener("click", (event) => {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return;
+  }
+
+  const colors = ["#ff7ad9", "#4de1ff", "#ffe84a", "#b68cff"];
+
+  for (let i = 0; i < 6; i++) {
+    const spark = document.createElement("span");
+    const angle = Math.PI * 2 * i / 6;
+    const distance = 18 + Math.random() * 24;
+
+    spark.textContent = "✦";
+
+    Object.assign(spark.style, {
+      position: "fixed",
+      left: event.clientX + "px",
+      top: event.clientY + "px",
+      zIndex: "99",
+      pointerEvents: "none",
+      color: colors[i % colors.length],
+      fontSize: "13px",
+      textShadow: "0 0 8px currentColor",
+      transition: "transform 550ms ease-out, opacity 550ms ease-out"
+    });
+
+    document.body.appendChild(spark);
+
+    requestAnimationFrame(() => {
+      spark.style.transform =
+        `translate(${Math.cos(angle) * distance}px,${Math.sin(angle) * distance}px)`;
+      spark.style.opacity = "0";
+    });
+
+    window.setTimeout(() => spark.remove(), 650);
+  }
+});
+
+(() => {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const targets = document.querySelectorAll(".neon-kinoko-dosei, .card-button");
+  const colors = ["#ff65c3", "#b6ff5c", "#62f7ff", "#b68cff", "#ffb85c", "#ffe84a"];
+  const marks = ["✦", "✧", "✨"];
+
+  function sparkle(element) {
+    const rect = element.getBoundingClientRect();
+    const spark = document.createElement("span");
+
+    spark.textContent = marks[Math.floor(Math.random() * marks.length)];
+
+    Object.assign(spark.style, {
+      position: "absolute",
+      left: rect.left + Math.random() * rect.width + "px",
+      top: rect.top + Math.random() * rect.height + "px",
+      zIndex: "99",
+      pointerEvents: "none",
+      color: colors[Math.floor(Math.random() * colors.length)],
+      fontSize: 9 + Math.random() * 10 + "px",
+      textShadow: "0 0 8px currentColor",
+      opacity: "1",
+      transition: "transform 750ms ease-out, opacity 750ms ease-out"
+    });
+
+    document.body.appendChild(spark);
+
+    requestAnimationFrame(() => {
+      const dx = (Math.random() - 0.5) * 44;
+      const dy = -(18 + Math.random() * 32);
+      const rot = (Math.random() - 0.5) * 180;
+      spark.style.transform =
+        `translate(${dx}px, ${dy}px) rotate(${rot}deg) scale(0.4)`;
+      spark.style.opacity = "0";
+    });
+
+    window.setTimeout(() => spark.remove(), 800);
+  }
+
+  targets.forEach((element) => {
+    let timer = null;
+
+    element.addEventListener("mouseenter", () => {
+      if (timer) return;
+      sparkle(element);
+      timer = window.setInterval(() => sparkle(element), 90);
+    });
+
+    element.addEventListener("mouseleave", () => {
+      window.clearInterval(timer);
+      timer = null;
+    });
+  });
+})();
+</script>
+</body>
+</html>
