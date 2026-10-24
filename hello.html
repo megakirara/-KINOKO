@@ -131,12 +131,52 @@ h1 {
   align-items: center;
 }
 
+.logo-link {
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+}
+
 .neon-hello {
+  pointer-events: auto;
+  cursor: pointer;
   max-width: 100%;
   height: auto;
   max-height: 120px;
   object-fit: contain;
+  transition: transform 0.2s ease;
   animation: ultraSoftRainbowNeon 80s infinite ease-in-out;
+}
+
+.neon-hello.is-pop {
+  animation: fluffy-bounce 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275), ultraSoftRainbowNeon 80s infinite ease-in-out;
+}
+
+@keyframes fluffy-bounce {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.35) rotate(-3deg); }
+  60%  { transform: scale(0.92) rotate(2deg); }
+  80%  { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.logo-sparkle-particle {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 100;
+  animation: pop-particle 0.6s ease-out forwards;
+}
+
+@keyframes pop-particle {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty)) scale(0);
+  }
 }
 
 @keyframes ultraSoftRainbowNeon {
@@ -172,6 +212,10 @@ h1 {
 
 .dosei-container:hover {
   transform: scale(1.05);
+}
+
+.dosei-container.is-pop {
+  animation: fluffy-bounce 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 @keyframes floatDosei {
@@ -248,7 +292,11 @@ h1 {
 
 <main>
   <section class="big-frame">
-    <h1><a href="https://megakirara.github.io/-KINOKO/"><img src="files/hello.png" alt="( ´ᯅ` )" class="neon-hello"></a></h1>
+    <h1>
+      <a href="https://megakirara.github.io/-KINOKO/" class="logo-link" id="logoLink">
+        <img src="files/hello.png" alt="( ´ᯅ` )" class="neon-hello" id="logoImg">
+      </a>
+    </h1>
 
     <p class="message">
       ようこそ、きのこの庭へ。<br>
@@ -279,6 +327,83 @@ document.addEventListener("dragstart", (e) => {
     e.preventDefault();
   }
 });
+
+(() => {
+  const logoLink = document.getElementById("logoLink");
+  const logoImg = document.getElementById("logoImg");
+
+  if (!logoLink || !logoImg) return;
+
+  function playBounceSound() {
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = 'sine';
+
+      osc.frequency.setValueAtTime(320, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(850, audioCtx.currentTime + 0.12);
+
+      gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.18);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.18);
+    } catch (e) {
+    }
+  }
+
+  function createLogoSparkles(rect) {
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const colors = ['#ffe84a', '#ff7ad9', '#4de1ff', '#b6ff5c', '#ffffff'];
+
+    for (let i = 0; i < 14; i++) {
+      const p = document.createElement('div');
+      p.className = 'logo-sparkle-particle';
+      
+      const size = Math.random() * 8 + 4;
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      p.style.left = centerX + 'px';
+      p.style.top = centerY + 'px';
+
+      const angle = Math.random() * Math.PI * 2;
+      const dist = Math.random() * 70 + 30;
+      p.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
+      p.style.setProperty('--ty', Math.sin(angle) * dist + 'px');
+
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 600);
+    }
+  }
+
+  logoLink.addEventListener("click", (e) => {
+    const href = logoLink.getAttribute("href");
+    if (href && href !== "#") {
+      e.preventDefault();
+
+      logoImg.classList.remove("is-pop");
+      void logoImg.offsetWidth; 
+      logoImg.classList.add("is-pop");
+
+      playBounceSound();
+      createLogoSparkles(logoImg.getBoundingClientRect());
+
+      setTimeout(() => {
+        window.location.href = href;
+      }, 350);
+    }
+  });
+
+  window.playBounceSound = playBounceSound;
+  window.createLogoSparkles = createLogoSparkles;
+})();
 
 (() => {
   const canvas = document.getElementById("spore-canvas");
@@ -547,6 +672,9 @@ document.addEventListener("click", (event) => {
 document.getElementById("dosei-btn").addEventListener("click", () => {
   const container = document.getElementById("dosei-btn");
   const overlay = document.getElementById("flash-overlay");
+
+  if (window.playBounceSound) window.playBounceSound();
+  if (window.createLogoSparkles) window.createLogoSparkles(container.getBoundingClientRect());
 
   container.style.transition = "transform 0.4s ease-in";
   container.style.transform = "scale(1.8)";
